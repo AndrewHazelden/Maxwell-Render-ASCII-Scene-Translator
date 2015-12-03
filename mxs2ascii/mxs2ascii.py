@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-03 10.52 am v0.1
+# 2015-12-03 12.26 pm v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -93,6 +93,8 @@ def b2a_writeAsciiScene(mxsFilePath):
   textDocument = ''
   
   # Temporary Placeholder values
+  #active_camera = 'Camera'
+  active_camera = cameraName
   time_limit = 1440
   sampling_level = 16
   multilight = 'intensity'
@@ -139,11 +141,15 @@ def b2a_writeAsciiScene(mxsFilePath):
   channels_uv = 'off'
   channels_custom_alpha = 'off'
   channels_reflectance = 'off'
-  tone_mapping_color_space = 'sRGB IEC61966-2.1'
+
+  # Get the Color Space as a String
+  tone_mapping_color_space = b2a_getColorSpace(scene)
+  #tone_mapping_color_space = 'sRGB IEC61966-2.1'
+
   tone_mapping_white_point = 6500
   tone_mapping_tint = 0.0
   tone_mapping_burn = 0.8
-  tone_mapping_monitor_gamma = 2.20
+  tone_mapping_monitor_gamma =  scene.getColorSpaceGamma()
   tone_mapping_sharpness_enabled = 'off'
   tone_mapping_sharpness = 60.0
   simulens_aperture_map = ''
@@ -187,7 +193,7 @@ def b2a_writeAsciiScene(mxsFilePath):
   # Add the render_options section
   textDocument += 'render_options\n'
   textDocument += '{\n'
-  
+  textDocument += indent + 'active_camera "' + str(active_camera) + '"\n'
   textDocument += indent + 'time_limit ' + str(time_limit) + '\n'
   textDocument += indent + 'sampling_level ' + str(sampling_level) + '\n'
   textDocument += indent + 'multilight "' + str(multilight) + '"\n'
@@ -306,6 +312,53 @@ def b2a_getPlatform():
   
   # print('Running on ' + mxPlatform + '\n')
   return mxPlatform
+
+# Get the Color Space as a String
+# Example: scene = Cmaxwell(mwcallback); colorSpace = b2a_getColorSpace(scene)
+def b2a_getColorSpace(scene):
+  colorSpace = ''
+
+  colorSpaceValue = scene.getColorSpace()
+  if colorSpaceValue == 0:
+    colorSpace = 'sRGB IEC61966-2.1'
+  elif colorSpaceValue == 1:
+    colorSpace = 'Adobe RGB'
+  elif colorSpaceValue == 2:
+    colorSpace = 'Apple RGB'
+  elif colorSpaceValue == 3:
+    colorSpace = 'PAL'
+  elif colorSpaceValue == 4:
+    colorSpace = 'NTSC 1953'
+  elif colorSpaceValue == 5:
+    colorSpace = 'NSTC 1979'
+  elif colorSpaceValue == 6:
+    colorSpace = 'Wide Gamut RGB'
+  elif colorSpaceValue == 7:
+    colorSpace = 'Pro Photo RGB'
+  elif colorSpaceValue == 8:
+    colorSpace = 'ECI RGB'
+  elif colorSpaceValue == 9:
+    colorSpace = 'CIE 1931'
+  elif colorSpaceValue == 10:
+    colorSpace = 'Bruce RGB'
+  elif colorSpaceValue == 11:
+    colorSpace = 'ColorMatch RGB'
+  elif colorSpaceValue == 12:
+    colorSpace = 'Best RGB'
+  elif colorSpaceValue == 13:
+    colorSpace = 'Don RGB 4'
+  elif colorSpaceValue == 14:
+    colorSpace = 'REC.709'
+  elif colorSpaceValue == 15:
+    colorSpace = 'ACES'
+  elif colorSpaceValue == 255:
+    colorSpace = 'unknown'
+  else:
+   colorSpace = 'unknown'
+
+  print('[Color Space] ' + str(colorSpaceValue))
+
+  return colorSpace
 
 
 # This code is the "main" section that is run automatically when the python script is loaded in pyMaxwell:

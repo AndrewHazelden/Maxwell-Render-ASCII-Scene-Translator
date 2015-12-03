@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+
+<!-- 
+
+  Maxwell Render Language Module for BBEdit and TextWrangler
+  Version 1.0 - 2015-12-03
+
+  Created by Andrew Hazelden
+  andrew@andrewhazelden.com
+  http://www.andrewhazelden.com
+  
+  Released under a Creative Commons Attribution-ShareAlike License:
+	<http://creativecommons.org/licenses/by-sa/2.0/>
+
+  To install, copy here:
+    
+      ~/Library/Application Support/BBEdit/Language Modules/
+
+  or here:
+
+    ~/Library/Application Support/TextWrangler/Language Modules/
+
+  and relaunch BBEdit or TextWrangler.
+  
+  Note: If you want to edit the plist file you can use the Apple plutil tool to validate plist file to check your edits for errors:
+  plutil ~/"Library/Application Support/TextWrangler/Language Modules/Maxwell Render.plist"
+
+-->
+
+<dict>
+	<key>BBEditDocumentType</key>
+	<string>CodelessLanguageModule</string>
+
+	<key>BBLMColorsSyntax</key>
+	<true/>
+
+	<key>Copyright</key>
+	<string>Copyright © 2015, Andrew Hazelden</string>
+	
+	<key>Author</key>
+	<string>Andrew Hazelden</string>
+	
+	<key>Version</key>
+	<string>1.0</string>
+
+	<key>BBLMIsCaseSensitive</key>
+	<false/>
+
+	<key>BBLMLanguageCode</key>
+	<string>MAS</string>
+
+	<key>BBLMLanguageDisplayName</key>
+	<string>Maxwell Render</string>
+
+	<key>BBLMScansFunctions</key>
+	<false/>
+  
+	<key>BBLMSuffixMap</key> 
+	<array> 
+	<dict> 
+	  <key>BBLMLanguageSuffix</key> 
+	  <string>.mas</string>
+	</dict>
+	</array> 
+ 
+	<key>BBLMPreferredFilenameExtension</key>
+	<string>mas</string>
+
+	<key>BBLMSupportsTextCompletion</key>
+	<true/>
+
+	<key>BBLMCommentLineDefault</key>
+	<string>#</string>
+
+	<key>BBLMKeywordList</key>
+	<array>
+    <!-- Maxwell Data Types Start -->
+		<string>ARRAY</string>
+		<string>BOOL</string>
+		<string>BYTE</string>
+		<string>ENUM</string>
+		<string>FLOAT</string>
+		<string>INT</string>
+		<string>LONG</string>
+		<string>MATRIX</string>
+		<string>NODE</string>
+		<string>POINT</string>
+		<string>POINT2</string>
+		<string>POINTER</string>
+		<string>RGB</string>
+		<string>RGBA</string>
+		<string>STRING</string>
+		<string>UINT</string>
+		<string>VECTOR</string>
+		<string>b85BYTE</string>
+		<string>b85FLOAT</string>
+		<string>b85POINT</string>
+		<string>b85POINT2</string>
+		<string>b85UINT</string>
+		<string>b85VECTOR</string>
+		<string>catclark</string>
+		<string>constant</string>
+		<string>indexed</string>
+		<string>light</string>
+		<string>noise_disp</string>
+		<string>object</string>
+		<string>rgbPP</string>
+		<string>uniform</string>
+		<string>varying</string>
+		<string>vertices</string>
+    <!-- Maxwell Data Types Start -->
+
+    <!-- Maxwell Nodes Start -->
+
+		<string>render_options</string>
+    <!-- Maxwell Nodes End -->
+
+    <!-- Maxwell Parameters Start -->
+		<string>time_limit</string>
+    <string>sampling_level</string>
+    <string>multilight</string>
+    <string>multilight_output</string>
+    <string>cpu_threads</string>
+    <string>priority</string>
+    <string>quality</string>
+    <string>command_line</string>
+    <string>depth</string>
+    <string>image</string>
+    <string>mxi</string>
+    <string>materials_override</string>
+    <string>materials_default</string>
+    <string>materials_search_path</string>
+    <string>motion_blur</string>
+    <string>displacement</string>
+    <string>dispersion</string>
+    <string>extra_sampling_enabled</string>
+    <string>extra_sampling_mask</string>
+    <string>extra_sampling_level</string>
+    <string>extra_sampling_custom_alpha</string>
+    <string>extra_sampling_bitmap</string>
+    <string>extra_sampling_invert_mask</string>
+    <string>channels_output_mode</string>
+    <string>channels_render</string>
+    <string>channels_alpha</string>
+    <string>channels_opaque</string>
+    <string>channels_zbuffer</string>
+    <string>channels_zbuffer_meters</string>
+    <string>channels_shadow</string>
+    <string>channels_material_id</string>
+    <string>channels_object_id</string>
+    <string>channels_motion_vector</string>
+    <string>channels_roughness</string>
+    <string>channels_fresnel</string>
+    <string>channels_normals</string>
+    <string>channels_normals_mode</string>
+    <string>channels_position</string>
+    <string>channels_position_mode</string>
+    <string>channels_deep</string>
+    <string>channels_deep_mode</string>
+    <string>channels_deep_min_distance_meters</string>
+		<string>channels_deep_max_samples</string>
+    <string>channels_uv</string>
+    <string>channels_custom_alpha</string>
+    <string>channels_reflectance</string>
+    <string>tone_mapping_color_space</string>
+    <string>tone_mapping_white_point</string>
+    <string>tone_mapping_tint</string>
+    <string>tone_mapping_burn</string>
+    <string>tone_mapping_monitor_gamma</string>
+    <string>tone_mapping_sharpness_enabled</string>
+    <string>tone_mapping_sharpness</string>
+    <string>simulens_aperture_map</string>
+    <string>simulens_obstacle_map</string>
+    <string>simulens_diffraction</string>
+    <string>simulens_frequency</string>
+    <string>simulens_scattering</string>
+    <string>simulens_devingetting</string>
+    <string>illumination</string>
+    <string>reflection_caustics</string>
+    <string>refraction_caustics</string>
+    <string>fire_floating_shadows</string>
+    <string>fire_floating_refractions</string>
+    <string>overlay_text</string>
+    <string>overlay_text_position</string>
+    <string>overlay_text_color</string>
+    <string>overlay_text_background</string>
+    <!-- Maxwell Parameters End-->
+
+	</array>
+		
+	<key>Language Features</key>
+	<dict>
+		<key>Identifier and Keyword Characters</key>
+		<string>0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz</string>		
+
+		<key>Open Strings 1</key>
+		<string>&quot;</string>
+		<key>Close Strings 1</key>
+		<string>&quot;</string>
+		<key>End-of-line Ends Strings 1</key>
+		<true/>
+		<key>Escape Char in Strings 1</key>
+		<string>\</string>
+		
+		<key>Open Line Comments</key> <string>;</string>
+		<key>PreferLineCommentsWhenCommenting</key>
+		<true/>
+		
+		<key>Comment Pattern</key> 
+		<string><![CDATA[
+		(?x: 
+			(\#.*?$)
+		)
+		]]></string>
+		
+		<key>String Pattern</key> 
+		<string><![CDATA[ 
+		(?x: 
+			("(\\"|[^"\r]|\\\r)*") | (?# Double-quote) 
+			(?s: 
+				<<-?(?P<delim>\w+) (?# Here-document)
+				.*?
+				(?P=delim)
+			)
+		)
+		]]></string>
+		
+		<key>Skip Pattern</key> 
+		<string><![CDATA[ 
+		(?x: 
+		(?P>comment) |
+		(?P>string)
+		)]]></string>
+	
+  </dict>
+
+</dict>
+</plist>

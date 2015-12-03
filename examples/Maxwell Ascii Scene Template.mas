@@ -1,0 +1,74 @@
+# Generated:  <Date> 2015-12-03 5:48:08 am
+# Using: <Maxwell Version> <Platform> Maxwell 3.2.0.2 Mac OS X 10.10.5
+
+render_options
+{
+  time_limit 1440
+  sampling_level 16
+  multilight <disabled><intensity><color>
+  multilight_output <composite><separate>
+  cpu_threads <Automatic><#>
+  priority <low><normal>
+  quality <production><draft>
+  command_line <string>
+  depth <8><16>
+  image <image.ext>
+  mxi <file.mxi>
+  materials_override <file>
+  materials_default <file.mxm>
+  materials_search_path <folder>
+  motion_blur <on> <off>
+  displacement <on> <off>
+  dispersion <on> <off>
+  extra_sampling_enabled <on><off>
+  extra_sampling_mask <Custom Alpha><Alpha><Bitmap>
+  extra_sampling_level 14
+  extra_sampling_custom_alpha
+  extra_sampling_bitmap <image.ext>
+  extra_sampling_invert_mask <on> <off>
+  channels_output_mode <separate><embedded>
+  channels_render <off><all><diffuse><reflections><refractions><diffuse + reflections><reflections+refractions>
+  channels_alpha <off><png 8><png 16><tga><tif 8><tif 16><tif 32><exr 16><exr 32>
+  channels_opaque <on><off>
+  channels_zbuffer <off><png 8><png 16><tga><tif 8><tif 16><tif 32><exr 16><exr 32><jpg><jp2>
+  channels_zbuffer_meters 1.0 1.0
+  channels_shadow <off><png 8><png 16><tga><tif 8><tif 16><tif 32><exr 16><exr 32><jpg><jp2>
+  channels_material_id <off><png 8><png 16><tga><tif 8><tif 16><tif 32><exr 16><exr 32><jpg><jp2>
+  channels_object_id <off><png 8><png 16><tga><tif 8><tif 16><tif 32><exr 16><exr 32><jpg><jp2>
+  channels_motion_vector <off><png 8><png 16><tga><tif 8><tif 16><tif 32><exr 16><exr 32><jpg><jp2>
+  channels_roughness <off><png 8><png 16><tga><tif 8><tif 16><tif 32><exr 16><exr 32><jpg><jp2>
+  channels_fresnel <off><png 8><png 16><tga><tif 8><tif 16><tif 32><exr 16><exr 32><jpg><jp2>
+  channels_normals <off><png 8><png 16><tga><tif 8><tif 16><tif 32><exr 16><exr 32><jpg><jp2>
+  channels_normals_mode <World><Camera>
+  channels_position <off><png 8><png 16><tga><tif 8><tif 16><tif 32><exr 16><exr 32><jpg><jp2>
+  channels_position_mode <World><Camera>
+  channels_deep <off><EXR Deep><PTEX>
+  channels_deep_mode <Alpha><RGBA>
+  channels_deep_min_distance_meters 0.2
+  channels_deep_max_samples 20
+  channels_uv <off><png 8><png 16><tga><tif 8><tif 16><tif 32><exr 16><exr 32><jpg><jp2>
+  channels_custom_alpha <off><png 8><png 16><tga><tif 8><tif 16><tif 32><exr 16><exr 32>
+  channels_reflectance <off><png 8><png 16><tga><tif 8><tif 16><tif 32><exr 16><exr 32><jpg><jp2>
+  tone_mapping_color_space <sRGB IEC61966-2.1>
+  tone_mapping_white_point  6500
+  tone_mapping_tint 0.0
+  tone_mapping_burn 0.8
+  tone_mapping_monitor_gamma 2.20
+  tone_mapping_sharpness_enabled <on><off>
+  tone_mapping_sharpness 60.0
+  simulens_aperture_map ""
+  simulens_obstacle_map ""
+  simulens_diffraction 1250.0
+  simulens_frequency 1250.0
+  simulens_scattering 250.0
+  simulens_devingetting 100.0
+  illumination <Both><Direct><Indirect><None>
+  reflection_caustics <Both><Direct><Indirect><None>
+  refraction_caustics  <Both><Direct><Indirect><None>
+  fire_floating_shadows <on><off>
+  fire_floating_refractions <on><off>
+  overlay_text ""
+  overlay_text_position
+  overlay_text_color <RGB>
+  overlay_text_background <RGB>
+}

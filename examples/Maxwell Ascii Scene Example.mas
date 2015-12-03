@@ -1,0 +1,74 @@
+# Generated:  2015-12-03 5:48:08 am
+# Using: Maxwell 3.2.0.2 Mac OS X 10.10.5
+
+render_options
+{
+  time_limit 1440
+  sampling_level 16
+  multilight intensity
+  multilight_output composite
+  cpu_threads Automatic
+  priority low
+  quality production
+  command_line ""
+  depth 16
+  image "/Users/Andrew/Documents/maxwell/image.png"
+  mxi "/Users/Andrew/Documents/maxwell/image.mxi"
+  materials_override ""
+  materials_default ""
+  materials_search_path "/Users/Andrew/Documents/maxwell"
+  motion_blur on
+  displacement on
+  dispersion on
+  extra_sampling_enabled off
+  extra_sampling_mask Custom
+  extra_sampling_level 14
+  extra_sampling_custom_alpha
+  extra_sampling_bitmap ""
+  extra_sampling_invert_mask off
+  channels_output_mode separate
+  channels_render <off
+  channels_alpha off
+  channels_opaque off
+  channels_zbuffer off
+  channels_zbuffer_meters 1.0 1.0
+  channels_shadow off
+  channels_material_id off
+  channels_object_id off
+  channels_motion_vector off
+  channels_roughness off
+  channels_fresnel off
+  channels_normals off
+  channels_normals_mode World
+  channels_position off
+  channels_position_mode World
+  channels_deep off
+  channels_deep_mode Alpha
+  channels_deep_min_distance_meters 0.2
+  channels_deep_max_samples 20
+  channels_uv off
+  channels_custom_alpha off
+  channels_reflectance off
+  tone_mapping_color_space "sRGB IEC61966-2.1"
+  tone_mapping_white_point 6500
+  tone_mapping_tint 0.0
+  tone_mapping_burn 0.8
+  tone_mapping_monitor_gamma 2.20
+  tone_mapping_sharpness_enabled off
+  tone_mapping_sharpness 60.0
+  simulens_aperture_map ""
+  simulens_obstacle_map ""
+  simulens_diffraction 1250.0
+  simulens_frequency 1250.0
+  simulens_scattering 250.0
+  simulens_devingetting 100.0
+  illumination Both
+  reflection_caustics Both
+  refraction_caustics  Both
+  fire_floating_shadows off
+  fire_floating_refractions off
+  overlay_text ""
+  overlay_text_position
+  overlay_text_color 1.0 1.0 1.0
+  overlay_text_background 0.0 0.0 0.0
+}

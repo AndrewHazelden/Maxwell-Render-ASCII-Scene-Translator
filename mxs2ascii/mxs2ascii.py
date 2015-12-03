@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-03 7:27 am v0.1
+# 2015-12-03 7:43 am v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -43,9 +43,9 @@ from pymaxwell import *
 from math import *
 import os
 import sys
+import datetime
 
-
-# :
+# Write the Maxell Ascii Scene to Disk
 # Example: writeAsciiScene('/Cube.mas')
 def writeAsciiScene(mxsFilePath):
   print('\n\n')
@@ -81,8 +81,11 @@ def writeAsciiScene(mxsFilePath):
   print('[Working Directory] ' + dirName)
   print('[Input Scene] ' + sceneName + ' [Camera] ' + str(cameraName) + ' [Resolution] ' + str(width) + 'x' + str(height))
 
+ #Scene.imagePath
 
   textDocument = ''
+  
+  # Temporary Placeholder values
   time_limit = 1440
   sampling_level = 16
   multilight = 'intensity'
@@ -153,12 +156,14 @@ def writeAsciiScene(mxsFilePath):
   overlay_text_background = '0.0 0.0 0.0'
   
   # Add the Maxwell ASCII header text
-  textDocument += '# Generated:  2015-12-03 5:48:08 am\n'
+  now = datetime.datetime.now()
+  textDocument += '# Generated:  ' + now.strftime('%Y-%m-%d %H:%M:%S %p') + '\n'
   textDocument += '# Using: Maxwell 3.2.0.2 Mac OS X 10.10.5\n\n'
 
   # Indent spacer - either a tab or two spaces
+  # indent = '\t'
   indent = '  '
-  #indent = '\t'
+  
   
   # Add the render_options section
   textDocument += 'render_options\n'

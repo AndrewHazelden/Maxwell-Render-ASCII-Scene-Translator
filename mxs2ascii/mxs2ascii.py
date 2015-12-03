@@ -48,10 +48,17 @@ import datetime
 # Write the Maxell Ascii Scene to Disk
 # Example: writeAsciiScene('/Cube.mas')
 def b2a_writeAsciiScene(mxsFilePath):
+
+  # Release Version
+  b2a_version = "0.1"
+
+
   print('\n\n')
-  print('Maxwell MXS to ASCII Translator for Maxwell Studio')
+  print('Maxwell MXS to ASCII Scene Translator v' + b2a_version)
   print('By Andrew Hazelden <andrew@andrewhazelden.com>')
+  print('http://www.andrewhazelden.com/blog')
   print('-----------------------------------------------\n')
+  
   # Find out the current scene file
   dirName = os.path.dirname(mxsFilePath)
   sceneName = os.path.basename(mxsFilePath)
@@ -163,12 +170,15 @@ def b2a_writeAsciiScene(mxsFilePath):
   mxPlatform = b2a_getPlatform()
   print('Running on ' + mxPlatform + '\n')
   
+  # Maxwell Release number - like "3.2.0.2"
   mxVersion = getPyMaxwellVersion()
+  
   # Add the Maxwell ASCII header text
-  textDocument += '# Maxwell ASCII Scene v0.1\n'
+  textDocument += '# Maxwell ASCII Scene v' + b2a_version + '\n'
   textDocument += '# Generated: ' + now.strftime('%Y-%m-%d %H:%M:%S %p') + '\n'
+  textDocument += '# Source MXS: ' + mxsFilePath + '\n'
   textDocument += '# Using: Maxwell ' + mxVersion + ' on ' + mxPlatform + '\n\n'
-
+  
   # Indent spacer - either a tab or two spaces
   # indent = '\t'
   indent = '  '
@@ -256,7 +266,7 @@ def b2a_writeAsciiScene(mxsFilePath):
   # -------------------------------------------------------
  
   asciiSceneFilename = scenePathNoExt + '.mas'
-  print('[Maxwell Ascii Scene] ' + os.path.basename(asciiSceneFilename))
+  print('[Maxwell ASCII Scene] ' + os.path.basename(asciiSceneFilename))
   print('[Document Contents] \n' + textDocument)
 
   asciiFile = open(asciiSceneFilename, 'w')
@@ -269,7 +279,7 @@ def b2a_writeAsciiScene(mxsFilePath):
     return 0
   else:
     print('\n--------------------------------------')
-    print('Ascii Scene Export Complete')
+    print('ASCII Scene Export Complete')
     return 1
 
 

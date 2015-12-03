@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-03 7:43 am v0.1
+# 2015-12-03 10.52 am v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -47,7 +47,7 @@ import datetime
 
 # Write the Maxell Ascii Scene to Disk
 # Example: writeAsciiScene('/Cube.mas')
-def writeAsciiScene(mxsFilePath):
+def b2a_writeAsciiScene(mxsFilePath):
   print('\n\n')
   print('Maxwell MXS to ASCII Translator for Maxwell Studio')
   print('By Andrew Hazelden <andrew@andrewhazelden.com>')
@@ -155,10 +155,19 @@ def writeAsciiScene(mxsFilePath):
   overlay_text_color = '1.0 1.0 1.0'
   overlay_text_background = '0.0 0.0 0.0'
   
-  # Add the Maxwell ASCII header text
+
+  # Check the OS time
   now = datetime.datetime.now()
-  textDocument += '# Generated:  ' + now.strftime('%Y-%m-%d %H:%M:%S %p') + '\n'
-  textDocument += '# Using: Maxwell 3.2.0.2 Mac OS X 10.10.5\n\n'
+  
+  # Check the OS Platform
+  mxPlatform = b2a_getPlatform()
+  print('Running on ' + mxPlatform + '\n')
+  
+  mxVersion = getPyMaxwellVersion()
+  # Add the Maxwell ASCII header text
+  textDocument += '# Maxwell ASCII Scene v0.1\n'
+  textDocument += '# Generated: ' + now.strftime('%Y-%m-%d %H:%M:%S %p') + '\n'
+  textDocument += '# Using: Maxwell ' + mxVersion + ' on ' + mxPlatform + '\n\n'
 
   # Indent spacer - either a tab or two spaces
   # indent = '\t'
@@ -264,6 +273,31 @@ def writeAsciiScene(mxsFilePath):
     return 1
 
 
+# Check the operating system
+# Example: mxPlatform = b2a_getPlatform()
+def b2a_getPlatform():
+  import platform
+
+  osPlatform = str(platform.system())
+
+  mxPlatform = ''
+  if osPlatform == 'Windows':
+    mxPlatform = 'Windows'
+  elif osPlatform == 'win32':
+    mxPlatform = 'Windows'
+  elif osPlatform == 'Darwin':
+   mxPlatform = "Mac"
+  elif osPlatform== 'Linux':
+    mxPlatform =  'Linux'
+  elif osPlatform == 'Linux2':
+    mxPlatform = 'Linux'
+  else:
+    mxPlatform = 'Linux'
+  
+  # print('Running on ' + mxPlatform + '\n')
+  return mxPlatform
+
+
 # This code is the "main" section that is run automatically when the python script is loaded in pyMaxwell:
 if __name__ == "__main__":
 
@@ -276,7 +310,7 @@ if __name__ == "__main__":
   # Launch the automagic stereo camera set up command
   if os.path.exists(mxsFilePath):
     # Generate the stereo project files
-  	ok = writeAsciiScene(mxsFilePath,)
+  	ok = b2a_writeAsciiScene(mxsFilePath,)
   else:
     print('[MXS File Not Found] ' + mxsFilePath)
 

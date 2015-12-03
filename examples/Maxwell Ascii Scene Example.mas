@@ -27,7 +27,7 @@ render_options
   extra_sampling_bitmap ""
   extra_sampling_invert_mask off
   channels_output_mode separate
-  channels_render <off
+  channels_render off
   channels_alpha off
   channels_opaque off
   channels_zbuffer off

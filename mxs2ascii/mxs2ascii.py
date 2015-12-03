@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-03 12.26 pm v0.1
+# 2015-12-03 5.34 pm v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -92,9 +92,10 @@ def b2a_writeAsciiScene(mxsFilePath):
 
   textDocument = ''
   
-  # Temporary Placeholder values
-  #active_camera = 'Camera'
+  # MXS Scene Render Opton Values
   active_camera = cameraName
+
+  # Scene
   time_limit = 1440
   sampling_level = 16
   multilight = 'intensity'
@@ -103,22 +104,35 @@ def b2a_writeAsciiScene(mxsFilePath):
   priority = 'low'
   quality = 'production'
   command_line = ''
+
+  # Output
   depth = 16
   image = '/Users/Andrew/Documents/maxwell/image.png'
   mxi = '/Users/Andrew/Documents/maxwell/image.mxi'
-  materials_override = ''
-  materials_default = ''
+
+  # Materials
+  materials_override_enable = "on" if scene.getOverrideMaterialEnabled() else "off"
+  #materials_override = ''
+  materials_override  = scene.getOverrideMaterial()
+  #materials_default = ''
+  materials_default = scene.getDefaultMaterial()
   materials_search_path = '/Users/Andrew/Documents/maxwell'
+
+  # Globals
   motion_blur = 'on'
   displacement = 'on'
   dispersion = 'on'
+
+  # Extra Sampling
   extra_sampling_enabled = 'off'
   extra_sampling_mask = 'Custom'
   extra_sampling_level = 14
   extra_sampling_custom_alpha = ''
   extra_sampling_bitmap = ''
   extra_sampling_invert_mask = 'off'
-  channels_output_mode = 'separate'
+  
+  # Channels
+  channels_output_mode = 'embedded'
   channels_render = 'off'
   channels_alpha = 'off'
   channels_opaque = 'off'
@@ -142,27 +156,34 @@ def b2a_writeAsciiScene(mxsFilePath):
   channels_custom_alpha = 'off'
   channels_reflectance = 'off'
 
-  # Get the Color Space as a String
+  # Tone Mapping
   tone_mapping_color_space = b2a_getColorSpace(scene)
-  #tone_mapping_color_space = 'sRGB IEC61966-2.1'
-
   tone_mapping_white_point = 6500
   tone_mapping_tint = 0.0
-  tone_mapping_burn = 0.8
-  tone_mapping_monitor_gamma =  scene.getColorSpaceGamma()
+  tone_mapping_monitor_gamma,tone_mapping_burn,ok = scene.getToneMapping()
+  #tone_mapping_monitor_gamma =  scene.getColorSpaceGamma()
   tone_mapping_sharpness_enabled = 'off'
   tone_mapping_sharpness = 60.0
+
+  # Simulens
+  #isEnabled,simulens_diffraction,simulens_frequency,simulens_aperture_map,simulens_obstacle_map,ok = scene.getDiffraction()
   simulens_aperture_map = ''
   simulens_obstacle_map = ''
   simulens_diffraction = 1250.0
   simulens_frequency = 1250.0
   simulens_scattering = 250.0
   simulens_devingetting = 100.0
+
+  # Illumination and Caustics
   illumination = 'Both'
   reflection_caustics = 'Both'
   refraction_caustics = 'Both'
+
+  # Fire
   fire_floating_shadows = 'off'
   fire_floating_refractions = 'off'
+
+  # Overlay Text
   overlay_text = ''
   overlay_text_position = ''
   overlay_text_color = '1.0 1.0 1.0'
@@ -174,7 +195,7 @@ def b2a_writeAsciiScene(mxsFilePath):
   
   # Check the OS Platform
   mxPlatform = b2a_getPlatform()
-  print('Running on ' + mxPlatform + '\n')
+  # print('Running on ' + mxPlatform + '\n')
   
   # Maxwell Release number - like "3.2.0.2"
   mxVersion = getPyMaxwellVersion()
@@ -202,21 +223,27 @@ def b2a_writeAsciiScene(mxsFilePath):
   textDocument += indent + 'priority "' + str(priority) + '"\n'
   textDocument += indent + 'quality "' + str(quality) + '"\n'
   textDocument += indent + 'command_line "' + str(command_line) + '"\n'
+
   textDocument += indent + 'depth ' + str(depth) + '\n'
   textDocument += indent + 'image "' + str(image) + '"\n'
   textDocument += indent + 'mxi "' + str(mxi) + '"\n'
+
+  textDocument += indent + 'materials_override_enable ' + str(materials_override_enable) + '\n'
   textDocument += indent + 'materials_override "' + str(materials_override) + '"\n'
   textDocument += indent + 'materials_default "' + str(materials_default) + '"\n'
   textDocument += indent + 'materials_search_path "' + str(materials_search_path) + '"\n'
+
   textDocument += indent + 'motion_blur ' + str(motion_blur) + '\n'
   textDocument += indent + 'displacement ' + str(displacement) + '\n'
   textDocument += indent + 'dispersion ' + str(dispersion) + '\n'
+
   textDocument += indent + 'extra_sampling_enabled ' + str(extra_sampling_enabled) + '\n'
   textDocument += indent + 'extra_sampling_mask "' + str(extra_sampling_mask) + '"\n'
   textDocument += indent + 'extra_sampling_level ' + str(extra_sampling_level) + '\n'
   textDocument += indent + 'extra_sampling_custom_alpha ' + str(extra_sampling_custom_alpha) + '\n'
   textDocument += indent + 'extra_sampling_bitmap ' + str(extra_sampling_bitmap) + '\n'
   textDocument += indent + 'extra_sampling_invert_mask ' + str(extra_sampling_invert_mask) + '\n'
+
   textDocument += indent + 'channels_output_mode "' + str(channels_output_mode) + '"\n'
   textDocument += indent + 'channels_render ' + str(channels_render) + '\n'
   textDocument += indent + 'channels_alpha ' + str(channels_alpha) + '\n'
@@ -240,6 +267,7 @@ def b2a_writeAsciiScene(mxsFilePath):
   textDocument += indent + 'channels_uv ' + str(channels_uv) + '\n'
   textDocument += indent + 'channels_custom_alpha ' + str(channels_custom_alpha) + '\n'
   textDocument += indent + 'channels_reflectance ' + str(channels_reflectance) + '\n'
+
   textDocument += indent + 'tone_mapping_color_space "' + str(tone_mapping_color_space) + '"\n'
   textDocument += indent + 'tone_mapping_white_point ' + str(tone_mapping_white_point) + '\n'
   textDocument += indent + 'tone_mapping_tint ' + str(tone_mapping_tint) + '\n'
@@ -247,6 +275,7 @@ def b2a_writeAsciiScene(mxsFilePath):
   textDocument += indent + 'tone_mapping_monitor_gamma ' + str(tone_mapping_monitor_gamma) + '\n'
   textDocument += indent + 'tone_mapping_sharpness_enabled ' + str(tone_mapping_sharpness_enabled) + '\n'
   textDocument += indent + 'tone_mapping_sharpness ' + str(tone_mapping_sharpness) + '\n'
+
   textDocument += indent + 'simulens_aperture_map ' + str(simulens_aperture_map) + '\n'
   textDocument += indent + 'simulens_obstacle_map ' + str(simulens_obstacle_map) + '\n'
   textDocument += indent + 'simulens_diffraction ' + str(simulens_diffraction) + '\n'
@@ -254,11 +283,14 @@ def b2a_writeAsciiScene(mxsFilePath):
   textDocument += indent + 'simulens_scattering ' + str(simulens_scattering) + '\n'
   textDocument += indent + 'simulens_devingetting ' + str(simulens_devingetting) + '\n'
   textDocument += indent + 'simulens_devingetting ' + str(simulens_devingetting) + '\n'
+
   textDocument += indent + 'illumination "' + str(illumination) + '"\n'
   textDocument += indent + 'reflection_caustics "' + str(reflection_caustics) + '"\n'
   textDocument += indent + 'refraction_caustics "' + str(refraction_caustics) + '"\n'
+
   textDocument += indent + 'fire_floating_shadows ' + str(fire_floating_shadows) + '\n'
   textDocument += indent + 'fire_floating_refractions ' + str(fire_floating_refractions) + '\n'
+
   textDocument += indent + 'overlay_text ' + str(overlay_text) + '\n'
   textDocument += indent + 'overlay_text_position ' + str(overlay_text_position) + '\n'
   textDocument += indent + 'overlay_text_color ' + str(overlay_text_color) + '\n'
@@ -281,11 +313,11 @@ def b2a_writeAsciiScene(mxsFilePath):
   
   if ok == 0:
     print('\n--------------------------------------')
-    print('There was an error saving: ' + asciiSceneFilename)
+    print('[There was an error saving] ' + asciiSceneFilename)
     return 0
   else:
     print('\n--------------------------------------')
-    print('ASCII Scene Export Complete')
+    print('[ASCII Scene Export Complete]')
     return 1
 
 
@@ -313,43 +345,44 @@ def b2a_getPlatform():
   # print('Running on ' + mxPlatform + '\n')
   return mxPlatform
 
-# Get the Color Space as a String
+
+# Get the Color Space
 # Example: scene = Cmaxwell(mwcallback); colorSpace = b2a_getColorSpace(scene)
 def b2a_getColorSpace(scene):
   colorSpace = ''
 
   colorSpaceValue = scene.getColorSpace()
-  if colorSpaceValue == 0:
+  if colorSpaceValue == COLOR_SPACE_SRGB:
     colorSpace = 'sRGB IEC61966-2.1'
-  elif colorSpaceValue == 1:
+  elif colorSpaceValue == COLOR_SPACE_ADOBE98:
     colorSpace = 'Adobe RGB'
-  elif colorSpaceValue == 2:
+  elif colorSpaceValue == COLOR_SPACE_APPLE:
     colorSpace = 'Apple RGB'
-  elif colorSpaceValue == 3:
+  elif colorSpaceValue == COLOR_SPACE_PAL:
     colorSpace = 'PAL'
-  elif colorSpaceValue == 4:
+  elif colorSpaceValue == COLOR_SPACE_NTSC:
     colorSpace = 'NTSC 1953'
-  elif colorSpaceValue == 5:
+  elif colorSpaceValue == COLOR_SPACE_NTSC1979:
     colorSpace = 'NSTC 1979'
-  elif colorSpaceValue == 6:
+  elif colorSpaceValue == COLOR_SPACE_WIDEGAMUT:
     colorSpace = 'Wide Gamut RGB'
-  elif colorSpaceValue == 7:
+  elif colorSpaceValue == COLOR_SPACE_PROPHOTO:
     colorSpace = 'Pro Photo RGB'
-  elif colorSpaceValue == 8:
+  elif colorSpaceValue == COLOR_SPACE_ECIRRGB:
     colorSpace = 'ECI RGB'
-  elif colorSpaceValue == 9:
+  elif colorSpaceValue == COLOR_SPACE_CIE1931:
     colorSpace = 'CIE 1931'
-  elif colorSpaceValue == 10:
+  elif colorSpaceValue == COLOR_SPACE_BRUCERGB:
     colorSpace = 'Bruce RGB'
-  elif colorSpaceValue == 11:
+  elif colorSpaceValue == COLOR_SPACE_COLORMATCH:
     colorSpace = 'ColorMatch RGB'
-  elif colorSpaceValue == 12:
+  elif colorSpaceValue == COLOR_SPACE_BESTRGB:
     colorSpace = 'Best RGB'
-  elif colorSpaceValue == 13:
+  elif colorSpaceValue == COLOR_SPACE_DONRGB4:
     colorSpace = 'Don RGB 4'
-  elif colorSpaceValue == 14:
+  elif colorSpaceValue == COLOR_SPACE_REC709:
     colorSpace = 'REC.709'
-  elif colorSpaceValue == 15:
+  elif colorSpaceValue == COLOR_SPACE_ACES:
     colorSpace = 'ACES'
   elif colorSpaceValue == 255:
     colorSpace = 'unknown'
@@ -360,6 +393,14 @@ def b2a_getColorSpace(scene):
 
   return colorSpace
 
+# Get the Color Temperature
+# Example: scene = Cmaxwell(mwcallback); colorTemperature = b2a_getColorTemperature(scene)
+def b2a_getColorTemperature(scene):
+  colorTemperatureValue =  scene.getCorrelatedcolorTemperature()
+
+  print('[Color Temperature] ' + str(colorTemperatureValue))
+
+  return colorTemperatureValue
 
 # This code is the "main" section that is run automatically when the python script is loaded in pyMaxwell:
 if __name__ == "__main__":

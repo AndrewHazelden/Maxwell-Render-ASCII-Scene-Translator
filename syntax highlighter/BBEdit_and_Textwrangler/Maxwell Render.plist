@@ -84,6 +84,7 @@
 		<string>BYTE</string>
 		<string>ENUM</string>
 		<string>FLOAT</string>
+		<string>DOUBLE</string>
 		<string>INT</string>
 		<string>LONG</string>
 		<string>MATRIX</string>
@@ -96,27 +97,37 @@
 		<string>STRING</string>
 		<string>UINT</string>
 		<string>VECTOR</string>
-		<string>b85BYTE</string>
-		<string>b85FLOAT</string>
-		<string>b85POINT</string>
-		<string>b85POINT2</string>
-		<string>b85UINT</string>
-		<string>b85VECTOR</string>
-		<string>catclark</string>
-		<string>constant</string>
-		<string>indexed</string>
-		<string>light</string>
-		<string>noise_disp</string>
-		<string>object</string>
-		<string>rgbPP</string>
-		<string>uniform</string>
-		<string>varying</string>
-		<string>vertices</string>
-    <!-- Maxwell Data Types Start -->
+		<string>VECTOR2D</string>
+		<string>XYZ</string>
+		<string>HSV</string>
+    <!-- Maxwell Data Types End -->
 
     <!-- Maxwell Nodes Start -->
-
+		<string>attribute</string>
+		<string>base</string>
+		<string>extension</string>
+		<string></string>
+		<string>bsdf</string>
+		<string>coating</string>
+		<string>emiter_pair</string>
+		<string>emitter</string>
+		<string>layer</string>
+		<string>camera</string>
+		<string>environment</string>
+		<string>material</string>
 		<string>render_options</string>
+    <string>mxi</string>
+		<string>object</string>
+		<string>object_triangles_group</string>
+		<string>scene_extension</string>
+		<string>sky_extension</string>
+		<string>texture_extension</string>
+		<string>texture_map</string>
+<string></string>
+
+
+
+
     <!-- Maxwell Nodes End -->
 
     <!-- Maxwell Parameters Start -->
@@ -146,6 +157,7 @@
     <string>extra_sampling_bitmap</string>
     <string>extra_sampling_invert_mask</string>
     <string>channels_output_mode</string>
+		<string>channels_render_layer</string>
     <string>channels_render</string>
     <string>channels_alpha</string>
     <string>channels_opaque</string>

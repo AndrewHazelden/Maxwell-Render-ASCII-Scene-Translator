@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-03 5.47 pm v0.1
+# 2015-12-04 1.05 pm v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -35,7 +35,7 @@
 
 # Step 3. Select the Script > Run menu item in PyMaxwell.
 
-# The script will start running. First the script will verify the mxs scene file exists. Then the scene will be opened in Maxwell and all of the scene elements and parameters will be exported to an ASCII text document with the name of `<scene>.mas`. This new file is saved to the same folder as the original mxs scene file.
+# The script will start running. First the script will verify the mxs scene file exists. Then the scene will be opened in Maxwell and all of the scene elements and parameters will be exported to an ASCII text document with the name of `<scene>.mxa`. This new file is saved to the same folder as the original mxs scene file.
 
 # -----------------------------------------
 
@@ -101,6 +101,7 @@ def b2a_writeAsciiScene(mxsFilePath):
   # multilight = 'intensity'
   # multilight_output = 'composite'
   cpu_threads = scene.getRenderParameter('NUM THREADS')[0]
+  # cpu_threads = scene.getRenderParameter('NUM THREADS')[0] if scene.getRenderParameter('NUM THREADS')[0] else '"Automatic"'
   # priority = 'low'
   # quality = 'production'
   # command_line = ''
@@ -112,9 +113,7 @@ def b2a_writeAsciiScene(mxsFilePath):
 
   # Materials
   materials_override_enable = "on" if scene.getOverrideMaterialEnabled() else "off"
-  #materials_override = ''
   materials_override  = scene.getOverrideMaterial()
-  #materials_default = ''
   materials_default = scene.getDefaultMaterial()
   materials_search_path = '/Users/Andrew/Documents/maxwell'
 
@@ -159,10 +158,7 @@ def b2a_writeAsciiScene(mxsFilePath):
   # Tone Mapping
   tone_mapping_color_space = b2a_getColorSpace(scene)
   tone_mapping_white_point, tone_mapping_tint, ok = scene.getWhitePoint()
-  # tone_mapping_white_point = 6500
-  # tone_mapping_tint = 0.0
   tone_mapping_monitor_gamma,tone_mapping_burn,ok = scene.getToneMapping()
-  # tone_mapping_monitor_gamma =  scene.getColorSpaceGamma()
   # tone_mapping_sharpness_enabled = 'off'
   # tone_mapping_sharpness = 60.0
 
@@ -304,8 +300,9 @@ def b2a_writeAsciiScene(mxsFilePath):
   # -------------------------------------------------------
   # Write the ASCII text format scene to disk
   # -------------------------------------------------------
- 
-  asciiSceneFilename = scenePathNoExt + '.mas'
+  asciiExt = 'mxa'
+  asciiSceneFilename = scenePathNoExt + '.' + asciiExt
+
   print('[Maxwell ASCII Scene] ' + os.path.basename(asciiSceneFilename))
   print('[Document Contents] \n' + textDocument)
 

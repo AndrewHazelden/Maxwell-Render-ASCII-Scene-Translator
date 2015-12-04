@@ -2,20 +2,22 @@
 <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 
-<!-- 
+<!--
 
   Maxwell Render Language Module for BBEdit and TextWrangler
-  Version 1.0 - 2015-12-03
+  Version 1.0 - 2015-12-04
 
   Created by Andrew Hazelden
   andrew@andrewhazelden.com
   http://www.andrewhazelden.com
-  
+
+  This language module will open an ASCII plain text representation of a stndard Maxwell MXS scene that has the .mxa file extension
+
   Released under a Creative Commons Attribution-ShareAlike License:
 	<http://creativecommons.org/licenses/by-sa/2.0/>
 
   To install, copy here:
-    
+
       ~/Library/Application Support/BBEdit/Language Modules/
 
   or here:
@@ -23,7 +25,7 @@
     ~/Library/Application Support/TextWrangler/Language Modules/
 
   and relaunch BBEdit or TextWrangler.
-  
+
   Note: If you want to edit the plist file you can use the Apple plutil tool to validate plist file to check your edits for errors:
   plutil ~/"Library/Application Support/TextWrangler/Language Modules/Maxwell Render.plist"
 
@@ -38,10 +40,10 @@
 
 	<key>Copyright</key>
 	<string>Copyright © 2015, Andrew Hazelden</string>
-	
+
 	<key>Author</key>
 	<string>Andrew Hazelden</string>
-	
+
 	<key>Version</key>
 	<string>1.0</string>
 
@@ -49,24 +51,24 @@
 	<false/>
 
 	<key>BBLMLanguageCode</key>
-	<string>MAS</string>
+	<string>MXA</string>
 
 	<key>BBLMLanguageDisplayName</key>
-	<string>Maxwell Render</string>
+	<string>Maxwell Render ASCII</string>
 
 	<key>BBLMScansFunctions</key>
 	<false/>
-  
-	<key>BBLMSuffixMap</key> 
-	<array> 
-	<dict> 
-	  <key>BBLMLanguageSuffix</key> 
-	  <string>.mas</string>
+
+	<key>BBLMSuffixMap</key>
+	<array>
+	<dict>
+	  <key>BBLMLanguageSuffix</key>
+	  <string>.mxa</string>
 	</dict>
-	</array> 
- 
+	</array>
+
 	<key>BBLMPreferredFilenameExtension</key>
-	<string>mas</string>
+	<string>mxa</string>
 
 	<key>BBLMSupportsTextCompletion</key>
 	<true/>
@@ -118,6 +120,7 @@
     <!-- Maxwell Nodes End -->
 
     <!-- Maxwell Parameters Start -->
+		<string>active_camera</string>
 		<string>time_limit</string>
     <string>sampling_level</string>
     <string>multilight</string>
@@ -129,6 +132,7 @@
     <string>depth</string>
     <string>image</string>
     <string>mxi</string>
+		<string>materials_override_enable</string>
     <string>materials_override</string>
     <string>materials_default</string>
     <string>materials_search_path</string>
@@ -189,11 +193,11 @@
     <!-- Maxwell Parameters End-->
 
 	</array>
-		
+
 	<key>Language Features</key>
 	<dict>
 		<key>Identifier and Keyword Characters</key>
-		<string>0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz</string>		
+		<string>0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz</string>
 
 		<key>Open Strings 1</key>
 		<string>&quot;</string>
@@ -203,37 +207,37 @@
 		<true/>
 		<key>Escape Char in Strings 1</key>
 		<string>\</string>
-		
+
 		<key>Open Line Comments</key> <string>;</string>
 		<key>PreferLineCommentsWhenCommenting</key>
 		<true/>
-		
-		<key>Comment Pattern</key> 
+
+		<key>Comment Pattern</key>
 		<string><![CDATA[
-		(?x: 
+		(?x:
 			(\#.*?$)
 		)
 		]]></string>
-		
-		<key>String Pattern</key> 
-		<string><![CDATA[ 
-		(?x: 
-			("(\\"|[^"\r]|\\\r)*") | (?# Double-quote) 
-			(?s: 
+
+		<key>String Pattern</key>
+		<string><![CDATA[
+		(?x:
+			("(\\"|[^"\r]|\\\r)*") | (?# Double-quote)
+			(?s:
 				<<-?(?P<delim>\w+) (?# Here-document)
 				.*?
 				(?P=delim)
 			)
 		)
 		]]></string>
-		
-		<key>Skip Pattern</key> 
-		<string><![CDATA[ 
-		(?x: 
+
+		<key>Skip Pattern</key>
+		<string><![CDATA[
+		(?x:
 		(?P>comment) |
 		(?P>string)
 		)]]></string>
-	
+
   </dict>
 
 </dict>

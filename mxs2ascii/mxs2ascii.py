@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-04 1.05 pm v0.1
+# 2015-12-04 1.40 pm v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -88,29 +88,59 @@ def b2a_writeAsciiScene(mxsFilePath):
   print('[Working Directory] ' + dirName)
   print('[Input Scene] ' + sceneName + ' [Camera] ' + str(cameraName) + ' [Resolution] ' + str(width) + 'x' + str(height))
 
- #Scene.imagePath
-
   textDocument = ''
   
   # MXS Scene Render Opton Values
   active_camera = cameraName
-
+  
   # Scene
   time_limit = scene.getRenderParameter('STOP TIME')[0] / 60
   sampling_level = scene.getRenderParameter('SAMPLING LEVEL')[0]
-  # multilight = 'intensity'
-  # multilight_output = 'composite'
+  
+  # USE MULTILIGHT = 'intensity'
+  multilight = ''
+  if scene.getRenderParameter('USE MULTILIGHT')[0] == 0:
+    # No multilight
+    multilight = 'disabled'
+  elif scene.getRenderParameter('USE MULTILIGHT')[0] == 1:
+    # Intensity multilight
+    multilight = 'intensity'
+  elif scene.getRenderParameter('USE MULTILIGHT')[0] == 2:
+    # Color multilight
+    multilight = 'color'
+  else:
+    multilight = 'unknown'
+  
+  # USE MULTILIGHT
+  multilight_output = 'separate' if scene.getRenderParameter('USE MULTILIGHT')[0] else 'composite'
+  
+  # NUM THREADS Automatic = 0
   cpu_threads = scene.getRenderParameter('NUM THREADS')[0]
   # cpu_threads = scene.getRenderParameter('NUM THREADS')[0] if scene.getRenderParameter('NUM THREADS')[0] else '"Automatic"'
+  
   # priority = 'low'
-  # quality = 'production'
+  
+  # ENGINE is the render quality
+  quality = ''
+  if scene.getRenderParameter('ENGINE')[0] == 'RS0':
+    quality = 'draft'
+  elif scene.getRenderParameter('ENGINE')[0] == 'RS1':
+    quality = 'production'
+  else:
+    quality = 'unknown'
+  
   # command_line = ''
 
   # Output
   depth = 16
-  image = '/Users/Andrew/Documents/maxwell/image.png'
-  mxi = '/Users/Andrew/Documents/maxwell/image.mxi'
-
+  #Scene.imagePath
+  
+  # COPY IMAGE AFTER RENDER '/Users/Andrew/Documents/maxwell/image.png'
+  image = scene.getRenderParameter('COPY IMAGE AFTER RENDER')[0]
+  
+  # COPY MXI AFTER RENDER 'Users/Andrew/Documents/maxwell/image.mxi'
+  mxi = scene.getRenderParameter('COPY MXI AFTER RENDER')[0]
+ 
   # Materials
   materials_override_enable = "on" if scene.getOverrideMaterialEnabled() else "off"
   materials_override  = scene.getOverrideMaterial()
@@ -118,9 +148,9 @@ def b2a_writeAsciiScene(mxsFilePath):
   materials_search_path = '/Users/Andrew/Documents/maxwell'
 
   # Globals
-  # motion_blur = 'on'
-  # displacement = 'on'
-  # dispersion = 'on'
+  motion_blur = "on" if scene.getRenderParameter('DO MOTION BLUR')[0] else "off"
+  displacement = "on" if scene.getRenderParameter('DO DISPLACEMENT')[0] else "off"
+  dispersion = "on" if scene.getRenderParameter('DO DISPERSION')[0] else "off"
 
   # Extra Sampling
   # extra_sampling_enabled = 'off'
@@ -215,11 +245,11 @@ def b2a_writeAsciiScene(mxsFilePath):
   textDocument += indent + 'active_camera "' + str(active_camera) + '"\n'
   textDocument += indent + 'time_limit ' + str(time_limit) + '\n'
   textDocument += indent + 'sampling_level ' + str(sampling_level) + '\n'
-  # textDocument += indent + 'multilight "' + str(multilight) + '"\n'
-  # textDocument += indent + 'multilight_output "' + str(multilight_output) + '"\n'
+  textDocument += indent + 'multilight "' + str(multilight) + '"\n'
+  textDocument += indent + 'multilight_output "' + str(multilight_output) + '"\n'
   textDocument += indent + 'cpu_threads ' + str(cpu_threads) + '\n'
   # textDocument += indent + 'priority "' + str(priority) + '"\n'
-  # textDocument += indent + 'quality "' + str(quality) + '"\n'
+  textDocument += indent + 'quality "' + str(quality) + '"\n'
   # textDocument += indent + 'command_line "' + str(command_line) + '"\n'
 
   textDocument += indent + 'depth ' + str(depth) + '\n'
@@ -231,9 +261,9 @@ def b2a_writeAsciiScene(mxsFilePath):
   textDocument += indent + 'materials_default "' + str(materials_default) + '"\n'
   textDocument += indent + 'materials_search_path "' + str(materials_search_path) + '"\n'
 
-  # textDocument += indent + 'motion_blur ' + str(motion_blur) + '\n'
-  # textDocument += indent + 'displacement ' + str(displacement) + '\n'
-  # textDocument += indent + 'dispersion ' + str(dispersion) + '\n'
+  textDocument += indent + 'motion_blur ' + str(motion_blur) + '\n'
+  textDocument += indent + 'displacement ' + str(displacement) + '\n'
+  textDocument += indent + 'dispersion ' + str(dispersion) + '\n'
 
   # textDocument += indent + 'extra_sampling_enabled ' + str(extra_sampling_enabled) + '\n'
   # textDocument += indent + 'extra_sampling_mask "' + str(extra_sampling_mask) + '"\n'

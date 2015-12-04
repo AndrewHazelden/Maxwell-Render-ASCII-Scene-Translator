@@ -6,16 +6,16 @@ render_options
   active_camera "Camera"
   time_limit 1440
   sampling_level 16
-  multilight <disabled><intensity><color>
-  multilight_output <composite><separate>
-  cpu_threads <Automatic><#>
+  multilight <disabled><intensity><color><unknown>
+  multilight_output <composite><separate><unknown>
+  cpu_threads <automatic><#>
   priority <low><normal>
-  quality <production><draft>
+  quality <production><draft><unknown>
   command_line <string>
   depth <8><16>
   image <image.ext>
   mxi <file.mxi>
-  materials_override_enable <on> <off>
+  materials_override_enable <on><off>
   materials_override <file.mxm>
   materials_default <file.mxm>
   materials_search_path <folder>
@@ -23,7 +23,7 @@ render_options
   displacement <on> <off>
   dispersion <on> <off>
   extra_sampling_enabled <on><off>
-  extra_sampling_mask <Custom Alpha><Alpha><Bitmap>
+  extra_sampling_mask <custom alpha><alpha><bitmap>
   extra_sampling_level 14
   extra_sampling_custom_alpha
   extra_sampling_bitmap <image.ext>
@@ -41,11 +41,11 @@ render_options
   channels_roughness <off><png 8><png 16><tga><tif 8><tif 16><tif 32><exr 16><exr 32><jpg><jp2>
   channels_fresnel <off><png 8><png 16><tga><tif 8><tif 16><tif 32><exr 16><exr 32><jpg><jp2>
   channels_normals <off><png 8><png 16><tga><tif 8><tif 16><tif 32><exr 16><exr 32><jpg><jp2>
-  channels_normals_mode <World><Camera>
+  channels_normals_mode <world><camera>
   channels_position <off><png 8><png 16><tga><tif 8><tif 16><tif 32><exr 16><exr 32><jpg><jp2>
-  channels_position_mode <World><Camera>
-  channels_deep <off><EXR Deep><PTEX>
-  channels_deep_mode <Alpha><RGBA>
+  channels_position_mode <world><camera>
+  channels_deep <off><exr deep><ptex>
+  channels_deep_mode <alpha><rgba>
   channels_deep_min_distance_meters 0.2
   channels_deep_max_samples 20
   channels_uv <off><png 8><png 16><tga><tif 8><tif 16><tif 32><exr 16><exr 32><jpg><jp2>
@@ -64,9 +64,9 @@ render_options
   simulens_frequency 1250.0
   simulens_scattering 250.0
   simulens_devingetting 100.0
-  illumination <Both><Direct><Indirect><None>
-  reflection_caustics <Both><Direct><Indirect><None>
-  refraction_caustics  <Both><Direct><Indirect><None>
+  illumination <both><direct><indirect><none>
+  reflection_caustics <both><direct><indirect><none>
+  refraction_caustics  <both><direct><indirect><none>
   fire_floating_shadows <on><off>
   fire_floating_refractions <on><off>
   overlay_text ""

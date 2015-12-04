@@ -8,7 +8,7 @@ render_options
   sampling_level 16
   multilight "intensity"
   multilight_output "composite"
-  cpu_threads "Automatic"
+  cpu_threads "automatic"
   priority "low"
   quality "production"
   command_line ""
@@ -16,14 +16,14 @@ render_options
   image "/Users/Andrew/Documents/maxwell/image.png"
   mxi "/Users/Andrew/Documents/maxwell/image.mxi"
   materials_override_enable on
-  materials_override "/Applications/Maxwell 3/materials database/mxm files/carpaint_grey.mxm"
+  materials_override "/Applications/Maxwell 3/materials database/mxm files/defaulty.mxm"
   materials_default "/Applications/Maxwell 3/materials database/mxm files/default.mxm"
   materials_search_path "/Users/Andrew/Documents/maxwell"
   motion_blur on
   displacement on
   dispersion on
   extra_sampling_enabled off
-  extra_sampling_mask "Custom"
+  extra_sampling_mask "custom"
   extra_sampling_level 14
   extra_sampling_custom_alpha
   extra_sampling_bitmap ""
@@ -41,11 +41,11 @@ render_options
   channels_roughness off
   channels_fresnel off
   channels_normals off
-  channels_normals_mode "World"
+  channels_normals_mode "world"
   channels_position off
-  channels_position_mode "World"
+  channels_position_mode "world"
   channels_deep off
-  channels_deep_mode "Alpha"
+  channels_deep_mode "alpha"
   channels_deep_min_distance_meters 0.2
   channels_deep_max_samples 20
   channels_uv off
@@ -64,9 +64,9 @@ render_options
   simulens_frequency 1250.0
   simulens_scattering 250.0
   simulens_devingetting 100.0
-  illumination "Both"
-  reflection_caustics "Both"
-  refraction_caustics  "Both"
+  illumination "both"
+  reflection_caustics "both"
+  refraction_caustics  "both"
   fire_floating_shadows off
   fire_floating_refractions off
   overlay_text ""

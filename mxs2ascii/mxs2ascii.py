@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-04 1.57 pm v0.1
+# 2015-12-04 3.19 pm v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -118,8 +118,8 @@ def b2a_writeAsciiScene(mxsFilePath):
   multilight_output = 'separate' if scene.getRenderParameter('SAVE LIGHTS IN SEPARATE FILES')[0] else 'composite'
   
   # NUM THREADS Automatic = 0
-  cpu_threads = scene.getRenderParameter('NUM THREADS')[0]
-  # cpu_threads = scene.getRenderParameter('NUM THREADS')[0] if scene.getRenderParameter('NUM THREADS')[0] else '"Automatic"'
+  #cpu_threads = scene.getRenderParameter('NUM THREADS')[0]
+  cpu_threads = scene.getRenderParameter('NUM THREADS')[0] if scene.getRenderParameter('NUM THREADS')[0] else '"automatic"'
   
   # priority = 'low'
   
@@ -156,37 +156,48 @@ def b2a_writeAsciiScene(mxsFilePath):
   dispersion = "on" if scene.getRenderParameter('DO DISPERSION')[0] else "off"
 
   # Extra Sampling
-  # extra_sampling_enabled = 'off'
-  # extra_sampling_mask = 'Custom'
-  # extra_sampling_level = 14
-  # extra_sampling_custom_alpha = ''
-  # extra_sampling_bitmap = ''
-  # extra_sampling_invert_mask = 'off'
+  extra_sampling_enabled = "on" if scene.getRenderParameter('DO EXTRA SAMPLING')[0] else "off"
+  
+  extra_sampling_mask = ''
+  if scene.getRenderParameter('EXTRA SAMPLING MASK')[0] == 0:
+    extra_sampling_mask = 'custom alpha'
+  elif scene.getRenderParameter('EXTRA SAMPLING MASK')[0] == 1:
+    extra_sampling_mask = 'alpha'
+  elif scene.getRenderParameter('EXTRA SAMPLING MASK')[0] == 2:
+    extra_sampling_mask = 'bitmap'
+  else:
+    extra_sampling_mask = 'unknown'
+  
+  extra_sampling_level = scene.getRenderParameter('EXTRA SAMPLING SL')[0]
+  extra_sampling_custom_alpha = scene.getRenderParameter('EXTRA SAMPLING CUSTOM ALPHA')[0]
+  extra_sampling_bitmap = scene.getRenderParameter('EXTRA SAMPLING USER BITMAP')[0]
+  extra_sampling_invert_mask = "on" if scene.getRenderParameter('EXTRA SAMPLING INVERT')[0] else "off"
   
   # Channels
   # channels_output_mode = 'embedded'
-  # channels_render = 'off'
-  # channels_alpha = 'off'
-  # channels_opaque = 'off'
+  channels_render_layer = "on" if scene.getRenderParameter('RENDER LAYERS')[0] else "off"
+  channels_render = "on" if scene.getRenderParameter('DO RENDER CHANNEL')[0] else "off"
+  channels_alpha = "on" if scene.getRenderParameter('DO ALPHA CHANNEL')[0] else "off"
+  channels_opaque = "on" if scene.getRenderParameter('OPAQUE ALPHA')[0] else "off"
   # channels_zbuffer = 'off'
   # channels_zbuffer_meters = "1.0 1.0"
-  # channels_shadow = 'off'
-  # channels_material_id = 'off'
-  # channels_object_id = 'off'
-  # channels_motion_vector = 'off'
-  # channels_roughness = 'off'
-  # channels_fresnel = 'off'
-  # channels_normals = 'off'
-  # channels_normals_mode = 'World'
-  # channels_position  = 'off'
-  # channels_position_mode = 'World'
-  # channels_deep = 'off'
-  # channels_deep_mode = 'Alpha'
+  channels_shadow = "on" if scene.getRenderParameter('DO SHADOW PASS CHANNEL')[0] else "off"
+  channels_material_id = "on" if scene.getRenderParameter('DO IDMATERIAL CHANNEL')[0] else "off"
+  channels_object_id = "on" if scene.getRenderParameter('DO IDOBJECT CHANNEL')[0] else "off"
+  channels_motion_vector = "on" if scene.getRenderParameter('DO MOTION CHANNEL')[0] else "off"
+  channels_roughness = "on" if scene.getRenderParameter('DO ROUGHNESS CHANNEL')[0] else "off"
+  channels_fresnel = "on" if scene.getRenderParameter('DO FRESNEL CHANNEL')[0] else "off"
+  channels_normals = "on" if scene.getRenderParameter('DO NORMALS CHANNEL')[0] else "off"
+  channels_normals_mode = "camera" if scene.getRenderParameter('NORMALS CHANNEL SPACE')[0] else "world"
+  channels_position = "on" if scene.getRenderParameter('DO POSITION CHANNEL')[0] else "off"
+  channels_position_mode = "camera" if scene.getRenderParameter('NORMALS CHANNEL SPACE')[0] else "world"
+  channels_deep = "on" if scene.getRenderParameter('DO DEEP CHANNEL')[0] else "off"
+  channels_deep_mode = "rgba" if scene.getRenderParameter('DEEP CHANNEL TYPE')[0] else "alpha"
   # channels_deep_min_distance_meters = 0.2
   # channels_deep_max_samples = 20
-  # channels_uv = 'off'
-  # channels_custom_alpha = 'off'
-  # channels_reflectance = 'off'
+  channels_uv = "on" if scene.getRenderParameter('DO UV CHANNEL')[0] else "off"
+  channels_custom_alpha = "on" if scene.getRenderParameter('DO ALPHA CUSTOM CHANNEL')[0] else "off"
+  channels_reflectance = "on" if scene.getRenderParameter('DO REFLECTANCE CHANNEL')[0] else "off"
 
   # Tone Mapping
   tone_mapping_color_space = b2a_getColorSpace(scene)
@@ -268,36 +279,37 @@ def b2a_writeAsciiScene(mxsFilePath):
   textDocument += indent + 'displacement ' + str(displacement) + '\n'
   textDocument += indent + 'dispersion ' + str(dispersion) + '\n'
 
-  # textDocument += indent + 'extra_sampling_enabled ' + str(extra_sampling_enabled) + '\n'
-  # textDocument += indent + 'extra_sampling_mask "' + str(extra_sampling_mask) + '"\n'
-  # textDocument += indent + 'extra_sampling_level ' + str(extra_sampling_level) + '\n'
-  # textDocument += indent + 'extra_sampling_custom_alpha ' + str(extra_sampling_custom_alpha) + '\n'
-  # textDocument += indent + 'extra_sampling_bitmap ' + str(extra_sampling_bitmap) + '\n'
-  # textDocument += indent + 'extra_sampling_invert_mask ' + str(extra_sampling_invert_mask) + '\n'
+  textDocument += indent + 'extra_sampling_enabled ' + str(extra_sampling_enabled) + '\n'
+  textDocument += indent + 'extra_sampling_mask "' + str(extra_sampling_mask) + '"\n'
+  textDocument += indent + 'extra_sampling_level ' + str(extra_sampling_level) + '\n'
+  textDocument += indent + 'extra_sampling_custom_alpha ' + str(extra_sampling_custom_alpha) + '\n'
+  textDocument += indent + 'extra_sampling_bitmap ' + str(extra_sampling_bitmap) + '\n'
+  textDocument += indent + 'extra_sampling_invert_mask ' + str(extra_sampling_invert_mask) + '\n'
 
-  # textDocument += indent + 'channels_output_mode "' + str(channels_output_mode) + '"\n'
-  # textDocument += indent + 'channels_render ' + str(channels_render) + '\n'
-  # textDocument += indent + 'channels_alpha ' + str(channels_alpha) + '\n'
-  # textDocument += indent + 'channels_opaque ' + str(channels_opaque) + '\n'
-  # textDocument += indent + 'channels_zbuffer ' + str(channels_zbuffer) + '\n'
+  #textDocument += indent + 'channels_output_mode "' + str(channels_output_mode) + '"\n'
+  textDocument += indent + 'channels_render_layer ' + str(channels_render_layer) + '\n'
+  textDocument += indent + 'channels_render ' + str(channels_render) + '\n'
+  textDocument += indent + 'channels_alpha ' + str(channels_alpha) + '\n'
+  textDocument += indent + 'channels_opaque ' + str(channels_opaque) + '\n'
+  #textDocument += indent + 'channels_zbuffer ' + str(channels_zbuffer) + '\n'
   # textDocument += indent + 'channels_zbuffer_meters ' + str(channels_zbuffer_meters) + '\n'
-  # textDocument += indent + 'channels_shadow ' + str(channels_shadow) + '\n'
-  # textDocument += indent + 'channels_material_id ' + str(channels_material_id) + '\n'
-  # textDocument += indent + 'channels_object_id ' + str(channels_object_id) + '\n'
-  # textDocument += indent + 'channels_motion_vector ' + str(channels_motion_vector) + '\n'
-  # textDocument += indent + 'channels_roughness ' + str(channels_roughness) + '\n'
-  # textDocument += indent + 'channels_fresnel ' + str(channels_fresnel) + '\n'
-  # textDocument += indent + 'channels_normals ' + str(channels_normals) + '\n'
-  # textDocument += indent + 'channels_normals_mode "' + str(channels_normals_mode) + '"\n'
-  # textDocument += indent + 'channels_position ' + str(channels_position) + '\n'
-  # textDocument += indent + 'channels_position_mode "' + str(channels_position_mode) + '"\n'
-  # textDocument += indent + 'channels_deep ' + str(channels_deep) + '\n'
-  # textDocument += indent + 'channels_deep_mode "' + str(channels_deep_mode) + '"\n'
+  textDocument += indent + 'channels_shadow ' + str(channels_shadow) + '\n'
+  textDocument += indent + 'channels_material_id ' + str(channels_material_id) + '\n'
+  textDocument += indent + 'channels_object_id ' + str(channels_object_id) + '\n'
+  textDocument += indent + 'channels_motion_vector ' + str(channels_motion_vector) + '\n'
+  textDocument += indent + 'channels_roughness ' + str(channels_roughness) + '\n'
+  textDocument += indent + 'channels_fresnel ' + str(channels_fresnel) + '\n'
+  textDocument += indent + 'channels_normals ' + str(channels_normals) + '\n'
+  textDocument += indent + 'channels_normals_mode "' + str(channels_normals_mode) + '"\n'
+  textDocument += indent + 'channels_position ' + str(channels_position) + '\n'
+  textDocument += indent + 'channels_position_mode "' + str(channels_position_mode) + '"\n'
+  textDocument += indent + 'channels_deep ' + str(channels_deep) + '\n'
+  textDocument += indent + 'channels_deep_mode "' + str(channels_deep_mode) + '"\n'
   # textDocument += indent + 'channels_deep_min_distance_meters ' + str(channels_deep_min_distance_meters) + '\n'
   # textDocument += indent + 'channels_deep_max_samples ' + str(channels_deep_max_samples) + '\n'
-  # textDocument += indent + 'channels_uv ' + str(channels_uv) + '\n'
-  # textDocument += indent + 'channels_custom_alpha ' + str(channels_custom_alpha) + '\n'
-  # textDocument += indent + 'channels_reflectance ' + str(channels_reflectance) + '\n'
+  textDocument += indent + 'channels_uv ' + str(channels_uv) + '\n'
+  textDocument += indent + 'channels_custom_alpha ' + str(channels_custom_alpha) + '\n'
+  textDocument += indent + 'channels_reflectance ' + str(channels_reflectance) + '\n'
 
   textDocument += indent + 'tone_mapping_color_space "' + str(tone_mapping_color_space) + '"\n'
   textDocument += indent + 'tone_mapping_white_point ' + str(tone_mapping_white_point) + '\n'
@@ -416,12 +428,12 @@ def b2a_getColorSpace(scene):
     colorSpace = 'REC.709'
   elif colorSpaceValue == COLOR_SPACE_ACES:
     colorSpace = 'ACES'
-  elif colorSpaceValue == 255:
+  elif colorSpaceValue == COLOR_SPACE_UNKNOWN:
     colorSpace = 'unknown'
   else:
-   colorSpace = 'unknown'
+    colorSpace = 'unknown'
 
-  print('[Color Space] ' + str(colorSpaceValue))
+  print('[Color Space] ' + str(colorSpace))
 
   return colorSpace
 

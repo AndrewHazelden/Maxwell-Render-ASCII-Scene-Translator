@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-04 4.14 pm v0.1
+# 2015-12-04 4.23 pm v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -148,7 +148,7 @@ def b2a_writeAsciiScene(mxsFilePath):
   materials_override_enable = "on" if scene.getOverrideMaterialEnabled() else "off"
   materials_override  = scene.getOverrideMaterial()
   materials_default = scene.getDefaultMaterial()
-  materials_search_path = '/Users/Andrew/Documents/maxwell'
+  materials_search_path = ''
 
   # Globals
   motion_blur = "on" if scene.getRenderParameter('DO MOTION BLUR')[0] else "off"
@@ -175,7 +175,30 @@ def b2a_writeAsciiScene(mxsFilePath):
   
   # Channels
   # channels_output_mode = 'embedded'
-  channels_render_layer = "on" if scene.getRenderParameter('RENDER LAYERS')[0] else "off"
+  
+  #channels_render_layers = ''
+  if scene.getRenderParameter('RENDER LAYERS')[0] == 0:
+    # RENDER_LAYER_ALL (all layers)
+    channels_render_layers = 'all'
+  elif scene.getRenderParameter('RENDER LAYERS')[0] == 1:
+    # RENDER_LAYER_DIFFUSE (diffuse)
+    channels_render_layers = 'diffuse'
+  elif scene.getRenderParameter('RENDER LAYERS')[0] == 2:
+    # RENDER_LAYER_REFLECTIONS (reflections)
+    channels_render_layers = 'diffuse'
+  elif scene.getRenderParameter('RENDER LAYERS')[0] == 3:
+    # RENDER_LAYER_REFRACTIONS (refractions)
+    channels_render_layers = 'refractions'
+  elif scene.getRenderParameter('RENDER LAYERS')[0] == 4:
+    # RENDER_LAYER_DIFFUSE_AND_REFLECTIONS (diffuse and reflections)
+    channels_render_layers = 'diffuse and reflections'
+  elif scene.getRenderParameter('RENDER LAYERS')[0] == 5:
+    # RENDER_LAYER_REFLECTIONS_AND_REFRACTIONS (reflections and refractions)
+    channels_render_layers = 'reflections and refractions'
+  else:
+    # Unknown state
+    channels_render_layers = 'unknown'
+    
   channels_render = "on" if scene.getRenderParameter('DO RENDER CHANNEL')[0] else "off"
   channels_alpha = "on" if scene.getRenderParameter('DO ALPHA CHANNEL')[0] else "off"
   channels_opaque = "on" if scene.getRenderParameter('OPAQUE ALPHA')[0] else "off"
@@ -287,7 +310,7 @@ def b2a_writeAsciiScene(mxsFilePath):
   textDocument += indent + 'extra_sampling_invert_mask ' + str(extra_sampling_invert_mask) + '\n'
 
   #textDocument += indent + 'channels_output_mode "' + str(channels_output_mode) + '"\n'
-  textDocument += indent + 'channels_render_layer ' + str(channels_render_layer) + '\n'
+  textDocument += indent + 'channels_render_layers "' + str(channels_render_layers) + '"\n'
   textDocument += indent + 'channels_render ' + str(channels_render) + '\n'
   textDocument += indent + 'channels_alpha ' + str(channels_alpha) + '\n'
   textDocument += indent + 'channels_opaque ' + str(channels_opaque) + '\n'

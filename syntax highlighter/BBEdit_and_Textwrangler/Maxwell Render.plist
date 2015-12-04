@@ -157,7 +157,7 @@
     <string>extra_sampling_bitmap</string>
     <string>extra_sampling_invert_mask</string>
     <string>channels_output_mode</string>
-		<string>channels_render_layer</string>
+		<string>channels_render_layers</string>
     <string>channels_render</string>
     <string>channels_alpha</string>
     <string>channels_opaque</string>

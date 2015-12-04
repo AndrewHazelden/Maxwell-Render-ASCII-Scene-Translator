@@ -29,7 +29,8 @@ render_options
   extra_sampling_bitmap <image.ext>
   extra_sampling_invert_mask <on> <off>
   channels_output_mode <separate><embedded>
-  channels_render <off><all><diffuse><reflections><refractions><diffuse + reflections><reflections+refractions>
+  channels_render_layers <all><diffuse><reflections><refractions><diffuse + reflections><reflections+refractions>
+  channels_render <on> <off>
   channels_alpha <off><png 8><png 16><tga><tif 8><tif 16><tif 32><exr 16><exr 32>
   channels_opaque <on><off>
   channels_zbuffer <off><png 8><png 16><tga><tif 8><tif 16><tif 32><exr 16><exr 32><jpg><jp2>

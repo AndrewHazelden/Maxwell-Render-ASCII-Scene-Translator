@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-04 1.40 pm v0.1
+# 2015-12-04 1.57 pm v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -59,6 +59,7 @@ def b2a_writeAsciiScene(mxsFilePath):
   print('http://www.andrewhazelden.com/blog')
   print('-----------------------------------------------\n')
   
+
   # Find out the current scene file
   dirName = os.path.dirname(mxsFilePath)
   sceneName = os.path.basename(mxsFilePath)
@@ -69,6 +70,8 @@ def b2a_writeAsciiScene(mxsFilePath):
   scene.readMXS(mxsFilePath)
   it = CmaxwellCameraIterator()
 
+  #print('[MXS Scene Created in] ' + str(scene.getPluginID))
+  
   # Camera Details
   #camera = it.first(scene)
   camera = scene.getActiveCamera()
@@ -111,8 +114,8 @@ def b2a_writeAsciiScene(mxsFilePath):
   else:
     multilight = 'unknown'
   
-  # USE MULTILIGHT
-  multilight_output = 'separate' if scene.getRenderParameter('USE MULTILIGHT')[0] else 'composite'
+  # SAVE LIGHTS IN SEPARATE FILES
+  multilight_output = 'separate' if scene.getRenderParameter('SAVE LIGHTS IN SEPARATE FILES')[0] else 'composite'
   
   # NUM THREADS Automatic = 0
   cpu_threads = scene.getRenderParameter('NUM THREADS')[0]

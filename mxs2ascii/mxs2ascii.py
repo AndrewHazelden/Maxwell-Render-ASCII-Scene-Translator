@@ -454,8 +454,8 @@ def b2a_getCameraBlock(scene):
   
   positionRaw,focalPointRaw,upRaw,focalLengthRaw,f_stop,stepTime,ok = camera.getStep(0)
   
-  position = str(positionRaw[0]) + ' ' + str(positionRaw[1]) + ' ' + str(positionRaw[2])
-  target = str(focalPointRaw[0]) + ' ' + str(focalPointRaw[1]) + ' ' + str(focalPointRaw[2])
+  position = str(round(positionRaw[0],3)) + ' ' + str(round(positionRaw[1],3)) + ' ' + str(round(positionRaw[2],3))
+  target = str(round(focalPointRaw[0],3)) + ' ' + str(round(focalPointRaw[1],3)) + ' ' + str(round(focalPointRaw[2],3))
   roll_angle = 0.0
   exposure = ""
   lens = b2a_lensTypeName(cameraLens)

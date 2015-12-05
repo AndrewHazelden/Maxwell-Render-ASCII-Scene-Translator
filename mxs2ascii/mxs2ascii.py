@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-05 7.48 am v0.1
+# 2015-12-05 8.04 am v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -448,20 +448,27 @@ def b2a_getRenderOptionsBlock(scene):
 def b2a_getCameraBlock(scene):
   camera = scene.getActiveCamera()
   cameraName = camera.getName()
-  
+  cameraLens = camera.getLensType()
+    
   active_camera = cameraName
-  position = "0.0 0.5 8.0"
-  target = "0.0 1.5 0.0"
+  
+  positionRaw,focalPointRaw,upRaw,focalLengthRaw,f_stop,stepTime,ok = camera.getStep(0)
+  
+  position = str(positionRaw[0]) + ' ' + str(positionRaw[1]) + ' ' + str(positionRaw[2])
+  target = str(focalPointRaw[0]) + ' ' + str(focalPointRaw[1]) + ' ' + str(focalPointRaw[2])
   roll_angle = 0.0
   exposure = ""
-  lens = 0
-  focal_length  = 35.0
+  lens = b2a_lensTypeName(cameraLens)
+  focal_length = round((focalLengthRaw * 1000.0), 0)
   lock_exposure = "off"
   shutter = 500
-  f_stop = 5.6
   ev_number = 13.937
-  resolution = "640 480"
   
+  # The active camera's render resolution
+  res = camera.getResolution()
+  width = res[0]
+  height = res[1]
+  resolution = str(width) + ' ' + str(height)
   
   
   # Indent spacer - either a tab or two spaces
@@ -477,7 +484,7 @@ def b2a_getCameraBlock(scene):
   textDocument += indent + 'position ' + str(position) + '\n'
   textDocument += indent + 'target ' + str(target) + '\n'
   textDocument += indent + 'exposure ' + str(exposure) + '\n'
-  textDocument += indent + 'lens ' + str(lens) + '\n'
+  textDocument += indent + 'lens "' + str(lens) + '"\n'
   textDocument += indent + 'focal_length ' + str(focal_length) + '\n'
   textDocument += indent + 'lock_exposure ' + str(lock_exposure) + '\n'
   textDocument += indent + 'shutter ' + str(shutter) + '\n'
@@ -536,6 +543,28 @@ def b2a_getColorSpace(scene):
   print('[Color Space] ' + str(colorSpace))
 
   return colorSpace
+  
+# Return the lens type name as a string
+# Example: it = CmaxwellCameraIterator(); camera = it.first(scene); cameraLens = cameraParams.getLensType(); lens = b2a_lensTypeName(cameraLens)
+def b2a_lensTypeName(cameraLens):
+
+  lensTypeName = ''
+  if cameraLens[0] == TYPE_CYLINDRICAL_LENS:
+    lensTypeName = 'cylindrical'
+  elif cameraLens[0] == TYPE_EXTENSION_LENS:
+    lensTypeName = 'extension lens'
+  elif cameraLens[0] == TYPE_FISHEYE_LENS:
+    lensTypeName = 'fisheye'
+  elif cameraLens[0] == TYPE_ORTHO_LENS:
+    lensTypeName = 'ortho'
+  elif cameraLens[0] == TYPE_PINHOLE_LENS:
+    lensTypeName = 'pinhole'
+  elif cameraLens[0] == TYPE_SPHERICAL_LENS:
+    lensTypeName = 'spherical'
+  elif cameraLens[0] == TYPE_THIN_LENS:
+    lensTypeName = 'thin'
+
+  return lensTypeName
 
 # Get the Color Temperature
 # Example: scene = Cmaxwell(mwcallback); colorTemperature = b2a_getColorTemperature(scene)

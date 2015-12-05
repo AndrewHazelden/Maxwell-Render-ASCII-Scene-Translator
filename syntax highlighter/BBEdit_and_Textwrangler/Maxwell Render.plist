@@ -211,11 +211,14 @@
 		<string>film_width</string>
 		<string>film_height</string>
 		<string>diaphragm_type</string>
+		<string>blades</string>
 		<string>fps</string>
 		<string>step_time</string>
 		<string>pixel_aspect</string>
 		<string>x_shift</string>
 		<string>y_shift</string>
+		<string>hidden</string>
+
 
     <!-- Maxwell Parameters End-->
 

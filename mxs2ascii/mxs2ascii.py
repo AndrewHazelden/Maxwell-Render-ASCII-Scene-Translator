@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-05 11.53 am v0.1
+# 2015-12-05 12.01 am v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -475,7 +475,7 @@ def b2a_getCameraBlock(scene):
   film_height = round((filmHeightRaw * 1000.0), 1)
   iso = camera.getIso()[0]
   
-  diaphragmTypeRaw,angle,nBlades,ok = camera.getDiaphragm()
+  diaphragmTypeRaw,angle,blades,ok = camera.getDiaphragm()
   diaphragm_type = ''
   if diaphragmTypeRaw == 'CIRCULAR':
     diaphragm_type = 'circular'
@@ -487,6 +487,8 @@ def b2a_getCameraBlock(scene):
   fps = camera.getFPS()[0]
   pixel_aspect = camera.getPixelAspect()[0]
   x_shift,y_shift,ok = camera.getShiftLens()
+
+  hidden =  "on" if camera.isHide()[0] else "off"
 
 #   print "[nSteps] " + str(nSteps) + "\n"
   
@@ -514,11 +516,13 @@ def b2a_getCameraBlock(scene):
   textDocument += indent + 'film_width ' + str(film_width) + '\n'
   textDocument += indent + 'film_height ' + str(film_height) + '\n'
   textDocument += indent + 'diaphragm_type "' + str(diaphragm_type) + '"\n'
+  textDocument += indent + 'blades ' + str(blades) + '\n'
   textDocument += indent + 'fps ' + str(fps) + '\n'
   textDocument += indent + 'step_time ' + str(step_time) + '\n'
   textDocument += indent + 'pixel_aspect ' + str(pixel_aspect) + '\n'
   textDocument += indent + 'x_shift ' + str(x_shift) + '\n'
   textDocument += indent + 'y_shift ' + str(y_shift) + '\n'
+  textDocument += indent + 'hidden ' + str(hidden) + '\n'
   
   # Close the camera section
   textDocument += '}\n'

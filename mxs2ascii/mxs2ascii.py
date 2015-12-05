@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-05 6.44 am v0.1
+# 2015-12-05 7.15 am v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -258,8 +258,7 @@ def b2a_writeAsciiScene(mxsFilePath):
   fire_floating_refractions = "on" if scene.getRenderParameter('DO FLOATING REFLECTIONS')[0] else "off"
 
   # Overlay Text
-  overlay_text = 1.0
-  #print '[overlay_text] ' + overlay_text + ' ' + str(scene.getRenderParameter('DO TEXT')[0])
+  # overlay_text = 1.0
   # overlay_text_position = ''
   # overlay_text_color = '1.0 1.0 1.0'
   # overlay_text_background = '0.0 0.0 0.0'

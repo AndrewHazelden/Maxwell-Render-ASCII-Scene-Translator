@@ -223,8 +223,6 @@
 		<string>z_near_clip_plane</string>
 		<string>z_far_clip_plane</string>
 		<string>hidden</string>
-
-
     <!-- Maxwell Parameters End-->
 
 	</array>

@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-05 12.20 am v0.1
+# 2015-12-05 12.28 am v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -225,9 +225,12 @@ def b2a_getRenderOptionsBlock(scene):
   materials_override_enable = "on" if scene.getOverrideMaterialEnabled() else "off"
   materials_override  = scene.getOverrideMaterial()
   materials_default = scene.getDefaultMaterial()
-  materials_search_path = ''
   
-  print '[***Search Paths***] ' + str(scene.getSearchingPaths())
+  # Search Paths
+  # TODO the translation of the array like results: (['/Applications/Maxwell 3/scripts/stereo/', '/Applications/Maxwell 3/materials database/textures/', '/Applications/Maxwell 3/materials database/ies/', '/Applications/Maxwell 3/materials database/iors/', 'C:/Program Files/Next Limit/Maxwell 3/scripts/stereo/', 'C:\\Program Files\\Next Limit\\Maxwell 3\\scripts\\stereo\\', 'C:\\Program Files\\Next Limit\\Maxwell 3\\materials database\\textures\\', 'C:\\Program Files\\Next Limit\\Maxwell 3\\materials database\\ies\\', 'C:\\Program Files\\Next Limit\\Maxwell 3\\materials database\\iors\\', 'M:\\Render\\Maxwell\\LatLong_Stereo_CubeX_sep\\', 'M:\\Render\\Maxwell\\', 'C:\\Users\\Administrator\\Desktop\\maxwell_latlong_stereo_cubex\\', 'C:\\Users\\Administrator\\Desktop\\maxwell\\Maxwell_LatLong_Stereo_CubeX\\', 'C:\\', 'M:\\Render\\Maxwell\\Maxwell_Stereo_Projects\\mxs\\Maxwell_LatLong_Stereo_CubeX\\', 'M:\\Render\\Maxwell\\Maxwell_Stereo_Projects\\mxs\\Maxwell_LatLong_Stereo_CubeX_v9\\', 'C:/Users/Administrator/Desktop/maxwell/Maxwell_LatLong_Stereo_CubeX/'], 1)
+  
+  materials_search_path = ''
+  #print '[Search Paths] ' + str(scene.getSearchingPaths()) + '\n'
 
   # Globals
   motion_blur = "on" if scene.getRenderParameter('DO MOTION BLUR')[0] else "off"

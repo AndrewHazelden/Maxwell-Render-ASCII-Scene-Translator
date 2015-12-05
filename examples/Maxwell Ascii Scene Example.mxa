@@ -1,5 +1,7 @@
-# Generated:  2015-12-03 5:48:08 AM
-# Using: Maxwell 3.2.0.2 Mac OS X 10.10.5
+# Maxwell ASCII Scene v0.1
+# Generated: 2015-12-05 12:34:24 PM
+# Source MXS: /Applications/Maxwell 3/scripts/stereo/CubeX.mxs
+# Using: Maxwell 3.2.0.0 on Mac
 
 render_options
 {

@@ -1,5 +1,6 @@
+# Maxwell ASCII Scene v0.1
 # Generated: <Date> 2015-12-03 5:48:08 AM
-# Using: <Maxwell Version> <Platform> Maxwell 3.2.0.2 Mac OS X 10.10.5
+# Using: <Maxwell Version> <Platform> Maxwell 3.2.0.2 Mac
 
 render_options
 {
@@ -19,9 +20,9 @@ render_options
   materials_override <file.mxm>
   materials_default <file.mxm>
   materials_search_path <folder>
-  motion_blur <on> <off>
-  displacement <on> <off>
-  dispersion <on> <off>
+  motion_blur <on><off>
+  displacement <on><off>
+  dispersion <on><off>
   extra_sampling_enabled <on><off>
   extra_sampling_mask <custom alpha><alpha><bitmap>
   extra_sampling_level 14

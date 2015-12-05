@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-04 9.18 pm v0.1
+# 2015-12-04 9.23 pm v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -284,7 +284,7 @@ def b2a_writeAsciiScene(mxsFilePath):
   textDocument += 'render_options\n'
   textDocument += '{\n'
   
-  """
+
   textDocument += indent + 'active_camera "' + str(active_camera) + '"\n'
   textDocument += indent + 'time_limit ' + str(time_limit) + '\n'
   textDocument += indent + 'sampling_level ' + str(sampling_level) + '\n'
@@ -320,7 +320,7 @@ def b2a_writeAsciiScene(mxsFilePath):
   textDocument += indent + 'channels_render ' + str(channels_render) + '\n'
   textDocument += indent + 'channels_alpha ' + str(channels_alpha) + '\n'
   textDocument += indent + 'channels_opaque ' + str(channels_opaque) + '\n'
-  #textDocument += indent + 'channels_zbuffer ' + str(channels_zbuffer) + '\n'
+  textDocument += indent + 'channels_zbuffer ' + str(channels_zbuffer) + '\n'
   ## textDocument += indent + 'channels_zbuffer_meters ' + str(channels_zbuffer_meters) + '\n'
   textDocument += indent + 'channels_shadow ' + str(channels_shadow) + '\n'
   textDocument += indent + 'channels_material_id ' + str(channels_material_id) + '\n'
@@ -332,22 +332,22 @@ def b2a_writeAsciiScene(mxsFilePath):
   textDocument += indent + 'channels_normals_mode "' + str(channels_normals_mode) + '"\n'
   textDocument += indent + 'channels_position ' + str(channels_position) + '\n'
   textDocument += indent + 'channels_position_mode "' + str(channels_position_mode) + '"\n'
-  #textDocument += indent + 'channels_deep ' + str(channels_deep) + '\n'
-  #textDocument += indent + 'channels_deep_mode "' + str(channels_deep_mode) + '"\n'
-  #textDocument += indent + 'channels_deep_min_distance ' + str(channels_deep_min_distance) + '\n'
+  textDocument += indent + 'channels_deep ' + str(channels_deep) + '\n'
+  textDocument += indent + 'channels_deep_mode "' + str(channels_deep_mode) + '"\n'
+  textDocument += indent + 'channels_deep_min_distance ' + str(channels_deep_min_distance) + '\n'
   ##textDocument += indent + 'channels_deep_max_samples ' + str(channels_deep_max_samples) + '\n'
-  #textDocument += indent + 'channels_uv ' + str(channels_uv) + '\n'
-  #textDocument += indent + 'channels_custom_alpha ' + str(channels_custom_alpha) + '\n'
-  #textDocument += indent + 'channels_reflectance ' + str(channels_reflectance) + '\n'
+  textDocument += indent + 'channels_uv ' + str(channels_uv) + '\n'
+  textDocument += indent + 'channels_custom_alpha ' + str(channels_custom_alpha) + '\n'
+  textDocument += indent + 'channels_reflectance ' + str(channels_reflectance) + '\n'
 
-  #textDocument += indent + 'tone_mapping_color_space "' + str(tone_mapping_color_space) + '"\n'
-  #textDocument += indent + 'tone_mapping_white_point ' + str(tone_mapping_white_point) + '\n'
-  #textDocument += indent + 'tone_mapping_tint ' + str(tone_mapping_tint) + '\n'
-  #textDocument += indent + 'tone_mapping_burn ' + str(tone_mapping_burn) + '\n'
-  #textDocument += indent + 'tone_mapping_monitor_gamma ' + str(tone_mapping_monitor_gamma) + '\n'
+  textDocument += indent + 'tone_mapping_color_space "' + str(tone_mapping_color_space) + '"\n'
+  textDocument += indent + 'tone_mapping_white_point ' + str(tone_mapping_white_point) + '\n'
+  textDocument += indent + 'tone_mapping_tint ' + str(tone_mapping_tint) + '\n'
+  textDocument += indent + 'tone_mapping_burn ' + str(tone_mapping_burn) + '\n'
+  textDocument += indent + 'tone_mapping_monitor_gamma ' + str(tone_mapping_monitor_gamma) + '\n'
   
-  # textDocument += indent + 'tone_mapping_sharpness_enabled ' + str(tone_mapping_sharpness_enabled) + '\n'
-  # textDocument += indent + 'tone_mapping_sharpness ' + str(tone_mapping_sharpness) + '\n'
+  ## textDocument += indent + 'tone_mapping_sharpness_enabled ' + str(tone_mapping_sharpness_enabled) + '\n'
+  ## textDocument += indent + 'tone_mapping_sharpness ' + str(tone_mapping_sharpness) + '\n'
 
   # textDocument += indent + 'simulens_aperture_map ' + str(simulens_aperture_map) + '\n'
   # textDocument += indent + 'simulens_obstacle_map ' + str(simulens_obstacle_map) + '\n'
@@ -368,7 +368,6 @@ def b2a_writeAsciiScene(mxsFilePath):
   # textDocument += indent + 'overlay_text_position ' + str(overlay_text_position) + '\n'
   # textDocument += indent + 'overlay_text_color ' + str(overlay_text_color) + '\n'
   # textDocument += indent + 'overlay_text_background ' + str(overlay_text_background) + '\n'
-  """
   
   # Close the render_options section
   textDocument += '}\n'

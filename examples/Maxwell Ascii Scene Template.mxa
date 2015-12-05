@@ -47,7 +47,7 @@ render_options
   channels_position_mode <world><camera>
   channels_deep <off><exr deep><ptex>
   channels_deep_mode <alpha><rgba>
-  channels_deep_min_distance_meters 0.2
+  channels_deep_min_distance 0.2
   channels_deep_max_samples 20
   channels_uv <off><png 8><png 16><tga><tif 8><tif 16><tif 32><exr 16><exr 32><jpg><jp2>
   channels_custom_alpha <off><png 8><png 16><tga><tif 8><tif 16><tif 32><exr 16><exr 32>

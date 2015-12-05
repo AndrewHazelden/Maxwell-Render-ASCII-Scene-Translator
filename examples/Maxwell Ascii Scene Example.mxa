@@ -47,7 +47,7 @@ render_options
   channels_position_mode "world"
   channels_deep off
   channels_deep_mode "alpha"
-  channels_deep_min_distance_meters 0.2
+  channels_deep_min_distance 0.2
   channels_deep_max_samples 20
   channels_uv off
   channels_custom_alpha off

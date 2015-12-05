@@ -88,10 +88,6 @@
 		<string>INT</string>
 		<string>LONG</string>
 		<string>MATRIX</string>
-		<string>NODE</string>
-		<string>POINT</string>
-		<string>POINT2</string>
-		<string>POINTER</string>
 		<string>RGB</string>
 		<string>RGBA</string>
 		<string>STRING</string>
@@ -106,7 +102,6 @@
 		<string>attribute</string>
 		<string>base</string>
 		<string>extension</string>
-		<string></string>
 		<string>bsdf</string>
 		<string>coating</string>
 		<string>emiter_pair</string>
@@ -123,14 +118,10 @@
 		<string>sky_extension</string>
 		<string>texture_extension</string>
 		<string>texture_map</string>
-<string></string>
-
-
-
-
     <!-- Maxwell Nodes End -->
 
     <!-- Maxwell Parameters Start -->
+		<string>name</string>
 		<string>active_camera</string>
 		<string>time_limit</string>
     <string>sampling_level</string>

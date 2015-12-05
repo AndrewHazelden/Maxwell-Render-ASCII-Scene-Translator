@@ -76,3 +76,9 @@ render_options
   overlay_text_color <RGB>
   overlay_text_background <RGB>
 }
+
+camera
+{
+  name "Camera"
+}
+

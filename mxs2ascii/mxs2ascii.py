@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-05 7.24 am v0.1
+# 2015-12-05 7.29 am v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -113,9 +113,10 @@ def b2a_writeAsciiScene(mxsFilePath):
   indent = '  '
   
   # Add the render_options section
-  renderOptionsText = b2a_getRenderOptions(scene)
+  textDocument += b2a_getRenderOptionsBlock(scene)
   
-  textDocument += renderOptionsText
+  # Add the camera section
+  textDocument += b2a_getCameraBlock(scene)
   
   # -------------------------------------------------------
   # Write the ASCII text format scene to disk
@@ -166,9 +167,8 @@ def b2a_getPlatform():
 
 
 # Get the Render Options
-# Example: scene = Cmaxwell(mwcallback); renderOptionsText = b2a_getRenderOptions(scene)
-def b2a_getRenderOptions(scene):
-
+# Example: scene = Cmaxwell(mwcallback); renderOptionsText = b2a_getRenderOptionsBlock(scene)
+def b2a_getRenderOptionsBlock(scene):
   camera = scene.getActiveCamera()
   cameraName = camera.getName()
   active_camera = cameraName
@@ -439,7 +439,31 @@ def b2a_getRenderOptions(scene):
   
   # Close the render_options section
   textDocument += '}\n'
+  textDocument += '\n'
   
+  return textDocument
+  
+# Get the Camera
+# Example: scene = Cmaxwell(mwcallback); cameraText = b2a_getCameraBlock(scene)
+def b2a_getCameraBlock(scene):
+  camera = scene.getActiveCamera()
+  cameraName = camera.getName()
+  active_camera = cameraName
+    
+  # Indent spacer - either a tab or two spaces
+  # indent = '\t'
+  indent = '  '
+  
+  # Add the camera section
+  textDocument = ''
+  textDocument += 'camera\n'
+  textDocument += '{\n'
+  
+  textDocument += indent + 'name "' + str(active_camera) + '"\n'
+  
+  # Close the camera section
+  textDocument += '}\n'
+  textDocument += '\n'
   return textDocument
   
 # Get the Color Space

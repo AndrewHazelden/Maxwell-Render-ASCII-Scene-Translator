@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-05 7.15 am v0.1
+# 2015-12-05 7.24 am v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -91,12 +91,89 @@ def b2a_writeAsciiScene(mxsFilePath):
   print('[Working Directory] ' + dirName)
   print('[Input Scene] ' + sceneName + ' [Camera] ' + str(cameraName) + ' [Resolution] ' + str(width) + 'x' + str(height))
 
-  textDocument = ''
+  # Check the OS time
+  now = datetime.datetime.now()
   
-  # MXS Scene Render Opton Values
+  # Check the OS Platform
+  mxPlatform = b2a_getPlatform()
+  # print('Running on ' + mxPlatform + '\n')
+  
+  # Maxwell Release number - like "3.2.0.2"
+  mxVersion = getPyMaxwellVersion()
+  
+  # Add the Maxwell ASCII header text
+  textDocument = ''
+  textDocument += '# Maxwell ASCII Scene v' + b2a_version + '\n'
+  textDocument += '# Generated: ' + now.strftime('%Y-%m-%d %H:%M:%S %p') + '\n'
+  textDocument += '# Source MXS: ' + mxsFilePath + '\n'
+  textDocument += '# Using: Maxwell ' + mxVersion + ' on ' + mxPlatform + '\n\n'
+  
+  # Indent spacer - either a tab or two spaces
+  # indent = '\t'
+  indent = '  '
+  
+  # Add the render_options section
+  renderOptionsText = b2a_getRenderOptions(scene)
+  
+  textDocument += renderOptionsText
+  
+  # -------------------------------------------------------
+  # Write the ASCII text format scene to disk
+  # -------------------------------------------------------
+  asciiExt = 'mxa'
+  asciiSceneFilename = scenePathNoExt + '.' + asciiExt
+
+  print('[Maxwell ASCII Scene] ' + os.path.basename(asciiSceneFilename))
+  print('[Document Contents] \n' + textDocument)
+
+  asciiFile = open(asciiSceneFilename, 'w')
+  ok = asciiFile.write(textDocument)
+  asciiFile.close
+  
+  if ok == 0:
+    print('\n--------------------------------------')
+    print('[There was an error saving] ' + asciiSceneFilename)
+    return 0
+  else:
+    print('\n--------------------------------------')
+    print('[ASCII Scene Export Complete]')
+    return 1
+
+
+# Check the operating system
+# Example: mxPlatform = b2a_getPlatform()
+def b2a_getPlatform():
+  import platform
+
+  osPlatform = str(platform.system())
+
+  mxPlatform = ''
+  if osPlatform == 'Windows':
+    mxPlatform = 'Windows'
+  elif osPlatform == 'win32':
+    mxPlatform = 'Windows'
+  elif osPlatform == 'Darwin':
+   mxPlatform = "Mac"
+  elif osPlatform== 'Linux':
+    mxPlatform =  'Linux'
+  elif osPlatform == 'Linux2':
+    mxPlatform = 'Linux'
+  else:
+    mxPlatform = 'Linux'
+  
+  # print('Running on ' + mxPlatform + '\n')
+  return mxPlatform
+
+
+# Get the Render Options
+# Example: scene = Cmaxwell(mwcallback); renderOptionsText = b2a_getRenderOptions(scene)
+def b2a_getRenderOptions(scene):
+
+  camera = scene.getActiveCamera()
+  cameraName = camera.getName()
   active_camera = cameraName
   
-  # Scene
+  # MXS Scene Render Option Values
   time_limit = scene.getRenderParameter('STOP TIME')[0] / 60
   sampling_level = scene.getRenderParameter('SAMPLING LEVEL')[0]
   
@@ -263,33 +340,17 @@ def b2a_writeAsciiScene(mxsFilePath):
   # overlay_text_color = '1.0 1.0 1.0'
   # overlay_text_background = '0.0 0.0 0.0'
   
-
-  # Check the OS time
-  now = datetime.datetime.now()
-  
-  # Check the OS Platform
-  mxPlatform = b2a_getPlatform()
-  # print('Running on ' + mxPlatform + '\n')
-  
-  # Maxwell Release number - like "3.2.0.2"
-  mxVersion = getPyMaxwellVersion()
-  
-  # Add the Maxwell ASCII header text
-  textDocument += '# Maxwell ASCII Scene v' + b2a_version + '\n'
-  textDocument += '# Generated: ' + now.strftime('%Y-%m-%d %H:%M:%S %p') + '\n'
-  textDocument += '# Source MXS: ' + mxsFilePath + '\n'
-  textDocument += '# Using: Maxwell ' + mxVersion + ' on ' + mxPlatform + '\n\n'
+  # -----------------------------------------------------------------
   
   # Indent spacer - either a tab or two spaces
   # indent = '\t'
   indent = '  '
   
-  
   # Add the render_options section
+  textDocument = ''
   textDocument += 'render_options\n'
   textDocument += '{\n'
   
-
   textDocument += indent + 'active_camera "' + str(active_camera) + '"\n'
   textDocument += indent + 'time_limit ' + str(time_limit) + '\n'
   textDocument += indent + 'sampling_level ' + str(sampling_level) + '\n'
@@ -379,54 +440,8 @@ def b2a_writeAsciiScene(mxsFilePath):
   # Close the render_options section
   textDocument += '}\n'
   
-  # -------------------------------------------------------
-  # Write the ASCII text format scene to disk
-  # -------------------------------------------------------
-  asciiExt = 'mxa'
-  asciiSceneFilename = scenePathNoExt + '.' + asciiExt
-
-  print('[Maxwell ASCII Scene] ' + os.path.basename(asciiSceneFilename))
-  print('[Document Contents] \n' + textDocument)
-
-  asciiFile = open(asciiSceneFilename, 'w')
-  ok = asciiFile.write(textDocument)
-  asciiFile.close
+  return textDocument
   
-  if ok == 0:
-    print('\n--------------------------------------')
-    print('[There was an error saving] ' + asciiSceneFilename)
-    return 0
-  else:
-    print('\n--------------------------------------')
-    print('[ASCII Scene Export Complete]')
-    return 1
-
-
-# Check the operating system
-# Example: mxPlatform = b2a_getPlatform()
-def b2a_getPlatform():
-  import platform
-
-  osPlatform = str(platform.system())
-
-  mxPlatform = ''
-  if osPlatform == 'Windows':
-    mxPlatform = 'Windows'
-  elif osPlatform == 'win32':
-    mxPlatform = 'Windows'
-  elif osPlatform == 'Darwin':
-   mxPlatform = "Mac"
-  elif osPlatform== 'Linux':
-    mxPlatform =  'Linux'
-  elif osPlatform == 'Linux2':
-    mxPlatform = 'Linux'
-  else:
-    mxPlatform = 'Linux'
-  
-  # print('Running on ' + mxPlatform + '\n')
-  return mxPlatform
-
-
 # Get the Color Space
 # Example: scene = Cmaxwell(mwcallback); colorSpace = b2a_getColorSpace(scene)
 def b2a_getColorSpace(scene):

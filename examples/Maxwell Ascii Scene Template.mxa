@@ -85,6 +85,8 @@ camera
   target <X> <Y> <Z>
   up <X> <Y> <Z>
   resolution <# width> <# height>
+  render_region <# x1> <# y1> <# x2> <# y2>
+  render_region_type <region><blow up>
   lens "pinhole"
   focal_length <# mm>
   shutter 500
@@ -99,6 +101,9 @@ camera
   pixel_aspect 1.0
   x_shift 0.0
   y_shift 0.0
+  z_clip_planes_enabled <on><off>
+  z_near_clip_plane 0.001
+  z_far_clip_plane 100.0
   hidden <on><off>
 }
 

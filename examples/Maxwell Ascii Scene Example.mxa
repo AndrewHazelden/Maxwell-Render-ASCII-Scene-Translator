@@ -85,6 +85,8 @@ camera
   target 8.0 0.0 0.0
   up 0.0 1.0 0.0
   resolution 1024 512
+  render_region 0 0 1023 511
+  render_region_type "region"
   lens "pinhole"
   focal_length 8.0
   shutter 0.0208333333333
@@ -99,5 +101,8 @@ camera
   pixel_aspect 1.0
   x_shift 0.0
   y_shift 0.0
+  z_clip_planes_enabled off
+  z_near_clip_plane 0.001
+  z_far_clip_plane 100.0
   hidden off
 }

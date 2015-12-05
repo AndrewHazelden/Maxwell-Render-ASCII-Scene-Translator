@@ -219,6 +219,9 @@
 		<string>pixel_aspect</string>
 		<string>x_shift</string>
 		<string>y_shift</string>
+		<string>z_clip_planes_enabled</string>
+		<string>z_near_clip_plane</string>
+		<string>z_far_clip_plane</string>
 		<string>hidden</string>
 
 

@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-05 12.11 am v0.1
+# 2015-12-05 12.20 am v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -499,9 +499,11 @@ def b2a_getCameraBlock(scene):
   fps = camera.getFPS()[0]
   pixel_aspect = camera.getPixelAspect()[0]
   x_shift,y_shift,ok = camera.getShiftLens()
-
   hidden =  "on" if camera.isHide()[0] else "off"
-
+  
+  z_near_clip_plane,z_far_clip_plane,z_clip_planes_enabled_raw,ok = camera.getCutPlanes()
+  z_clip_planes_enabled = "on" if z_clip_planes_enabled_raw else "off"
+  
 #   print "[nSteps] " + str(nSteps) + "\n"
   
   # Indent spacer - either a tab or two spaces
@@ -536,6 +538,9 @@ def b2a_getCameraBlock(scene):
   textDocument += indent + 'pixel_aspect ' + str(pixel_aspect) + '\n'
   textDocument += indent + 'x_shift ' + str(x_shift) + '\n'
   textDocument += indent + 'y_shift ' + str(y_shift) + '\n'
+  textDocument += indent + 'z_clip_planes_enabled ' + str(z_clip_planes_enabled) + '\n'
+  textDocument += indent + 'z_near_clip_plane ' + str(z_near_clip_plane) + '\n'
+  textDocument += indent + 'z_far_clip_plane ' + str(z_far_clip_plane) + '\n'
   textDocument += indent + 'hidden ' + str(hidden) + '\n'
   
   # Close the camera section

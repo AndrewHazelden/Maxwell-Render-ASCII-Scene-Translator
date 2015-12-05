@@ -1,13 +1,13 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-05 12.28 am v0.1
+# 2015-12-05 7.25 pm v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
 
 # Description
 # -----------
-# This tool will convert a binary format MXS scene file into a plain text ascii format that is easier for a rendering TD to review and edit.
+# This tool will convert a binary format Maxwell Render MXS scene file into a plain text ASCII format that is easier for a rendering TD to review and edit.
 
 
 # Script Installation
@@ -227,7 +227,7 @@ def b2a_getRenderOptionsBlock(scene):
   materials_default = scene.getDefaultMaterial()
   
   # Search Paths
-  # TODO the translation of the array like results: (['/Applications/Maxwell 3/scripts/stereo/', '/Applications/Maxwell 3/materials database/textures/', '/Applications/Maxwell 3/materials database/ies/', '/Applications/Maxwell 3/materials database/iors/', 'C:/Program Files/Next Limit/Maxwell 3/scripts/stereo/', 'C:\\Program Files\\Next Limit\\Maxwell 3\\scripts\\stereo\\', 'C:\\Program Files\\Next Limit\\Maxwell 3\\materials database\\textures\\', 'C:\\Program Files\\Next Limit\\Maxwell 3\\materials database\\ies\\', 'C:\\Program Files\\Next Limit\\Maxwell 3\\materials database\\iors\\', 'M:\\Render\\Maxwell\\LatLong_Stereo_CubeX_sep\\', 'M:\\Render\\Maxwell\\', 'C:\\Users\\Administrator\\Desktop\\maxwell_latlong_stereo_cubex\\', 'C:\\Users\\Administrator\\Desktop\\maxwell\\Maxwell_LatLong_Stereo_CubeX\\', 'C:\\', 'M:\\Render\\Maxwell\\Maxwell_Stereo_Projects\\mxs\\Maxwell_LatLong_Stereo_CubeX\\', 'M:\\Render\\Maxwell\\Maxwell_Stereo_Projects\\mxs\\Maxwell_LatLong_Stereo_CubeX_v9\\', 'C:/Users/Administrator/Desktop/maxwell/Maxwell_LatLong_Stereo_CubeX/'], 1)
+  # TODO -  Translate the "materials_search_path" array results: (['/Applications/Maxwell 3/scripts/stereo/', '/Applications/Maxwell 3/materials database/textures/', '/Applications/Maxwell 3/materials database/ies/', '/Applications/Maxwell 3/materials database/iors/', 'C:/Program Files/Next Limit/Maxwell 3/scripts/stereo/', 'C:\\Program Files\\Next Limit\\Maxwell 3\\scripts\\stereo\\', 'C:\\Program Files\\Next Limit\\Maxwell 3\\materials database\\textures\\', 'C:\\Program Files\\Next Limit\\Maxwell 3\\materials database\\ies\\', 'C:\\Program Files\\Next Limit\\Maxwell 3\\materials database\\iors\\', 'M:\\Render\\Maxwell\\LatLong_Stereo_CubeX_sep\\', 'M:\\Render\\Maxwell\\', 'C:\\Users\\Administrator\\Desktop\\maxwell_latlong_stereo_cubex\\', 'C:\\Users\\Administrator\\Desktop\\maxwell\\Maxwell_LatLong_Stereo_CubeX\\', 'C:\\', 'M:\\Render\\Maxwell\\Maxwell_Stereo_Projects\\mxs\\Maxwell_LatLong_Stereo_CubeX\\', 'M:\\Render\\Maxwell\\Maxwell_Stereo_Projects\\mxs\\Maxwell_LatLong_Stereo_CubeX_v9\\', 'C:/Users/Administrator/Desktop/maxwell/Maxwell_LatLong_Stereo_CubeX/'], 1)
   
   materials_search_path = ''
   #print '[Search Paths] ' + str(scene.getSearchingPaths()) + '\n'
@@ -325,7 +325,7 @@ def b2a_getRenderOptionsBlock(scene):
   # simulens_diffraction = 1250.0
   # simulens_frequency = 1250.0
   simulens_scattering_enabled = "on" if scene.getRenderParameter('DO SCATTERING_LENS')[0] else "off"
-  # Note the Maxwell Studio GUI if "Scattering" is set to 2500 then SCATTERING_LENS=1.0
+  # Note the Maxwell Studio GUI settings - If "Scattering" is set to 2500 then SCATTERING_LENS=1.0
   simulens_scattering = scene.getRenderParameter('SCATTERING_LENS')[0]
   simulens_devingetting_enabled = "on" if scene.getRenderParameter('DO DEVIGNETTING')[0] else "off"
   simulens_devingetting = scene.getRenderParameter('DEVIGNETTING')[0]
@@ -507,7 +507,7 @@ def b2a_getCameraBlock(scene):
   z_near_clip_plane,z_far_clip_plane,z_clip_planes_enabled_raw,ok = camera.getCutPlanes()
   z_clip_planes_enabled = "on" if z_clip_planes_enabled_raw else "off"
   
-#   print "[nSteps] " + str(nSteps) + "\n"
+  # print "[nSteps] " + str(nSteps) + "\n"
   
   # Indent spacer - either a tab or two spaces
   # indent = '\t'
@@ -629,6 +629,8 @@ def b2a_getColorTemperature(scene):
 
   return colorTemperatureValue
 
+# -------------------------------------------------------------------
+# -------------------------------------------------------------------
 # This code is the "main" section that is run automatically when the python script is loaded in pyMaxwell:
 if __name__ == "__main__":
 
@@ -638,10 +640,38 @@ if __name__ == "__main__":
   # mxsFilePath = '/opt/maxwell-3.2/scripts/stereo/CubeX.mxs'
   # mxsFilePath = '/home/andrew/maxwell-3.2/scripts/stereo/CubeX.mxs'
 
-  # Launch the automagic stereo camera set up command
-  if os.path.exists(mxsFilePath):
-    # Generate the stereo project files
-  	ok = b2a_writeAsciiScene(mxsFilePath,)
-  else:
-    print('[MXS File Not Found] ' + mxsFilePath)
+  # ------------------------------------------
+  # Process a single MXS File
+  # ------------------------------------------
+
+#  # Launch the MXS scene processing command
+#  if os.path.exists(mxsFilePath):
+#    # Generate the new MXA ASCII scene file
+#  	ok = b2a_writeAsciiScene(mxsFilePath)
+#  else:
+#     print('[MXS File Not Found] ' + mxsFilePath)
+    
+  # ------------------------------------------
+  # Or process a whole directory of MXS files
+  # ------------------------------------------
+  
+  # MXS scene file extension
+  mxsFileExt = 'mxs'
+  
+  # The MXS scene directory path with a trailing slash
+  mxsDirPath = '/Applications/Maxwell 3/scripts/stereo/'
+  # mxsDirPath = 'C:/Program Files/Next Limit/Maxwell 3/scripts/stereo/'
+  # mxsDirPath = '/opt/maxwell-3.2/scripts/stereo/'
+  # mxsDirPath = '/home/andrew/maxwell-3.2/scripts/stereo/'
+  
+  # Build a list of MXS files in the current directory
+  mxsFileList = getFilesFromPath(mxsDirPath, mxsFileExt)
+
+  # Iterate through each of the active MXS files is the current directory
+  for file in mxsFileList:
+    mxsFilePath = mxsDirPath + file
+    print '[MXS File] ' + mxsFilePath + '\n'
+    # Generate the new MXA ASCII scene file
+    ok = b2a_writeAsciiScene(mxsFilePath)
+    
 

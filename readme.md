@@ -16,19 +16,19 @@ Here is an example Maxwell ASCII .mxa scene file with syntax highlighting enable
 
 ## MXA Development Roadmap ##
 
-### Phase 1 - Binary to ASCII (The Current Stage) ###
+### Phase 1 - MXS Binary to ASCII (The Current Stage) ###
 
 Currently the `mxs2ascii.py` script is able to successfully translate the input `.mxs` scene file's Render Options, and Camera node information into the new `.mxa` format.
 
 Work is continuing right now on implementing the rest of the data types in the `mxs2ascii.py` script that are present in a binary format Maxwell Render `.mxs` scene.
 
-### Phase 2 - ASCII to Binary Converter ###
+### Phase 2 - MXA ASCII to Binary Converter ###
 
 Work will start on making part two of this project which is to assemble a matching `ascii2mxs.py` translator to bring your ASCII scene description format back into the binary domain.
 
-### Phase 3 - ASCII Direct to Render ###
+### Phase 3 - MXA ASCII Direct to Render ###
 
-Once there is a set of working file translators that can seamlessly translate a scene from the MXS to MXA file formats and back, work will start on the final stage 3 effor which is to create a `mxa2render.py` script for rendering a .mxa scene file in Maxwell Render that was loaded straight from an ascii format `.mxa` document.
+Once there is a set of working file translators that can seamlessly translate a scene from the MXS to MXA file formats and back, work will start on the final stage 3 effor which is to create a `mxa2render.py` script for rendering a .mxa scene file in Maxwell Render that was loaded straight from an ASCII format `.mxa` document.
 
 ## Open Source License ##
 
@@ -58,9 +58,23 @@ Copy the `mxs2ascii.py` python file to your Maxwell 3.2 scripts directory:
 
 **Step 1.** Launch PyMaxwell and open up the `mxs2ascii.py` python script.
 
-**Step 2.** Edit the "mxsFilePath" variable in the main function near the bottom of this script and specify your Maxwell Studio based MXS scene file:
+**Step 2.** Choose if you want to process a single MXS or a directory filled with of MXS files.
 
 ![Editing the mxsFilePath variable](images/editing-the-mxs-file-path.png)
+
+**Process a Single MXS File**
+
+If you want to process a single MXS file edit the "mxsFilePath" variable in the main function near the bottom of this script and specify your Maxwell Studio based MXS scene file.
+
+Then uncomment the code block just below to the section "# Process a single MXS File". Then add python based `#` number sign comments at the beginning of the lines in the "# Or process a whole directory of MXS files" section of code.
+
+**Process a Whole Directory of MXS Files**
+
+If you want to automatically process an entire folder filled with MXS files then you should edit the "mxsDirPath" to specify the folder location that holds your Maxwell Studio based MXS scene files.
+
+Make sure the code block just below to the section "# Process a single MXS File" is commented with python based `#` number sign comments at the beginning of each of the lines.
+
+Then you might need to uncomment the code block lines just below the "# Or process a whole directory of MXS files" section of code.
 
 **Step 3.** Select the **Script > Run** menu item in PyMaxwell.
 

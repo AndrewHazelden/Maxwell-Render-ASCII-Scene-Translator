@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-05 12.01 am v0.1
+# 2015-12-05 12.11 am v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -459,6 +459,19 @@ def b2a_getCameraBlock(scene):
   height = res[1]
   resolution = str(width) + ' ' + str(height)
   
+  # Cropped Screen Render Region
+  x1,y1,x2,y2,render_region_type_raw,ok = camera.getScreenRegion()
+  #render_region = "0 0 " + str(width) + ' ' + str(height)
+  render_region = str(x1) + ' ' + str(y1) + ' ' + str(x2) + ' ' + str(y2)
+  
+  render_region_type = ''
+  if render_region_type_raw == 'REGION':
+    render_region_type = 'region'
+  elif render_region_type_raw == 'BLOW UP':
+    render_region_type = 'blow up'
+  else:
+    render_region_type = 'unknown'
+  
   position_raw,target_raw,up_raw,focal_length_raw,f_stop,step_time,ok = camera.getStep(0)
   position = str(round(position_raw[0],3)) + ' ' + str(round(position_raw[1],3)) + ' ' + str(round(position_raw[2],3))
   target = str(round(target_raw[0],3)) + ' ' + str(round(target_raw[1],3)) + ' ' + str(round(target_raw[2],3))
@@ -466,10 +479,9 @@ def b2a_getCameraBlock(scene):
   roll_angle = 0.0
   lens = b2a_lensTypeName(camera_lens)
   focal_length = round((focal_length_raw * 1000.0), 0)
-  lock_exposure = "off"
+  #lock_exposure = "off"
   shutter = camera.getShutter()[0]
   #ev_number = 0
-  
   filmWidthRaw,filmHeightRaw,ok = camera.getFilmSize()
   film_width = round((filmWidthRaw * 1000.0), 1)
   film_height = round((filmHeightRaw * 1000.0), 1)
@@ -506,9 +518,11 @@ def b2a_getCameraBlock(scene):
   textDocument += indent + 'target ' + str(target) + '\n'
   textDocument += indent + 'up ' + str(up) + '\n'
   textDocument += indent + 'resolution ' + str(resolution) + '\n'
+  textDocument += indent + 'render_region ' + str(render_region) + '\n'
+  textDocument += indent + 'render_region_type "' + str(render_region_type) + '"\n'
   textDocument += indent + 'lens "' + str(lens) + '"\n'
   textDocument += indent + 'focal_length ' + str(focal_length) + '\n'
-  textDocument += indent + 'lock_exposure ' + str(lock_exposure) + '\n'
+  #textDocument += indent + 'lock_exposure ' + str(lock_exposure) + '\n'
   textDocument += indent + 'shutter ' + str(shutter) + '\n'
   textDocument += indent + 'f_stop ' + str(f_stop) + '\n'
   #textDocument += indent + 'ev_number ' + str(ev_number) + '\n'

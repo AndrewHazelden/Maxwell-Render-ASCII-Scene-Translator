@@ -87,13 +87,13 @@ camera
   resolution 1024 512
   lens "pinhole"
   focal_length 8.0
-  lock_exposure off
   shutter 0.0208333333333
   f_stop 12.0
   iso 100.0
   film_width 32.4
   film_height 16.2
   diaphragm_type "circular"
+  blades 0
   fps 30.0
   step_time 0.0
   pixel_aspect 1.0

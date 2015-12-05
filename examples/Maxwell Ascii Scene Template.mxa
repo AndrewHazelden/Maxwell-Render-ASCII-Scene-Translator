@@ -87,13 +87,13 @@ camera
   resolution <# width> <# height>
   lens "pinhole"
   focal_length <# mm>
-  lock_exposure <on><off>
   shutter 500
   f_stop 12.0
   iso 100.0
   film_width <# mm>
   film_height <# mm>
   diaphragm_type <circular><polygonal>
+  blades 0
   fps 30.0
   step_time 0.0
   pixel_aspect 1.0

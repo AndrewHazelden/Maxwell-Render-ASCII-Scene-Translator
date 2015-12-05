@@ -201,6 +201,8 @@
 		<string>target</string>
 		<string>up</string>
 		<string>resolution</string>
+		<string>render_region</string>
+		<string>render_region_type</string>
 		<string>lens</string>
 		<string>focal_length</string>
 		<string>lock_exposure</string>

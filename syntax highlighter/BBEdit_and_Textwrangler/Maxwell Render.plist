@@ -121,7 +121,6 @@
     <!-- Maxwell Nodes End -->
 
     <!-- Maxwell Parameters Start -->
-		<string>name</string>
 		<string>active_camera</string>
 		<string>time_limit</string>
     <string>sampling_level</string>
@@ -195,6 +194,20 @@
     <string>overlay_text_position</string>
     <string>overlay_text_color</string>
     <string>overlay_text_background</string>
+
+		<string>name</string>
+		<string>position</string>
+		<string>target</string>
+		<string>roll_angle</string>
+		<string>exposure</string>
+		<string>lens</string>
+		<string>focal_length</string>
+		<string>lock_exposure</string>
+		<string>shutter</string>
+		<string>f_stop</string>
+		<string>ev_number</string>
+		<string>resolution</string>
+
     <!-- Maxwell Parameters End-->
 
 	</array>

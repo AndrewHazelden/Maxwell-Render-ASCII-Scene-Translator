@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-05 7.29 am v0.1
+# 2015-12-05 7.48 am v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -448,8 +448,22 @@ def b2a_getRenderOptionsBlock(scene):
 def b2a_getCameraBlock(scene):
   camera = scene.getActiveCamera()
   cameraName = camera.getName()
+  
   active_camera = cameraName
-    
+  position = "0.0 0.5 8.0"
+  target = "0.0 1.5 0.0"
+  roll_angle = 0.0
+  exposure = ""
+  lens = 0
+  focal_length  = 35.0
+  lock_exposure = "off"
+  shutter = 500
+  f_stop = 5.6
+  ev_number = 13.937
+  resolution = "640 480"
+  
+  
+  
   # Indent spacer - either a tab or two spaces
   # indent = '\t'
   indent = '  '
@@ -460,6 +474,16 @@ def b2a_getCameraBlock(scene):
   textDocument += '{\n'
   
   textDocument += indent + 'name "' + str(active_camera) + '"\n'
+  textDocument += indent + 'position ' + str(position) + '\n'
+  textDocument += indent + 'target ' + str(target) + '\n'
+  textDocument += indent + 'exposure ' + str(exposure) + '\n'
+  textDocument += indent + 'lens ' + str(lens) + '\n'
+  textDocument += indent + 'focal_length ' + str(focal_length) + '\n'
+  textDocument += indent + 'lock_exposure ' + str(lock_exposure) + '\n'
+  textDocument += indent + 'shutter ' + str(shutter) + '\n'
+  textDocument += indent + 'f_stop ' + str(f_stop) + '\n'
+  textDocument += indent + 'ev_number ' + str(ev_number) + '\n'
+  textDocument += indent + 'resolution ' + str(resolution) + '\n'
   
   # Close the camera section
   textDocument += '}\n'

@@ -44,7 +44,7 @@ render_options
   channels_fresnel <off><png 8><png 16><tga><tif 8><tif 16><tif 32><exr 16><exr 32><jpg><jp2>
   channels_normals <off><png 8><png 16><tga><tif 8><tif 16><tif 32><exr 16><exr 32><jpg><jp2>
   channels_normals_mode <world><camera>
-  channels_motion_type <reelsmart><other>
+  channels_motion_mode <reelsmart><other>
   channels_position <off><png 8><png 16><tga><tif 8><tif 16><tif 32><exr 16><exr 32><jpg><jp2>
   channels_position_mode <world><camera>
   channels_deep <off><exr deep><ptex>
@@ -87,7 +87,7 @@ camera
   up <X> <Y> <Z>
   resolution <# width> <# height>
   render_region <# x1> <# y1> <# x2> <# y2>
-  render_region_type <region><blow up>
+  render_region_mode <region><blow up>
   lens "pinhole"
   focal_length <# mm>
   shutter 500
@@ -95,7 +95,7 @@ camera
   iso 100.0
   film_width <# mm>
   film_height <# mm>
-  diaphragm_type <circular><polygonal>
+  diaphragm_mode <circular><polygonal>
   blades 0
   fps 30.0
   step_time 0.0
@@ -107,4 +107,3 @@ camera
   z_far_clip_plane 100.0
   hidden <on><off>
 }
-

@@ -161,7 +161,7 @@
     <string>channels_fresnel</string>
     <string>channels_normals</string>
     <string>channels_normals_mode</string>
-    <string>channels_motion_type</string>
+    <string>channels_motion_mode</string>
     <string>channels_position</string>
     <string>channels_position_mode</string>
     <string>channels_deep</string>
@@ -202,7 +202,7 @@
 		<string>up</string>
 		<string>resolution</string>
 		<string>render_region</string>
-		<string>render_region_type</string>
+		<string>render_region_mode</string>
 		<string>lens</string>
 		<string>focal_length</string>
 		<string>lock_exposure</string>
@@ -212,7 +212,7 @@
 		<string>iso</string>
 		<string>film_width</string>
 		<string>film_height</string>
-		<string>diaphragm_type</string>
+		<string>diaphragm_mode</string>
 		<string>blades</string>
 		<string>fps</string>
 		<string>step_time</string>

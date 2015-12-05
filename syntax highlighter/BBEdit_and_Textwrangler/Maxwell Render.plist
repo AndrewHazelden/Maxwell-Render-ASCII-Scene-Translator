@@ -161,6 +161,7 @@
     <string>channels_fresnel</string>
     <string>channels_normals</string>
     <string>channels_normals_mode</string>
+    <string>channels_motion_type</string>
     <string>channels_position</string>
     <string>channels_position_mode</string>
     <string>channels_deep</string>
@@ -198,15 +199,23 @@
 		<string>name</string>
 		<string>position</string>
 		<string>target</string>
-		<string>roll_angle</string>
-		<string>exposure</string>
+		<string>up</string>
+		<string>resolution</string>
 		<string>lens</string>
 		<string>focal_length</string>
 		<string>lock_exposure</string>
 		<string>shutter</string>
 		<string>f_stop</string>
 		<string>ev_number</string>
-		<string>resolution</string>
+		<string>iso</string>
+		<string>film_width</string>
+		<string>film_height</string>
+		<string>diaphragm_type</string>
+		<string>fps</string>
+		<string>step_time</string>
+		<string>pixel_aspect</string>
+		<string>x_shift</string>
+		<string>y_shift</string>
 
     <!-- Maxwell Parameters End-->
 

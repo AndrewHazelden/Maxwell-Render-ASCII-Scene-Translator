@@ -45,6 +45,7 @@ render_options
   channels_normals_mode "world"
   channels_position off
   channels_position_mode "world"
+  channels_motion_type "reelsmart"
   channels_deep off
   channels_deep_mode "alpha"
   channels_deep_min_distance 0.2
@@ -79,5 +80,23 @@ render_options
 
 camera
 {
-  name "RenderCamera"
+  name "RenderCam"
+  position 4.652 0.0 0.0
+  target 8.0 0.0 0.0
+  up 0.0 1.0 0.0
+  resolution 1024 512
+  lens "pinhole"
+  focal_length 8.0
+  lock_exposure off
+  shutter 0.0208333333333
+  f_stop 12.0
+  iso 100.0
+  film_width 32.4
+  film_height 16.2
+  diaphragm_type "circular"
+  fps 30.0
+  step_time 0.0
+  pixel_aspect 1.0
+  x_shift 0.0
+  y_shift 0.0
 }

@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-05 8.04 am v0.1
+# 2015-12-05 11.53 am v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -226,6 +226,8 @@ def b2a_getRenderOptionsBlock(scene):
   materials_override  = scene.getOverrideMaterial()
   materials_default = scene.getDefaultMaterial()
   materials_search_path = ''
+  
+  print '[***Search Paths***] ' + str(scene.getSearchingPaths())
 
   # Globals
   motion_blur = "on" if scene.getRenderParameter('DO MOTION BLUR')[0] else "off"
@@ -296,7 +298,7 @@ def b2a_getRenderOptionsBlock(scene):
   channels_normals_mode = "camera" if scene.getRenderParameter('NORMALS CHANNEL SPACE')[0] else "world"
   channels_position = "on" if scene.getRenderParameter('DO POSITION CHANNEL')[0] else "off"
   channels_position_mode = "camera" if scene.getRenderParameter('POSITION CHANNEL SPACE')[0] else "world"
-  ##channels_motion_type = "reelsmart" if scene.getRenderParameter('MOTION CHANNEL TYPE')[0] else "other"
+  channels_motion_type = "other" if scene.getRenderParameter('MOTION CHANNEL TYPE')[0] else "reelsmart"
   channels_deep = "on" if scene.getRenderParameter('DO DEEP CHANNEL')[0] else "off"
   channels_deep_mode = "rgba" if scene.getRenderParameter('DEEP CHANNEL TYPE')[0] else "alpha"
   channels_deep_min_distance = scene.getRenderParameter('DEEP MIN DISTANCE')[0]
@@ -396,6 +398,7 @@ def b2a_getRenderOptionsBlock(scene):
   textDocument += indent + 'channels_fresnel ' + str(channels_fresnel) + '\n'
   textDocument += indent + 'channels_normals ' + str(channels_normals) + '\n'
   textDocument += indent + 'channels_normals_mode "' + str(channels_normals_mode) + '"\n'
+  textDocument += indent + 'channels_motion_type "' + str(channels_motion_type) + '"\n'
   textDocument += indent + 'channels_position ' + str(channels_position) + '\n'
   textDocument += indent + 'channels_position_mode "' + str(channels_position_mode) + '"\n'
   textDocument += indent + 'channels_deep ' + str(channels_deep) + '\n'
@@ -447,29 +450,45 @@ def b2a_getRenderOptionsBlock(scene):
 # Example: scene = Cmaxwell(mwcallback); cameraText = b2a_getCameraBlock(scene)
 def b2a_getCameraBlock(scene):
   camera = scene.getActiveCamera()
-  cameraName = camera.getName()
-  cameraLens = camera.getLensType()
+  name = camera.getName()
+  camera_lens = camera.getLensType()
     
-  active_camera = cameraName
-  
-  positionRaw,focalPointRaw,upRaw,focalLengthRaw,f_stop,stepTime,ok = camera.getStep(0)
-  
-  position = str(round(positionRaw[0],3)) + ' ' + str(round(positionRaw[1],3)) + ' ' + str(round(positionRaw[2],3))
-  target = str(round(focalPointRaw[0],3)) + ' ' + str(round(focalPointRaw[1],3)) + ' ' + str(round(focalPointRaw[2],3))
-  roll_angle = 0.0
-  exposure = ""
-  lens = b2a_lensTypeName(cameraLens)
-  focal_length = round((focalLengthRaw * 1000.0), 0)
-  lock_exposure = "off"
-  shutter = 500
-  ev_number = 13.937
-  
-  # The active camera's render resolution
+  # The camera's render resolution
   res = camera.getResolution()
   width = res[0]
   height = res[1]
   resolution = str(width) + ' ' + str(height)
   
+  position_raw,target_raw,up_raw,focal_length_raw,f_stop,step_time,ok = camera.getStep(0)
+  position = str(round(position_raw[0],3)) + ' ' + str(round(position_raw[1],3)) + ' ' + str(round(position_raw[2],3))
+  target = str(round(target_raw[0],3)) + ' ' + str(round(target_raw[1],3)) + ' ' + str(round(target_raw[2],3))
+  up = str(round(up_raw[0],3)) + ' ' + str(round(up_raw[1],3)) + ' ' + str(round(up_raw[2],3))
+  roll_angle = 0.0
+  lens = b2a_lensTypeName(camera_lens)
+  focal_length = round((focal_length_raw * 1000.0), 0)
+  lock_exposure = "off"
+  shutter = camera.getShutter()[0]
+  #ev_number = 0
+  
+  filmWidthRaw,filmHeightRaw,ok = camera.getFilmSize()
+  film_width = round((filmWidthRaw * 1000.0), 1)
+  film_height = round((filmHeightRaw * 1000.0), 1)
+  iso = camera.getIso()[0]
+  
+  diaphragmTypeRaw,angle,nBlades,ok = camera.getDiaphragm()
+  diaphragm_type = ''
+  if diaphragmTypeRaw == 'CIRCULAR':
+    diaphragm_type = 'circular'
+  elif diaphragmTypeRaw == 'POLYGONAL':
+    diaphragm_type = 'polygonal'
+  else:
+    diaphragm_type = 'unknown'
+     
+  fps = camera.getFPS()[0]
+  pixel_aspect = camera.getPixelAspect()[0]
+  x_shift,y_shift,ok = camera.getShiftLens()
+
+#   print "[nSteps] " + str(nSteps) + "\n"
   
   # Indent spacer - either a tab or two spaces
   # indent = '\t'
@@ -480,17 +499,26 @@ def b2a_getCameraBlock(scene):
   textDocument += 'camera\n'
   textDocument += '{\n'
   
-  textDocument += indent + 'name "' + str(active_camera) + '"\n'
+  textDocument += indent + 'name "' + str(name) + '"\n'
   textDocument += indent + 'position ' + str(position) + '\n'
   textDocument += indent + 'target ' + str(target) + '\n'
-  textDocument += indent + 'exposure ' + str(exposure) + '\n'
+  textDocument += indent + 'up ' + str(up) + '\n'
+  textDocument += indent + 'resolution ' + str(resolution) + '\n'
   textDocument += indent + 'lens "' + str(lens) + '"\n'
   textDocument += indent + 'focal_length ' + str(focal_length) + '\n'
   textDocument += indent + 'lock_exposure ' + str(lock_exposure) + '\n'
   textDocument += indent + 'shutter ' + str(shutter) + '\n'
   textDocument += indent + 'f_stop ' + str(f_stop) + '\n'
-  textDocument += indent + 'ev_number ' + str(ev_number) + '\n'
-  textDocument += indent + 'resolution ' + str(resolution) + '\n'
+  #textDocument += indent + 'ev_number ' + str(ev_number) + '\n'
+  textDocument += indent + 'iso ' + str(iso) + '\n'
+  textDocument += indent + 'film_width ' + str(film_width) + '\n'
+  textDocument += indent + 'film_height ' + str(film_height) + '\n'
+  textDocument += indent + 'diaphragm_type "' + str(diaphragm_type) + '"\n'
+  textDocument += indent + 'fps ' + str(fps) + '\n'
+  textDocument += indent + 'step_time ' + str(step_time) + '\n'
+  textDocument += indent + 'pixel_aspect ' + str(pixel_aspect) + '\n'
+  textDocument += indent + 'x_shift ' + str(x_shift) + '\n'
+  textDocument += indent + 'y_shift ' + str(y_shift) + '\n'
   
   # Close the camera section
   textDocument += '}\n'

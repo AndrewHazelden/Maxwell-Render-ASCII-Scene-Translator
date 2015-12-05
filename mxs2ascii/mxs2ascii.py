@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-04 9.00 pm v0.1
+# 2015-12-04 9.18 pm v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -175,7 +175,7 @@ def b2a_writeAsciiScene(mxsFilePath):
   
   # Channels
   # channels_output_mode = 'embedded'
-  
+
   channels_render_layers = ''
   if scene.getRenderParameter('RENDER LAYERS')[0] == RENDER_LAYER_ALL:
     # RENDER_LAYER_ALL (all layers)
@@ -198,10 +198,10 @@ def b2a_writeAsciiScene(mxsFilePath):
   else:
     # Fallback Unknown state
     channels_render_layers = 'unknown'
-    
+  
   channels_render = "on" if scene.getRenderParameter('DO RENDER CHANNEL')[0] else "off"
   channels_alpha = "on" if scene.getRenderParameter('DO ALPHA CHANNEL')[0] else "off"
-  channels_opaque = "on" if scene.getRenderParameter('DO OPAQUE ALPHA')[0] else "off"
+  channels_opaque = "on" if scene.getRenderParameter('OPAQUE ALPHA')[0] else "off"
   channels_zbuffer = "on" if scene.getRenderParameter('DO ZBUFFER CHANNEL')[0] else "off"
   
   # print('[***ZBUFFER RANGE*** TUPPLE]' + str(scene.getRenderParameter('ZBUFFER RANGE')[0]))
@@ -217,11 +217,11 @@ def b2a_writeAsciiScene(mxsFilePath):
   channels_normals_mode = "camera" if scene.getRenderParameter('NORMALS CHANNEL SPACE')[0] else "world"
   channels_position = "on" if scene.getRenderParameter('DO POSITION CHANNEL')[0] else "off"
   channels_position_mode = "camera" if scene.getRenderParameter('POSITION CHANNEL SPACE')[0] else "world"
-  channels_motion_type = "reelsmart" if scene.getRenderParameter('MOTION CHANNEL TYPE')[0] else "other"
+  ##channels_motion_type = "reelsmart" if scene.getRenderParameter('MOTION CHANNEL TYPE')[0] else "other"
   channels_deep = "on" if scene.getRenderParameter('DO DEEP CHANNEL')[0] else "off"
   channels_deep_mode = "rgba" if scene.getRenderParameter('DEEP CHANNEL TYPE')[0] else "alpha"
   channels_deep_min_distance = scene.getRenderParameter('DEEP MIN DISTANCE')[0]
-  #channels_deep_max_samples = scene.getRenderParameter('DEEP MAX SAMPLES')[0]
+  ##channels_deep_max_samples = scene.getRenderParameter('DEEP MAX SAMPLES')[0]
   channels_uv = "on" if scene.getRenderParameter('DO UV CHANNEL')[0] else "off"
   channels_custom_alpha = "on" if scene.getRenderParameter('DO ALPHA CUSTOM CHANNEL')[0] else "off"
   channels_reflectance = "on" if scene.getRenderParameter('DO REFLECTANCE CHANNEL')[0] else "off"
@@ -230,8 +230,8 @@ def b2a_writeAsciiScene(mxsFilePath):
   tone_mapping_color_space = b2a_getColorSpace(scene)
   tone_mapping_white_point,tone_mapping_tint,ok = scene.getWhitePoint()
   tone_mapping_monitor_gamma,tone_mapping_burn,ok = scene.getToneMapping()
-  # tone_mapping_sharpness_enabled = 'off'
-  # tone_mapping_sharpness = 60.0
+  ## tone_mapping_sharpness_enabled = 'off'
+  ## tone_mapping_sharpness = 60.0
 
   # Simulens
     
@@ -283,6 +283,8 @@ def b2a_writeAsciiScene(mxsFilePath):
   # Add the render_options section
   textDocument += 'render_options\n'
   textDocument += '{\n'
+  
+  """
   textDocument += indent + 'active_camera "' + str(active_camera) + '"\n'
   textDocument += indent + 'time_limit ' + str(time_limit) + '\n'
   textDocument += indent + 'sampling_level ' + str(sampling_level) + '\n'
@@ -313,13 +315,13 @@ def b2a_writeAsciiScene(mxsFilePath):
   textDocument += indent + 'extra_sampling_bitmap ' + str(extra_sampling_bitmap) + '\n'
   textDocument += indent + 'extra_sampling_invert_mask ' + str(extra_sampling_invert_mask) + '\n'
 
-  #textDocument += indent + 'channels_output_mode "' + str(channels_output_mode) + '"\n'
+  ##textDocument += indent + 'channels_output_mode "' + str(channels_output_mode) + '"\n'
   textDocument += indent + 'channels_render_layers "' + str(channels_render_layers) + '"\n'
   textDocument += indent + 'channels_render ' + str(channels_render) + '\n'
   textDocument += indent + 'channels_alpha ' + str(channels_alpha) + '\n'
   textDocument += indent + 'channels_opaque ' + str(channels_opaque) + '\n'
-  textDocument += indent + 'channels_zbuffer ' + str(channels_zbuffer) + '\n'
-  # textDocument += indent + 'channels_zbuffer_meters ' + str(channels_zbuffer_meters) + '\n'
+  #textDocument += indent + 'channels_zbuffer ' + str(channels_zbuffer) + '\n'
+  ## textDocument += indent + 'channels_zbuffer_meters ' + str(channels_zbuffer_meters) + '\n'
   textDocument += indent + 'channels_shadow ' + str(channels_shadow) + '\n'
   textDocument += indent + 'channels_material_id ' + str(channels_material_id) + '\n'
   textDocument += indent + 'channels_object_id ' + str(channels_object_id) + '\n'
@@ -330,19 +332,20 @@ def b2a_writeAsciiScene(mxsFilePath):
   textDocument += indent + 'channels_normals_mode "' + str(channels_normals_mode) + '"\n'
   textDocument += indent + 'channels_position ' + str(channels_position) + '\n'
   textDocument += indent + 'channels_position_mode "' + str(channels_position_mode) + '"\n'
-  textDocument += indent + 'channels_deep ' + str(channels_deep) + '\n'
-  textDocument += indent + 'channels_deep_mode "' + str(channels_deep_mode) + '"\n'
-  textDocument += indent + 'channels_deep_min_distance ' + str(channels_deep_min_distance) + '\n'
-  #textDocument += indent + 'channels_deep_max_samples ' + str(channels_deep_max_samples) + '\n'
-  textDocument += indent + 'channels_uv ' + str(channels_uv) + '\n'
-  textDocument += indent + 'channels_custom_alpha ' + str(channels_custom_alpha) + '\n'
-  textDocument += indent + 'channels_reflectance ' + str(channels_reflectance) + '\n'
+  #textDocument += indent + 'channels_deep ' + str(channels_deep) + '\n'
+  #textDocument += indent + 'channels_deep_mode "' + str(channels_deep_mode) + '"\n'
+  #textDocument += indent + 'channels_deep_min_distance ' + str(channels_deep_min_distance) + '\n'
+  ##textDocument += indent + 'channels_deep_max_samples ' + str(channels_deep_max_samples) + '\n'
+  #textDocument += indent + 'channels_uv ' + str(channels_uv) + '\n'
+  #textDocument += indent + 'channels_custom_alpha ' + str(channels_custom_alpha) + '\n'
+  #textDocument += indent + 'channels_reflectance ' + str(channels_reflectance) + '\n'
 
-  textDocument += indent + 'tone_mapping_color_space "' + str(tone_mapping_color_space) + '"\n'
-  textDocument += indent + 'tone_mapping_white_point ' + str(tone_mapping_white_point) + '\n'
-  textDocument += indent + 'tone_mapping_tint ' + str(tone_mapping_tint) + '\n'
-  textDocument += indent + 'tone_mapping_burn ' + str(tone_mapping_burn) + '\n'
-  textDocument += indent + 'tone_mapping_monitor_gamma ' + str(tone_mapping_monitor_gamma) + '\n'
+  #textDocument += indent + 'tone_mapping_color_space "' + str(tone_mapping_color_space) + '"\n'
+  #textDocument += indent + 'tone_mapping_white_point ' + str(tone_mapping_white_point) + '\n'
+  #textDocument += indent + 'tone_mapping_tint ' + str(tone_mapping_tint) + '\n'
+  #textDocument += indent + 'tone_mapping_burn ' + str(tone_mapping_burn) + '\n'
+  #textDocument += indent + 'tone_mapping_monitor_gamma ' + str(tone_mapping_monitor_gamma) + '\n'
+  
   # textDocument += indent + 'tone_mapping_sharpness_enabled ' + str(tone_mapping_sharpness_enabled) + '\n'
   # textDocument += indent + 'tone_mapping_sharpness ' + str(tone_mapping_sharpness) + '\n'
 
@@ -365,6 +368,7 @@ def b2a_writeAsciiScene(mxsFilePath):
   # textDocument += indent + 'overlay_text_position ' + str(overlay_text_position) + '\n'
   # textDocument += indent + 'overlay_text_color ' + str(overlay_text_color) + '\n'
   # textDocument += indent + 'overlay_text_background ' + str(overlay_text_background) + '\n'
+  """
   
   # Close the render_options section
   textDocument += '}\n'

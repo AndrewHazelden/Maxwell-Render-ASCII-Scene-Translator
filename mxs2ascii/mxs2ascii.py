@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-05 5.53 am v0.1
+# 2015-12-05 6.44 am v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -174,7 +174,9 @@ def b2a_writeAsciiScene(mxsFilePath):
   extra_sampling_invert_mask = "on" if scene.getRenderParameter('EXTRA SAMPLING INVERT')[0] else "off"
   
   # Channels
-  # channels_output_mode = 'embedded'
+  channels_output_mode = "embedded" if scene.getRenderParameter('EMBED CHANNELS')[0] else "separate"
+  #print '[channels_output_mode] ' + channels_output_mode + ' ' + str(scene.getRenderParameter('EMBED CHANNELS')[0])
+
 
   channels_render_layers = ''
   if scene.getRenderParameter('RENDER LAYERS')[0] == RENDER_LAYER_ALL:
@@ -230,8 +232,8 @@ def b2a_writeAsciiScene(mxsFilePath):
   tone_mapping_color_space = b2a_getColorSpace(scene)
   tone_mapping_white_point,tone_mapping_tint,ok = scene.getWhitePoint()
   tone_mapping_monitor_gamma,tone_mapping_burn,ok = scene.getToneMapping()
-  ## tone_mapping_sharpness_enabled = 'off'
-  ## tone_mapping_sharpness = 60.0
+  tone_mapping_sharpness_enabled = "on" if scene.getRenderParameter('DO SHARPNESS')[0] else "off"
+  tone_mapping_sharpness = scene.getRenderParameter('SHARPNESS')[0]
 
   # Simulens
     
@@ -240,8 +242,11 @@ def b2a_writeAsciiScene(mxsFilePath):
   # simulens_obstacle_map = ''
   # simulens_diffraction = 1250.0
   # simulens_frequency = 1250.0
-  # simulens_scattering = 250.0
-  # simulens_devingetting = 100.0
+  simulens_scattering_enabled = "on" if scene.getRenderParameter('DO SCATTERING_LENS')[0] else "off"
+  # Note the Maxwell Studio GUI if "Scattering" is set to 2500 then SCATTERING_LENS=1.0
+  simulens_scattering = scene.getRenderParameter('SCATTERING_LENS')[0]
+  simulens_devingetting_enabled = "on" if scene.getRenderParameter('DO DEVIGNETTING')[0] else "off"
+  simulens_devingetting = scene.getRenderParameter('DEVIGNETTING')[0]
 
   # Illumination and Caustics
   # illumination = 'Both'
@@ -249,11 +254,12 @@ def b2a_writeAsciiScene(mxsFilePath):
   # refraction_caustics = 'Both'
 
   # Fire
-  # fire_floating_shadows = 'off'
-  # fire_floating_refractions = 'off'
+  fire_floating_shadows = "on" if scene.getRenderParameter('DO FLOATING SHADOWS')[0] else "off"
+  fire_floating_refractions = "on" if scene.getRenderParameter('DO FLOATING REFLECTIONS')[0] else "off"
 
   # Overlay Text
-  # overlay_text = ''
+  overlay_text = 1.0
+  #print '[overlay_text] ' + overlay_text + ' ' + str(scene.getRenderParameter('DO TEXT')[0])
   # overlay_text_position = ''
   # overlay_text_color = '1.0 1.0 1.0'
   # overlay_text_background = '0.0 0.0 0.0'
@@ -315,7 +321,7 @@ def b2a_writeAsciiScene(mxsFilePath):
   textDocument += indent + 'extra_sampling_bitmap "' + str(extra_sampling_bitmap) + '"\n'
   textDocument += indent + 'extra_sampling_invert_mask ' + str(extra_sampling_invert_mask) + '\n'
 
-  ##textDocument += indent + 'channels_output_mode "' + str(channels_output_mode) + '"\n'
+  textDocument += indent + 'channels_output_mode "' + str(channels_output_mode) + '"\n'
   textDocument += indent + 'channels_render_layers "' + str(channels_render_layers) + '"\n'
   textDocument += indent + 'channels_render ' + str(channels_render) + '\n'
   textDocument += indent + 'channels_alpha ' + str(channels_alpha) + '\n'
@@ -346,23 +352,25 @@ def b2a_writeAsciiScene(mxsFilePath):
   textDocument += indent + 'tone_mapping_burn ' + str(tone_mapping_burn) + '\n'
   textDocument += indent + 'tone_mapping_monitor_gamma ' + str(tone_mapping_monitor_gamma) + '\n'
   
-  ## textDocument += indent + 'tone_mapping_sharpness_enabled ' + str(tone_mapping_sharpness_enabled) + '\n'
-  ## textDocument += indent + 'tone_mapping_sharpness ' + str(tone_mapping_sharpness) + '\n'
+  textDocument += indent + 'tone_mapping_sharpness_enabled ' + str(tone_mapping_sharpness_enabled) + '\n'
+  # Note the Maxwell Studio GUI if "Sharpness" is set to 100 then SCATTERING_LENS=1.0
+  textDocument += indent + 'tone_mapping_sharpness ' + str(tone_mapping_sharpness) + '\n'
 
   # textDocument += indent + 'simulens_aperture_map ' + str(simulens_aperture_map) + '\n'
   # textDocument += indent + 'simulens_obstacle_map ' + str(simulens_obstacle_map) + '\n'
   # textDocument += indent + 'simulens_diffraction ' + str(simulens_diffraction) + '\n'
   # textDocument += indent + 'simulens_frequency ' + str(simulens_frequency) + '\n'
-  # textDocument += indent + 'simulens_scattering ' + str(simulens_scattering) + '\n'
-  # textDocument += indent + 'simulens_devingetting ' + str(simulens_devingetting) + '\n'
-  # textDocument += indent + 'simulens_devingetting ' + str(simulens_devingetting) + '\n'
+  textDocument += indent + 'simulens_scattering_enabled ' + str(simulens_scattering_enabled) + '\n'
+  textDocument += indent + 'simulens_scattering ' + str(simulens_scattering) + '\n'
+  textDocument += indent + 'simulens_devingetting_enabled ' + str(simulens_devingetting_enabled) + '\n'
+  textDocument += indent + 'simulens_devingetting ' + str(simulens_devingetting) + '\n'
 
   # textDocument += indent + 'illumination "' + str(illumination) + '"\n'
   # textDocument += indent + 'reflection_caustics "' + str(reflection_caustics) + '"\n'
   # textDocument += indent + 'refraction_caustics "' + str(refraction_caustics) + '"\n'
 
-  # textDocument += indent + 'fire_floating_shadows ' + str(fire_floating_shadows) + '\n'
-  # textDocument += indent + 'fire_floating_refractions ' + str(fire_floating_refractions) + '\n'
+  textDocument += indent + 'fire_floating_shadows ' + str(fire_floating_shadows) + '\n'
+  textDocument += indent + 'fire_floating_refractions ' + str(fire_floating_refractions) + '\n'
 
   # textDocument += indent + 'overlay_text ' + str(overlay_text) + '\n'
   # textDocument += indent + 'overlay_text_position ' + str(overlay_text_position) + '\n'

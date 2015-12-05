@@ -64,6 +64,7 @@ render_options
   simulens_diffraction 1250.0
   simulens_frequency 1250.0
   simulens_scattering 250.0
+  simulens_devingetting_enabled on
   simulens_devingetting 100.0
   illumination "both"
   reflection_caustics "both"

@@ -175,7 +175,7 @@
     <string>channels_position_mode</string>
     <string>channels_deep</string>
     <string>channels_deep_mode</string>
-    <string>channels_deep_min_distance_meters</string>
+    <string>channels_deep_min_distance</string>
 		<string>channels_deep_max_samples</string>
     <string>channels_uv</string>
     <string>channels_custom_alpha</string>
@@ -191,7 +191,9 @@
     <string>simulens_obstacle_map</string>
     <string>simulens_diffraction</string>
     <string>simulens_frequency</string>
+    <string>simulens_scattering_enabled</string>
     <string>simulens_scattering</string>
+    <string>simulens_devingetting_enabled</string>
     <string>simulens_devingetting</string>
     <string>illumination</string>
     <string>reflection_caustics</string>

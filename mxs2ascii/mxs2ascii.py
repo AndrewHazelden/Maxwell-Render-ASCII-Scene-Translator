@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-04 9.23 pm v0.1
+# 2015-12-05 5.53 am v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -157,6 +157,7 @@ def b2a_writeAsciiScene(mxsFilePath):
 
   # Extra Sampling
   extra_sampling_enabled = "on" if scene.getRenderParameter('DO EXTRA SAMPLING')[0] else "off"
+  extra_sampling_level = scene.getRenderParameter('EXTRA SAMPLING SL')[0]
   
   extra_sampling_mask = ''
   if scene.getRenderParameter('EXTRA SAMPLING MASK')[0] == EXTRA_SAMPLING_CUSTOM_ALPHA:
@@ -168,7 +169,6 @@ def b2a_writeAsciiScene(mxsFilePath):
   else:
     extra_sampling_mask = 'unknown'
   
-  extra_sampling_level = scene.getRenderParameter('EXTRA SAMPLING SL')[0]
   extra_sampling_custom_alpha = scene.getRenderParameter('EXTRA SAMPLING CUSTOM ALPHA')[0]
   extra_sampling_bitmap = scene.getRenderParameter('EXTRA SAMPLING USER BITMAP')[0]
   extra_sampling_invert_mask = "on" if scene.getRenderParameter('EXTRA SAMPLING INVERT')[0] else "off"
@@ -309,10 +309,10 @@ def b2a_writeAsciiScene(mxsFilePath):
   textDocument += indent + 'dispersion ' + str(dispersion) + '\n'
 
   textDocument += indent + 'extra_sampling_enabled ' + str(extra_sampling_enabled) + '\n'
-  textDocument += indent + 'extra_sampling_mask "' + str(extra_sampling_mask) + '"\n'
   textDocument += indent + 'extra_sampling_level ' + str(extra_sampling_level) + '\n'
-  textDocument += indent + 'extra_sampling_custom_alpha ' + str(extra_sampling_custom_alpha) + '\n'
-  textDocument += indent + 'extra_sampling_bitmap ' + str(extra_sampling_bitmap) + '\n'
+  textDocument += indent + 'extra_sampling_mask "' + str(extra_sampling_mask) + '"\n'
+  textDocument += indent + 'extra_sampling_custom_alpha "' + str(extra_sampling_custom_alpha) + '"\n'
+  textDocument += indent + 'extra_sampling_bitmap "' + str(extra_sampling_bitmap) + '"\n'
   textDocument += indent + 'extra_sampling_invert_mask ' + str(extra_sampling_invert_mask) + '\n'
 
   ##textDocument += indent + 'channels_output_mode "' + str(channels_output_mode) + '"\n'

@@ -18,7 +18,7 @@ render_options
   image "/Users/Andrew/Documents/maxwell/image.png"
   mxi "/Users/Andrew/Documents/maxwell/image.mxi"
   materials_override_enable on
-  materials_override "/Applications/Maxwell 3/materials database/mxm files/defaulty.mxm"
+  materials_override "/Applications/Maxwell 3/materials database/mxm files/default.mxm"
   materials_default "/Applications/Maxwell 3/materials database/mxm files/default.mxm"
   materials_search_path "/Users/Andrew/Documents/maxwell"
   motion_blur on

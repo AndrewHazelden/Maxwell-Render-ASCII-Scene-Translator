@@ -65,15 +65,15 @@ Copy the `mxs2ascii.py` python file to your Maxwell 3.2 scripts directory:
 
 If you want to process a single MXS file edit the "mxsFilePath" variable in the main function near the bottom of this script and specify your Maxwell Studio based MXS scene file.
 
-Then uncomment the code block just below to the section "# Process a single MXS File". Then add python based `#` number sign comments at the beginning of the lines in the "# Or process a whole directory of MXS files" section of code.
+Uncomment the code block just below to the section "# Process a single MXS File".
+
+Then add python based `#` number sign comments at the beginning of the lines in the "# Or process a whole directory of MXS files" section of code.
 
 **Process a Whole Directory of MXS Files**
 
 If you want to automatically process an entire folder filled with MXS files then you should edit the "mxsDirPath" to specify the folder location that holds your Maxwell Studio based MXS scene files.
 
-Make sure the code block just below to the section "# Process a single MXS File" is commented with python based `#` number sign comments at the beginning of each of the lines.
-
-Then you might need to uncomment the code block lines just below the "# Or process a whole directory of MXS files" section of code.
+Make sure the code block just below to the section "# Process a single MXS File" is commented out with python based `#` number sign comments at the beginning of each of the lines. Then you might need to uncomment the code block lines just below the "# Or process a whole directory of MXS files" section of code if you have previously used the "Process a single MXS File" feature.
 
 **Step 3.** Select the **Script > Run** menu item in PyMaxwell.
 

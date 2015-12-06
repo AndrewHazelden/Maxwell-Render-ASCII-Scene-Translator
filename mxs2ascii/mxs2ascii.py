@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-06 4.30 am v0.1
+# 2015-12-06 5.03 am v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -64,7 +64,7 @@ import datetime
 
 # Write the Maxell Ascii Scene to Disk
 # Example: writeAsciiScene('/Cube.mas')
-def b2a_writeAsciiScene(mxsFilePath):
+def mxa_writeAsciiScene(mxsFilePath):
 
   # Release Version
   mxa_version = "0.1"
@@ -111,7 +111,7 @@ def b2a_writeAsciiScene(mxsFilePath):
   now = datetime.datetime.now()
   
   # Check the OS Platform
-  mxPlatform = b2a_getPlatform()
+  mxPlatform = mxa_getPlatform()
   # print('Running on ' + mxPlatform + '\n')
   
   # Maxwell Release number - like "3.2.0.2"
@@ -129,10 +129,13 @@ def b2a_writeAsciiScene(mxsFilePath):
   indent = '  '
   
   # Add the render_options section
-  textDocument += b2a_getRenderOptionsBlock(scene)
+  textDocument += mxa_getRenderOptionsBlock(scene)
   
   # Add the camera section
-  textDocument += b2a_getCameraBlock(scene)
+  textDocument += mxa_getCameraBlock(scene)
+  
+  # Add the environment section
+  textDocument += mxa_getEnvironmentBlock(scene)
   
   # -------------------------------------------------------
   # Write the ASCII text format scene to disk
@@ -158,8 +161,8 @@ def b2a_writeAsciiScene(mxsFilePath):
 
 
 # Check the operating system
-# Example: mxPlatform = b2a_getPlatform()
-def b2a_getPlatform():
+# Example: mxPlatform = mxa_getPlatform()
+def mxa_getPlatform():
   import platform
 
   osPlatform = str(platform.system())
@@ -183,8 +186,8 @@ def b2a_getPlatform():
 
 
 # Get the Render Options
-# Example: scene = Cmaxwell(mwcallback); renderOptionsText = b2a_getRenderOptionsBlock(scene)
-def b2a_getRenderOptionsBlock(scene):
+# Example: scene = Cmaxwell(mwcallback); renderOptionsText = mxa_getRenderOptionsBlock(scene)
+def mxa_getRenderOptionsBlock(scene):
   camera = scene.getActiveCamera()
   cameraName = camera.getName()
   active_camera = cameraName
@@ -327,7 +330,7 @@ def b2a_getRenderOptionsBlock(scene):
   channels_reflectance = "on" if scene.getRenderParameter('DO REFLECTANCE CHANNEL')[0] else "off"
 
   # Tone Mapping
-  tone_mapping_color_space = b2a_getColorSpace(scene)
+  tone_mapping_color_space = mxa_getColorSpace(scene)
   tone_mapping_white_point,tone_mapping_tint,ok = scene.getWhitePoint()
   tone_mapping_monitor_gamma,tone_mapping_burn,ok = scene.getToneMapping()
   tone_mapping_sharpness_enabled = "on" if scene.getRenderParameter('DO SHARPNESS')[0] else "off"
@@ -464,10 +467,11 @@ def b2a_getRenderOptionsBlock(scene):
   textDocument += '\n'
   
   return textDocument
-  
+
+
 # Get the Camera
-# Example: scene = Cmaxwell(mwcallback); cameraText = b2a_getCameraBlock(scene)
-def b2a_getCameraBlock(scene):
+# Example: scene = Cmaxwell(mwcallback); cameraText = mxa_getCameraBlock(scene)
+def mxa_getCameraBlock(scene):
   camera = scene.getActiveCamera()
   name = camera.getName()
   camera_lens = camera.getLensType()
@@ -496,7 +500,7 @@ def b2a_getCameraBlock(scene):
   target = str(round(target_raw[0],3)) + ' ' + str(round(target_raw[1],3)) + ' ' + str(round(target_raw[2],3))
   up = str(round(up_raw[0],3)) + ' ' + str(round(up_raw[1],3)) + ' ' + str(round(up_raw[2],3))
   roll_angle = 0.0
-  lens = b2a_lensTypeName(camera_lens)
+  lens = mxa_lensTypeName(camera_lens)
   focal_length = round((focal_length_raw * 1000.0), 0)
   #lock_exposure = "off"
   shutter = camera.getShutter()[0]
@@ -566,10 +570,32 @@ def b2a_getCameraBlock(scene):
   textDocument += '}\n'
   textDocument += '\n'
   return textDocument
+
+# Get the Environment
+# Example: scene = Cmaxwell(mwcallback); environmentText = mxa_getEnvironmentBlock(scene)
+def mxa_getEnvironmentBlock(scene):
+  camera = scene.getActiveCamera()
+  name = camera.getName()
+  
+  # Indent spacer - either a tab or two spaces
+  # indent = '\t'
+  indent = '  '
+  
+  # Add the environment section
+  textDocument = ''
+  textDocument += 'environment\n'
+  textDocument += '{\n'
+  
+  # textDocument += indent + ' "' + str() + '"\n'
+  
+  # Close the environment section
+  textDocument += '}\n'
+  textDocument += '\n'
+  return textDocument
   
 # Get the Color Space
-# Example: scene = Cmaxwell(mwcallback); colorSpace = b2a_getColorSpace(scene)
-def b2a_getColorSpace(scene):
+# Example: scene = Cmaxwell(mwcallback); colorSpace = mxa_getColorSpace(scene)
+def mxa_getColorSpace(scene):
   colorSpace = ''
 
   colorSpaceValue = scene.getColorSpace()
@@ -615,8 +641,8 @@ def b2a_getColorSpace(scene):
   return colorSpace
   
 # Return the lens type name as a string
-# Example: it = CmaxwellCameraIterator(); camera = it.first(scene); cameraLens = cameraParams.getLensType(); lens = b2a_lensTypeName(cameraLens)
-def b2a_lensTypeName(cameraLens):
+# Example: it = CmaxwellCameraIterator(); camera = it.first(scene); cameraLens = cameraParams.getLensType(); lens = mxa_lensTypeName(cameraLens)
+def mxa_lensTypeName(cameraLens):
 
   lensTypeName = ''
   if cameraLens[0] == TYPE_CYLINDRICAL_LENS:
@@ -637,8 +663,8 @@ def b2a_lensTypeName(cameraLens):
   return lensTypeName
 
 # Get the Color Temperature
-# Example: scene = Cmaxwell(mwcallback); colorTemperature = b2a_getColorTemperature(scene)
-def b2a_getColorTemperature(scene):
+# Example: scene = Cmaxwell(mwcallback); colorTemperature = mxa_getColorTemperature(scene)
+def mxa_getColorTemperature(scene):
   colorTemperatureValue =  scene.getCorrelatedcolorTemperature()
 
   print('[Color Temperature] ' + str(colorTemperatureValue))
@@ -651,8 +677,8 @@ def b2a_getColorTemperature(scene):
 if __name__ == "__main__":
 
   # Choose a Maxwell MXS scene file to process:
-  # mxsFilePath = '/Applications/Maxwell 3/scripts/stereo/CubeX.mxs'
-  mxsFilePath = 'C:/Program Files/Next Limit/Maxwell 3/scripts/stereo/CubeX.mxs'
+  mxsFilePath = '/Applications/Maxwell 3/scripts/stereo/CubeX.mxs'
+  # mxsFilePath = 'C:/Program Files/Next Limit/Maxwell 3/scripts/stereo/CubeX.mxs'
   # mxsFilePath = '/opt/maxwell-3.2/scripts/stereo/CubeX.mxs'
   # mxsFilePath = '/home/andrew/maxwell-3.2/scripts/stereo/CubeX.mxs'
 
@@ -663,7 +689,7 @@ if __name__ == "__main__":
 #  # Launch the MXS scene processing command
 #  if os.path.exists(mxsFilePath):
 #    # Generate the new MXA ASCII scene file
-#  	ok = b2a_writeAsciiScene(mxsFilePath)
+#  	ok = mxa_writeAsciiScene(mxsFilePath)
 #  else:
 #     print('[MXS File Not Found] ' + mxsFilePath)
     
@@ -675,8 +701,8 @@ if __name__ == "__main__":
   mxsFileExt = 'mxs'
   
   # The MXS scene directory path with a trailing slash
-  # mxsDirPath = '/Applications/Maxwell 3/scripts/stereo/'
-  mxsDirPath = 'C:/Program Files/Next Limit/Maxwell 3/scripts/stereo/'
+  mxsDirPath = '/Applications/Maxwell 3/scripts/stereo/'
+  # mxsDirPath = 'C:/Program Files/Next Limit/Maxwell 3/scripts/stereo/'
   # mxsDirPath = '/opt/maxwell-3.2/scripts/stereo/'
   # mxsDirPath = '/home/andrew/maxwell-3.2/scripts/stereo/'
   # mxsDirPath = '/Applications/Maxwell 3/library/Scenes/Guggenheim_museum_Bilbao/' 
@@ -689,6 +715,6 @@ if __name__ == "__main__":
     mxsFilePath = mxsDirPath + file
     # print '[MXS File] ' + mxsFilePath + '\n'
     # Generate the new MXA ASCII scene file
-    ok = b2a_writeAsciiScene(mxsFilePath)
+    ok = mxa_writeAsciiScene(mxsFilePath)
     
 

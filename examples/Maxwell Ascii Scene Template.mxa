@@ -108,3 +108,8 @@ camera
   z_far_clip_plane 100.0
   hidden <on><off>
 }
+
+environment
+{
+
+}

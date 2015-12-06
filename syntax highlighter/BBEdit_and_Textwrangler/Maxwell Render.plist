@@ -223,6 +223,7 @@
 		<string>z_far_clip_plane</string>
 		<string>hidden</string>
 
+		<string>sky_type</string>
 		<string>intensity</string>
 		<string>planet_reflecton</string>
 		<string>ozone</string>

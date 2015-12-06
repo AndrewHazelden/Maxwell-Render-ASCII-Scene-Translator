@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-06 5.03 am v0.1
+# 2015-12-06 5.45 am v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -575,8 +575,23 @@ def mxa_getCameraBlock(scene):
 # Example: scene = Cmaxwell(mwcallback); environmentText = mxa_getEnvironmentBlock(scene)
 def mxa_getEnvironmentBlock(scene):
   camera = scene.getActiveCamera()
-  name = camera.getName()
+  enviro = scene.getEnvironment()
   
+  sky_type_raw = str(enviro.getActiveSky())
+  print '[sky_mode_raw] ' + str(sky_type_raw)
+  
+  sky_type = ''
+  if sky_type_raw == 'None':
+    sky_type = 'none'
+  elif sky_type_raw == 'CONSTANT':
+    sky_type = 'constant'  
+  elif sky_type_raw == 'PHYSICAL':
+    sky_type = 'physical' 
+  else:
+   sky_type = 'unknown' 
+
+  intensity,ozone,water,angstromTurbidity,wavelengthTurbidity,aerosolAlbedo,asimmetryFactor,planetReflectance,ok = enviro.getPhysicalSkyAtmosphere()
+
   # Indent spacer - either a tab or two spaces
   # indent = '\t'
   indent = '  '
@@ -586,8 +601,51 @@ def mxa_getEnvironmentBlock(scene):
   textDocument += 'environment\n'
   textDocument += '{\n'
   
-  # textDocument += indent + ' "' + str() + '"\n'
-  
+  textDocument += indent + 'sky_type "' + str(sky_type) + '"\n'
+
+#   textDocument += indent + 'intensity ' + str('') + '\n'
+#   textDocument += indent + 'planet_reflecton ' + str('') + '\n'
+#   textDocument += indent + 'ozone ' + str('') + '\n'
+#   textDocument += indent + 'water ' + str('') + '\n'
+#   textDocument += indent + 'turbidity_coefficient ' + str('') + '\n'
+#   textDocument += indent + 'wavelength_exponent ' + str('') + '\n'
+#   textDocument += indent + 'reflectance ' + str('') + '\n'
+#   textDocument += indent + 'asymmetry ' + str('') + '\n'
+#   textDocument += indent + 'sun_type "' + str('') + '"\n'
+#   textDocument += indent + 'sun_power ' + str('') + '\n'
+#   textDocument += indent + 'sun_radius_factor ' + str('') + '\n'
+#   textDocument += indent + 'sun_temperature ' + str('') + '\n'
+#   textDocument += indent + 'sun_color ' + str('') + '\n'
+#   textDocument += indent + 'location ' + str('') + '\n'
+#   textDocument += indent + 'city "' + str('') + '"\n'
+#   textDocument += indent + 'latitude ' + str('') + '\n'
+#   textDocument += indent + 'longitude ' + str('') + '\n'
+#   textDocument += indent + 'date "' + str('') + '"\n'
+#   textDocument += indent + 'time "' + str('') + '"\n'
+#   textDocument += indent + 'gmt ' + str('') + '\n'
+#   textDocument += indent + 'ground_rotation ' + str('') + '\n'
+#   textDocument += indent + 'zenith ' + str('') + '\n'
+#   textDocument += indent + 'horizon ' + str('') + '\n'
+#   textDocument += indent + 'mid_point ' + str('') + '\n'
+#   textDocument += indent + 'ibl_intensity ' + str('') + '\n'
+#   textDocument += indent + 'ibl_interpolation ' + str('') + '\n'
+#   textDocument += indent + 'ibl_screen_mapping ' + str('') + '\n'
+#   textDocument += indent + 'background_type ' + str('') + '\n'
+#   textDocument += indent + 'background_map "' + str('') + '"\n'
+#   textDocument += indent + 'background_intensity ' + str('') + '\n'
+#   textDocument += indent + 'background_scale ' + str('') + '\n'
+#   textDocument += indent + 'background_offset ' + str('') + '\n'
+#   textDocument += indent + 'refraction_type ' + str('') + '\n'
+#   textDocument += indent + 'refraction_map "' + str('') + '"\n'
+#   textDocument += indent + 'refraction_intensity ' + str('') + '\n'
+#   textDocument += indent + 'refraction_scale ' + str('') + '\n'
+#   textDocument += indent + 'refraction_offset ' + str('') + '\n'
+#   textDocument += indent + 'illumination_type ' + str('') + '\n'
+#   textDocument += indent + 'illumination_map "' + str('') + '"\n'
+#   textDocument += indent + 'illumination_intensity ' + str('') + '\n'
+#   textDocument += indent + 'illumination_scale ' + str('') + '\n'
+#   textDocument += indent + 'illumination_offset ' + str('') + '\n'
+
   # Close the environment section
   textDocument += '}\n'
   textDocument += '\n'

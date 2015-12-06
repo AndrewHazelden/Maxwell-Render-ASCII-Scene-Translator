@@ -250,6 +250,7 @@
         <keyword>z_far_clip_plane</keyword>
         <keyword>hidden</keyword>
         
+        <keyword>sky_type</keyword>
         <keyword>intensity</keyword>
         <keyword>planet_reflecton</keyword>
         <keyword>ozone</keyword>

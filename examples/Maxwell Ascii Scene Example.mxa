@@ -111,5 +111,13 @@ camera
 
 environment
 {
-
+  sky_type "constant"
+  intensity 1.0
+  planet_reflecton 0.25
+  ozone 0.4
+  water 2.0
+  turbidity_coefficient 0.04
+  wavelength_exponent 1.2
+  reflectance 0.8
+  asymmetry 0.7
 }

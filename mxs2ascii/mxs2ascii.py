@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-06 5.45 am v0.1
+# 2015-12-06 5.53 am v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -590,7 +590,7 @@ def mxa_getEnvironmentBlock(scene):
   else:
    sky_type = 'unknown' 
 
-  intensity,ozone,water,angstromTurbidity,wavelengthTurbidity,aerosolAlbedo,asimmetryFactor,planetReflectance,ok = enviro.getPhysicalSkyAtmosphere()
+  intensity,ozone,water,turbidity_coefficient,wavelength_exponent,reflectance,asymmetry,planet_reflecton,ok = enviro.getPhysicalSkyAtmosphere()
 
   # Indent spacer - either a tab or two spaces
   # indent = '\t'
@@ -603,14 +603,14 @@ def mxa_getEnvironmentBlock(scene):
   
   textDocument += indent + 'sky_type "' + str(sky_type) + '"\n'
 
-#   textDocument += indent + 'intensity ' + str('') + '\n'
-#   textDocument += indent + 'planet_reflecton ' + str('') + '\n'
-#   textDocument += indent + 'ozone ' + str('') + '\n'
-#   textDocument += indent + 'water ' + str('') + '\n'
-#   textDocument += indent + 'turbidity_coefficient ' + str('') + '\n'
-#   textDocument += indent + 'wavelength_exponent ' + str('') + '\n'
-#   textDocument += indent + 'reflectance ' + str('') + '\n'
-#   textDocument += indent + 'asymmetry ' + str('') + '\n'
+  textDocument += indent + 'intensity ' + str(intensity) + '\n'
+  textDocument += indent + 'planet_reflecton ' + str(planet_reflecton) + '\n'
+  textDocument += indent + 'ozone ' + str(ozone) + '\n'
+  textDocument += indent + 'water ' + str(water) + '\n'
+  textDocument += indent + 'turbidity_coefficient ' + str(turbidity_coefficient) + '\n'
+  textDocument += indent + 'wavelength_exponent ' + str(wavelength_exponent) + '\n'
+  textDocument += indent + 'reflectance ' + str(reflectance) + '\n'
+  textDocument += indent + 'asymmetry ' + str(asymmetry) + '\n'
 #   textDocument += indent + 'sun_type "' + str('') + '"\n'
 #   textDocument += indent + 'sun_power ' + str('') + '\n'
 #   textDocument += indent + 'sun_radius_factor ' + str('') + '\n'

@@ -578,17 +578,17 @@ def mxa_getEnvironmentBlock(scene):
   enviro = scene.getEnvironment()
   
   sky_type_raw = str(enviro.getActiveSky())
-  print '[sky_mode_raw] ' + str(sky_type_raw)
+  #print '[sky_mode_raw] ' + str(sky_type_raw)
   
   sky_type = ''
   if sky_type_raw == 'None':
     sky_type = 'none'
   elif sky_type_raw == 'CONSTANT':
-    sky_type = 'constant'  
+    sky_type = 'constant'
   elif sky_type_raw == 'PHYSICAL':
-    sky_type = 'physical' 
+    sky_type = 'physical'
   else:
-   sky_type = 'unknown' 
+   sky_type = 'unknown'
 
   # Physical Sky
   intensity,ozone,water,turbidity_coefficient,wavelength_exponent,reflectance,asymmetry,planet_reflecton,ok = enviro.getPhysicalSkyAtmosphere()
@@ -601,17 +601,19 @@ def mxa_getEnvironmentBlock(scene):
   if sun_type_raw == SUN_DISABLED:
     sun_type = 'none'
   elif sun_type_raw == SUN_PHYSICAL:
-    sun_type = 'physical'  
+    sun_type = 'physical'
   elif sun_type_raw == SUN_CONSTANT:
-    sun_type = 'constant' 
+    sun_type = 'constant'
   else:
-   sun_type = 'unknown' 
+   sun_type = 'unknown'
   
-  # print '[sun_color] ' + str(sun_color) 
+  # print '[sun_color] ' + str(sun_color)
 
   # Ground Rotation comes back as radians - We are going to store it in degrees for simplicity
   ground_rotation_radians,ok = enviro.getSunRotation()
   ground_rotation = ground_rotation_radians * (180/pi)
+  
+  longitude,latitude,gmt,day_of_year,time_of_day,ok = enviro.getSunLongitudeAndLatitude()
   
   # Indent spacer - either a tab or two spaces
   # indent = '\t'
@@ -638,11 +640,11 @@ def mxa_getEnvironmentBlock(scene):
   textDocument += indent + 'sun_color ' + str(sun_color) + '\n'
 #   textDocument += indent + 'location ' + str('') + '\n'
 #   textDocument += indent + 'city "' + str('') + '"\n'
-#   textDocument += indent + 'latitude ' + str('') + '\n'
-#   textDocument += indent + 'longitude ' + str('') + '\n'
-#   textDocument += indent + 'date "' + str('') + '"\n'
-#   textDocument += indent + 'time "' + str('') + '"\n'
-#   textDocument += indent + 'gmt ' + str('') + '\n'
+  textDocument += indent + 'latitude ' + str(latitude) + '\n'
+  textDocument += indent + 'longitude ' + str(longitude) + '\n'
+  textDocument += indent + 'day_of_year ' + str(day_of_year) + '\n'
+  textDocument += indent + 'time_of_day ' + str(time_of_day) + '\n'
+  textDocument += indent + 'gmt ' + str(gmt) + '\n'
   textDocument += indent + 'ground_rotation ' + str(ground_rotation) + '\n'
 #   textDocument += indent + 'zenith ' + str('') + '\n'
 #   textDocument += indent + 'horizon ' + str('') + '\n'

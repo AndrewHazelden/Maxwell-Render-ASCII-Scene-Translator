@@ -125,5 +125,10 @@ environment
   sun_radius_factor 1.0
   sun_temperature 5777.0
   sun_color 1.0 1.0 1.0
+  latitude 44.497
+  longitude -63.888
+  day_of_year 107
+  time_of_day 19.0333333333
+  gmt -3
   ground_rotation 1.0
 }

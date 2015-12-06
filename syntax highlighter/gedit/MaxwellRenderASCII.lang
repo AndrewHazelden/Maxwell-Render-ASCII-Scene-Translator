@@ -268,8 +268,8 @@
         <keyword>city</keyword>
         <keyword>latitude</keyword>
         <keyword>longitude</keyword>
-        <keyword>date</keyword>
-        <keyword>time</keyword>
+        <keyword>day_of_year</keyword>
+        <keyword>time_of_day</keyword>
         <keyword>gmt</keyword>
         <keyword>ground_rotation</keyword>
         <keyword>zenith</keyword>

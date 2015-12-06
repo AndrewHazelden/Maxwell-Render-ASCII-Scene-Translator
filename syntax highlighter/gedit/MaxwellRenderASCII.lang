@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+ Author: Andrew Hazelden <andrew@andrewhazelden.com
+ Copyright (C) 2015 Andrew Hazelden
+
+  Released under a Creative Commons Attribution-ShareAlike License:
+  <http://creativecommons.org/licenses/by-sa/2.0/>
+  
+
+  Windows gedit language file installation
+  On Windows you need to copy the MaxwellRenderASCII.lang file to the language-specs folder located at:
+  
+    C:\Program Files (x86)\gedit\share\gtksourceview-2.0\language-specs\
+    
+    or
+    
+    C:\Program Files\gedit\share\gtksourceview-2.0\language-specs\
+  
+  
+  Linux gedit language file installation
+  On Linux you need to copy the MaxwellRenderASCII.lang file to the language-specs folder located at:
+  
+     /usr/local/share/gtksourceview-2.0/language-specs/
+     
+     or
+     
+     /usr/share/gtksourceview-2.0/language-specs/
+
+     or you can place the .lang files in your home folder at:
+
+     ~/.local/share/gtksourceview-2.0/language-specs/
+  
+  
+-->
+
+<language id="mxa" _name="Maxwell Render ASCII" version="2.0" _section="Scripts">
+
+  <metadata>
+    <property name="mimetypes">text/plain</property>
+    <property name="globs">*.mxa</property>
+    <property name="line-comment-start">#</property>
+  </metadata>
+
+  <styles>
+    <style id="decimal"           _name="Decimal number"      map-to="def:decimal"/>
+    <style id="float"           _name="Floating Point number"      map-to="def:decimal"/>
+    <style id="comment-numbersign"           _name="Comment"             map-to="def:comment"/>
+    <style id="string"            _name="String"              map-to="def:string"/>
+    <style id="escaped-character" _name="Escaped Character" map-to="def:special-char"/>
+    <style id="datatype" _name="datatype" map-to="def:type"/>
+    <style id="nodes" _name="nodes" map-to="def:identifier"/>
+    <style id="parameters"           _name="parameters"             map-to="def:keyword"/>
+  </styles>
+
+  <definitions>
+  <context id="mxa">
+    <include>
+      <!-- Start of Maxwell Syntax Elements -->
+
+      <!-- Comments -->
+      <context id="comment-numbersign" style-ref="comment-numbersign" end-at-line-end="true">
+        <start>#</start>
+        <end>\n</end>
+        <include>
+          <context ref="def:in-line-comment"/>
+        </include>
+      </context>
+      
+      <!-- Strings -->
+       <context id="string" end-at-line-end="true" style-ref="string">
+        <start>"</start>
+        <end>"</end>
+        <include>
+          <context id="escaped-character" style-ref="escaped-character">
+            <match>\\"</match>
+          </context>
+        </include>
+      </context>
+      
+      <!-- Numbers -->
+       
+          <context id="decimal" style-ref="decimal">
+              <match extended="true">
+                  (?&lt;![\w\.])
+                  [0-9]+[uUlL]*
+                  (?![\w\.])
+              </match>
+          </context>
+        
+          <!-- http://www.lysator.liu.se/c/ANSI-C-grammar-l.html -->
+          <context id="float" style-ref="float">
+              <match extended="true">
+                  (?&lt;![\w\.])
+                  ((\.[0-9]+ | [0-9]+\.[0-9]*) ([Ee][+-]?[0-9]*)? |
+                   ([0-9]+[Ee][+-]?[0-9]*))
+                  [fFlL]?
+                  (?![\w\.])
+              </match>
+          </context>
+
+      <context id="datatype" style-ref="datatype">
+        <!-- Maxwell Data Types Start -->
+        <keyword>ARRAY</keyword>
+        <keyword>BOOL</keyword>
+        <keyword>BYTE</keyword>
+        <keyword>ENUM</keyword>
+        <keyword>FLOAT</keyword>
+        <keyword>DOUBLE</keyword>
+        <keyword>INT</keyword>
+        <keyword>LONG</keyword>
+        <keyword>MATRIX</keyword>
+        <keyword>RGB</keyword>
+        <keyword>RGBA</keyword>
+        <keyword>keyword</keyword>
+        <keyword>UINT</keyword>
+        <keyword>VECTOR</keyword>
+        <keyword>VECTOR2D</keyword>
+        <keyword>XYZ</keyword>
+        <keyword>HSV</keyword>
+        <!-- Maxwell Data Types Start -->
+      </context>
+
+      <context id="nodes" style-ref="nodes">
+        <!-- Maxwell Nodes Start -->
+        <keyword>attribute</keyword>
+        <keyword>base</keyword>
+        <keyword>extension</keyword>
+        <keyword>bsdf</keyword>
+        <keyword>coating</keyword>
+        <keyword>emiter_pair</keyword>
+        <keyword>emitter</keyword>
+        <keyword>layer</keyword>
+        <keyword>camera</keyword>
+        <keyword>environment</keyword>
+        <keyword>material</keyword>
+        <keyword>render_options</keyword>
+        <keyword>object</keyword>
+        <keyword>object_triangles_group</keyword>
+        <keyword>scene_extension</keyword>
+        <keyword>sky_extension</keyword>
+        <keyword>texture_extension</keyword>
+        <keyword>texture_map</keyword>
+        <!-- Maxwell Nodes End -->
+      </context>
+
+
+      <context id="parameters" style-ref="parameters">
+        <!-- Maxwell Parameters Start -->
+        <keyword>active_camera</keyword>
+        <keyword>time_limit</keyword>
+        <keyword>sampling_level</keyword>
+        <keyword>multilight</keyword>
+        <keyword>multilight_output</keyword>
+        <keyword>cpu_threads</keyword>
+        <keyword>priority</keyword>
+        <keyword>quality</keyword>
+        <keyword>command_line</keyword>
+        <keyword>depth</keyword>
+        <keyword>image</keyword>
+        <keyword>mxi</keyword>
+        <keyword>materials_override_enable</keyword>
+        <keyword>materials_override</keyword>
+        <keyword>materials_default</keyword>
+        <keyword>materials_search_path</keyword>
+        <keyword>motion_blur</keyword>
+        <keyword>displacement</keyword>
+        <keyword>dispersion</keyword>
+        <keyword>extra_sampling_enabled</keyword>
+        <keyword>extra_sampling_mask</keyword>
+        <keyword>extra_sampling_level</keyword>
+        <keyword>extra_sampling_custom_alpha</keyword>
+        <keyword>extra_sampling_bitmap</keyword>
+        <keyword>extra_sampling_invert_mask</keyword>
+        <keyword>channels_output_mode</keyword>
+        <keyword>channels_render_layers</keyword>
+        <keyword>channels_render</keyword>
+        <keyword>channels_alpha</keyword>
+        <keyword>channels_opaque</keyword>
+        <keyword>channels_zbuffer</keyword>
+        <keyword>channels_zbuffer_meters</keyword>
+        <keyword>channels_shadow</keyword>
+        <keyword>channels_material_id</keyword>
+        <keyword>channels_object_id</keyword>
+        <keyword>channels_motion_vector</keyword>
+        <keyword>channels_roughness</keyword>
+        <keyword>channels_fresnel</keyword>
+        <keyword>channels_normals</keyword>
+        <keyword>channels_normals_mode</keyword>
+        <keyword>channels_motion_mode</keyword>
+        <keyword>channels_position</keyword>
+        <keyword>channels_position_mode</keyword>
+        <keyword>channels_deep</keyword>
+        <keyword>channels_deep_mode</keyword>
+        <keyword>channels_deep_min_distance</keyword>
+        <keyword>channels_deep_max_samples</keyword>
+        <keyword>channels_uv</keyword>
+        <keyword>channels_custom_alpha</keyword>
+        <keyword>channels_reflectance</keyword>
+        <keyword>tone_mapping_color_space</keyword>
+        <keyword>tone_mapping_white_point</keyword>
+        <keyword>tone_mapping_tint</keyword>
+        <keyword>tone_mapping_burn</keyword>
+        <keyword>tone_mapping_monitor_gamma</keyword>
+        <keyword>tone_mapping_sharpness_enabled</keyword>
+        <keyword>tone_mapping_sharpness</keyword>
+        <keyword>simulens_aperture_map</keyword>
+        <keyword>simulens_obstacle_map</keyword>
+        <keyword>simulens_diffraction</keyword>
+        <keyword>simulens_frequency</keyword>
+        <keyword>simulens_scattering_enabled</keyword>
+        <keyword>simulens_scattering</keyword>
+        <keyword>simulens_devingetting_enabled</keyword>
+        <keyword>simulens_devingetting</keyword>
+        <keyword>illumination</keyword>
+        <keyword>reflection_caustics</keyword>
+        <keyword>refraction_caustics</keyword>
+        <keyword>fire_floating_shadows</keyword>
+        <keyword>fire_floating_refractions</keyword>
+        <keyword>overlay_text</keyword>
+        <keyword>overlay_text_position</keyword>
+        <keyword>overlay_text_color</keyword>
+        <keyword>overlay_text_background</keyword>
+
+        <keyword>name</keyword>
+        <keyword>position</keyword>
+        <keyword>target</keyword>
+        <keyword>up</keyword>
+        <keyword>resolution</keyword>
+        <keyword>render_region</keyword>
+        <keyword>render_region_mode</keyword>
+        <keyword>lens</keyword>
+        <keyword>focal_length</keyword>
+        <keyword>lock_exposure</keyword>
+        <keyword>shutter</keyword>
+        <keyword>f_stop</keyword>
+        <keyword>ev_number</keyword>
+        <keyword>iso</keyword>
+        <keyword>film_width</keyword>
+        <keyword>film_height</keyword>
+        <keyword>diaphragm_mode</keyword>
+        <keyword>blades</keyword>
+        <keyword>fps</keyword>
+        <keyword>step_time</keyword>
+        <keyword>pixel_aspect</keyword>
+        <keyword>x_shift</keyword>
+        <keyword>y_shift</keyword>
+        <keyword>z_clip_planes_enabled</keyword>
+        <keyword>z_near_clip_plane</keyword>
+        <keyword>z_far_clip_plane</keyword>
+        <keyword>hidden</keyword>
+        <!-- Maxwell Parameters End-->
+        </context>
+
+    <!-- End of Maxwell Syntax Elements -->
+    </include>
+  </context>
+</definitions>
+</language>

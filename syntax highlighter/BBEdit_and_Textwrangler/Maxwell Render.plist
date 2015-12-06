@@ -111,7 +111,6 @@
 		<string>environment</string>
 		<string>material</string>
 		<string>render_options</string>
-    <string>mxi</string>
 		<string>object</string>
 		<string>object_triangles_group</string>
 		<string>scene_extension</string>

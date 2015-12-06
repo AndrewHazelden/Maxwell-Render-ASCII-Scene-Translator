@@ -1,6 +1,7 @@
 # Maxwell ASCII Scene v0.1
-# Generated: <Date> 2015-12-03 5:48:08 AM
-# Using: <Maxwell Version> <Platform> Maxwell 3.2.0.2 Mac
+# Generated: <Year>-<MM>-<DD> <H>:<M>:<S> <AM/PM>
+# Source MXS: <dir>/<scene>.mxs
+# Using: Maxwell <Maxwell Version> on <Platform>
 
 render_options
 {

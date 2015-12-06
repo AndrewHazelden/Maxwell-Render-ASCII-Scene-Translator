@@ -4,7 +4,7 @@ by Andrew Hazelden
 
 ## Overview ##
 
-The `mxs2ascii.py` tool is a new PyMaxwell based python script that will translate a binary format Maxwell Render .mxs scene file into an plain text ASCII format document with the .mxa extension.
+The `mxs2ascii.py` tool is a new PyMaxwell based python script that will translate a binary format Maxwell Render .mxs scene file into an ASCII plain text format document with the .mxa extension.
 
 There is also a corresponding set of syntax highlighters that are provided with the new toolset. The syntax highlighting modules make it easier to review and edit the new .mxa format scene using one your favorite text editors like Notepad++ (Windows), TextWrangler and BBEdit (Mac), or Gedit (Multi-platform).
 

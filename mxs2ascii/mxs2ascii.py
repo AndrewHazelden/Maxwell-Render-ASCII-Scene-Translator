@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-05 7.25 pm v0.1
+# 2015-12-06 4.30 am v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -18,7 +18,9 @@
 # C:/Program Files/Next Limit/Maxwell 3/scripts/
 
 # Linux
-# /opt/maxwell/3/scripts/
+# /opt/maxwell-3.2/scripts/
+# or
+# $home/maxwell-3.2/scripts/
 
 # Mac
 # /Applications/Maxwell 3/scripts/
@@ -30,12 +32,27 @@
 # Step 1.
 # Launch PyMaxwell and open up the `mxs2ascii.py` python script.
 
-# Step 2.
-# Edit the "mxsFilePath" variable in the main function near the bottom of this script and specify your Maxwell Studio based MXS scene file.
+# Step 2. Choose if you want to process a single MXS or a directory filled with of MXS files.
+
+# Process a Single MXS File
+# If you want to process a single MXS file edit the "mxsFilePath" variable in the main function near the bottom of this script and specify your Maxwell Studio based MXS scene file.
+
+# Then uncomment the code block just below to the section "# Process a single MXS File". Then add python based `#` number sign comments at the beginning of the lines in the "# Or process a whole directory of MXS files" section of code.
+
+# Process a Whole Directory of MXS Files
+
+# If you want to automatically process an entire folder filled with MXS files then you should edit the "mxsDirPath" to specify the folder location that holds your Maxwell Studio based MXS scene files.
+
+# Make sure the code block just below to the section "# Process a single MXS File" is commented with python based `#` number sign comments at the beginning of each of the lines.
+
+# Then you might need to uncomment the code block lines just below the "# Or process a whole directory of MXS files" section of code.
 
 # Step 3. Select the Script > Run menu item in PyMaxwell.
 
-# The script will start running. First the script will verify the mxs scene file exists. Then the scene will be opened in Maxwell and all of the scene elements and parameters will be exported to an ASCII text document with the name of `<scene>.mxa`. This new file is saved to the same folder as the original mxs scene file.
+# The script will start running. First the script will verify the mxs scene file exists.
+
+# Then the scene will be opened in Maxwell and the scene elements and parameters will be exported to an ASCII text document with the name of `<scene>.mxa`. This new file is saved to the same folder as the original mxs scene file.
+
 
 # -----------------------------------------
 
@@ -50,16 +67,15 @@ import datetime
 def b2a_writeAsciiScene(mxsFilePath):
 
   # Release Version
-  b2a_version = "0.1"
-
+  mxa_version = "0.1"
 
   print('\n\n')
-  print('Maxwell MXS to ASCII Scene Translator v' + b2a_version)
+  print('-----------------------------------------------')
+  print('Maxwell MXS to ASCII Scene Translator v' + mxa_version)
   print('By Andrew Hazelden <andrew@andrewhazelden.com>')
   print('http://www.andrewhazelden.com/blog')
   print('-----------------------------------------------\n')
   
-
   # Find out the current scene file
   dirName = os.path.dirname(mxsFilePath)
   sceneName = os.path.basename(mxsFilePath)
@@ -89,7 +105,7 @@ def b2a_writeAsciiScene(mxsFilePath):
   height = res[1]
 
   print('[Working Directory] ' + dirName)
-  print('[Input Scene] ' + sceneName + ' [Camera] ' + str(cameraName) + ' [Resolution] ' + str(width) + 'x' + str(height))
+  print('[Input Scene] ' + sceneName + ' [Active Camera] ' + str(cameraName) + ' [Resolution] ' + str(width) + 'x' + str(height))
 
   # Check the OS time
   now = datetime.datetime.now()
@@ -103,7 +119,7 @@ def b2a_writeAsciiScene(mxsFilePath):
   
   # Add the Maxwell ASCII header text
   textDocument = ''
-  textDocument += '# Maxwell ASCII Scene v' + b2a_version + '\n'
+  textDocument += '# Maxwell ASCII Scene v' + mxa_version + '\n'
   textDocument += '# Generated: ' + now.strftime('%Y-%m-%d %H:%M:%S %p') + '\n'
   textDocument += '# Source MXS: ' + mxsFilePath + '\n'
   textDocument += '# Using: Maxwell ' + mxVersion + ' on ' + mxPlatform + '\n\n'
@@ -137,7 +153,7 @@ def b2a_writeAsciiScene(mxsFilePath):
     return 0
   else:
     print('\n--------------------------------------')
-    print('[ASCII Scene Export Complete]')
+    print('[ASCII Scene Export Complete] ' + asciiSceneFilename)
     return 1
 
 
@@ -301,7 +317,7 @@ def b2a_getRenderOptionsBlock(scene):
   channels_normals_mode = "camera" if scene.getRenderParameter('NORMALS CHANNEL SPACE')[0] else "world"
   channels_position = "on" if scene.getRenderParameter('DO POSITION CHANNEL')[0] else "off"
   channels_position_mode = "camera" if scene.getRenderParameter('POSITION CHANNEL SPACE')[0] else "world"
-  channels_motion_type = "other" if scene.getRenderParameter('MOTION CHANNEL TYPE')[0] else "reelsmart"
+  channels_motion_mode = "other" if scene.getRenderParameter('MOTION CHANNEL TYPE')[0] else "reelsmart"
   channels_deep = "on" if scene.getRenderParameter('DO DEEP CHANNEL')[0] else "off"
   channels_deep_mode = "rgba" if scene.getRenderParameter('DEEP CHANNEL TYPE')[0] else "alpha"
   channels_deep_min_distance = scene.getRenderParameter('DEEP MIN DISTANCE')[0]
@@ -401,7 +417,7 @@ def b2a_getRenderOptionsBlock(scene):
   textDocument += indent + 'channels_fresnel ' + str(channels_fresnel) + '\n'
   textDocument += indent + 'channels_normals ' + str(channels_normals) + '\n'
   textDocument += indent + 'channels_normals_mode "' + str(channels_normals_mode) + '"\n'
-  textDocument += indent + 'channels_motion_type "' + str(channels_motion_type) + '"\n'
+  textDocument += indent + 'channels_motion_mode "' + str(channels_motion_mode) + '"\n'
   textDocument += indent + 'channels_position ' + str(channels_position) + '\n'
   textDocument += indent + 'channels_position_mode "' + str(channels_position_mode) + '"\n'
   textDocument += indent + 'channels_deep ' + str(channels_deep) + '\n'
@@ -463,17 +479,17 @@ def b2a_getCameraBlock(scene):
   resolution = str(width) + ' ' + str(height)
   
   # Cropped Screen Render Region
-  x1,y1,x2,y2,render_region_type_raw,ok = camera.getScreenRegion()
+  x1,y1,x2,y2,render_region_mode_raw,ok = camera.getScreenRegion()
   #render_region = "0 0 " + str(width) + ' ' + str(height)
   render_region = str(x1) + ' ' + str(y1) + ' ' + str(x2) + ' ' + str(y2)
   
-  render_region_type = ''
-  if render_region_type_raw == 'REGION':
-    render_region_type = 'region'
-  elif render_region_type_raw == 'BLOW UP':
-    render_region_type = 'blow up'
+  render_region_mode = ''
+  if render_region_mode_raw == 'REGION':
+    render_region_mode = 'region'
+  elif render_region_mode_raw == 'BLOW UP':
+    render_region_mode = 'blow up'
   else:
-    render_region_type = 'unknown'
+    render_region_mode = 'unknown'
   
   position_raw,target_raw,up_raw,focal_length_raw,f_stop,step_time,ok = camera.getStep(0)
   position = str(round(position_raw[0],3)) + ' ' + str(round(position_raw[1],3)) + ' ' + str(round(position_raw[2],3))
@@ -490,14 +506,14 @@ def b2a_getCameraBlock(scene):
   film_height = round((filmHeightRaw * 1000.0), 1)
   iso = camera.getIso()[0]
   
-  diaphragmTypeRaw,angle,blades,ok = camera.getDiaphragm()
-  diaphragm_type = ''
-  if diaphragmTypeRaw == 'CIRCULAR':
-    diaphragm_type = 'circular'
-  elif diaphragmTypeRaw == 'POLYGONAL':
-    diaphragm_type = 'polygonal'
+  diaphragm_mode_raw,angle,blades,ok = camera.getDiaphragm()
+  diaphragm_mode = ''
+  if diaphragm_mode_raw == 'CIRCULAR':
+    diaphragm_mode = 'circular'
+  elif diaphragm_mode_raw == 'POLYGONAL':
+    diaphragm_mode = 'polygonal'
   else:
-    diaphragm_type = 'unknown'
+    diaphragm_mode = 'unknown'
      
   fps = camera.getFPS()[0]
   pixel_aspect = camera.getPixelAspect()[0]
@@ -524,7 +540,7 @@ def b2a_getCameraBlock(scene):
   textDocument += indent + 'up ' + str(up) + '\n'
   textDocument += indent + 'resolution ' + str(resolution) + '\n'
   textDocument += indent + 'render_region ' + str(render_region) + '\n'
-  textDocument += indent + 'render_region_type "' + str(render_region_type) + '"\n'
+  textDocument += indent + 'render_region_mode "' + str(render_region_mode) + '"\n'
   textDocument += indent + 'lens "' + str(lens) + '"\n'
   textDocument += indent + 'focal_length ' + str(focal_length) + '\n'
   #textDocument += indent + 'lock_exposure ' + str(lock_exposure) + '\n'
@@ -534,7 +550,7 @@ def b2a_getCameraBlock(scene):
   textDocument += indent + 'iso ' + str(iso) + '\n'
   textDocument += indent + 'film_width ' + str(film_width) + '\n'
   textDocument += indent + 'film_height ' + str(film_height) + '\n'
-  textDocument += indent + 'diaphragm_type "' + str(diaphragm_type) + '"\n'
+  textDocument += indent + 'diaphragm_mode "' + str(diaphragm_mode) + '"\n'
   textDocument += indent + 'blades ' + str(blades) + '\n'
   textDocument += indent + 'fps ' + str(fps) + '\n'
   textDocument += indent + 'step_time ' + str(step_time) + '\n'
@@ -594,7 +610,7 @@ def b2a_getColorSpace(scene):
   else:
     colorSpace = 'unknown'
 
-  print('[Color Space] ' + str(colorSpace))
+  # print('[Color Space] ' + str(colorSpace))
 
   return colorSpace
   
@@ -635,8 +651,8 @@ def b2a_getColorTemperature(scene):
 if __name__ == "__main__":
 
   # Choose a Maxwell MXS scene file to process:
-  mxsFilePath = '/Applications/Maxwell 3/scripts/stereo/CubeX.mxs'
-  # mxsFilePath = 'C:/Program Files/Next Limit/Maxwell 3/scripts/stereo/CubeX.mxs'
+  # mxsFilePath = '/Applications/Maxwell 3/scripts/stereo/CubeX.mxs'
+  mxsFilePath = 'C:/Program Files/Next Limit/Maxwell 3/scripts/stereo/CubeX.mxs'
   # mxsFilePath = '/opt/maxwell-3.2/scripts/stereo/CubeX.mxs'
   # mxsFilePath = '/home/andrew/maxwell-3.2/scripts/stereo/CubeX.mxs'
 
@@ -659,10 +675,11 @@ if __name__ == "__main__":
   mxsFileExt = 'mxs'
   
   # The MXS scene directory path with a trailing slash
-  mxsDirPath = '/Applications/Maxwell 3/scripts/stereo/'
-  # mxsDirPath = 'C:/Program Files/Next Limit/Maxwell 3/scripts/stereo/'
+  # mxsDirPath = '/Applications/Maxwell 3/scripts/stereo/'
+  mxsDirPath = 'C:/Program Files/Next Limit/Maxwell 3/scripts/stereo/'
   # mxsDirPath = '/opt/maxwell-3.2/scripts/stereo/'
   # mxsDirPath = '/home/andrew/maxwell-3.2/scripts/stereo/'
+  # mxsDirPath = '/Applications/Maxwell 3/library/Scenes/Guggenheim_museum_Bilbao/' 
   
   # Build a list of MXS files in the current directory
   mxsFileList = getFilesFromPath(mxsDirPath, mxsFileExt)
@@ -670,7 +687,7 @@ if __name__ == "__main__":
   # Iterate through each of the active MXS files is the current directory
   for file in mxsFileList:
     mxsFilePath = mxsDirPath + file
-    print '[MXS File] ' + mxsFilePath + '\n'
+    # print '[MXS File] ' + mxsFilePath + '\n'
     # Generate the new MXA ASCII scene file
     ok = b2a_writeAsciiScene(mxsFilePath)
     

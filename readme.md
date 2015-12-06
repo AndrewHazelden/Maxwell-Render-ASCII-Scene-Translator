@@ -1,5 +1,5 @@
 # Maxwell Render ASCII Scene Translator #
-**Version 0.1** Released 2015-12-05  
+**Version 0.1** Released 2015-12-06  
 by Andrew Hazelden  
 
 ## Overview ##

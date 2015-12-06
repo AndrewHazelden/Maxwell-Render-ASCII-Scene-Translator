@@ -16,19 +16,18 @@ Here is an example Maxwell ASCII .mxa scene file with syntax highlighting enable
 
 ## MXA Development Roadmap ##
 
-### Phase 1 - MXS Binary to ASCII (The Current Stage) ###
+### Phase 1 - MXS Binary to MXS ASCII Converter ###
+This is the current development stage.
 
-Currently the `mxs2ascii.py` script is able to successfully translate the input `.mxs` scene file's Render Options, and Camera node information into the new `.mxa` format.
+At the present time the `mxs2ascii.py` script is able to successfully translate the input `.mxs` scene file's "Render Options", and "Camera" node information into the new `.mxa` ASCII text format. The development efforts right now are focused on implementing the rest of the data types that are present in a binary format Maxwell Render `.mxs` scene in the `mxs2ascii.py` script.
 
-Work is continuing right now on implementing the rest of the data types in the `mxs2ascii.py` script that are present in a binary format Maxwell Render `.mxs` scene.
+### Phase 2 - MXA ASCII to MXS Binary Converter ###
 
-### Phase 2 - MXA ASCII to Binary Converter ###
-
-Work will start on making part two of this project which is to assemble a matching `ascii2mxs.py` translator to bring your ASCII scene description format back into the binary domain.
+This phase will see a matching `ascii2mxs.py` translator script created to convert your .mxa ASCII scene format documents back into the native Maxwell Render .mxa binary format.
 
 ### Phase 3 - MXA ASCII Direct to Render ###
 
-Once there is a set of working file translators that can seamlessly translate a scene from the MXS to MXA file formats and back, work will start on the final stage 3 effor which is to create a `mxa2render.py` script for rendering a .mxa scene file in Maxwell Render that was loaded straight from an ASCII format `.mxa` document.
+Once there is a set of working file translators that can seamlessly translate a scene back and forth between the MXS binary and MXA ASCII file formats, work will start on the final stage 3 effort which is to create a `mxa2render.py` script for directly rendering a .mxa scene file in Maxwell Render.
 
 ## Open Source License ##
 

@@ -120,4 +120,10 @@ environment
   wavelength_exponent 1.2
   reflectance 0.8
   asymmetry 0.7
+  sun_type <none><constant><physical><unknown>
+  sun_power 1.0
+  sun_radius_factor 1.0
+  sun_temperature 5777.0
+  sun_color 1.0 1.0 1.0
+  ground_rotation 1.0
 }

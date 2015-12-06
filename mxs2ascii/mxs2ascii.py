@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-06 6.06 am v0.1
+# 2015-12-06 6.32 am v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -590,7 +590,24 @@ def mxa_getEnvironmentBlock(scene):
   else:
    sky_type = 'unknown' 
 
+  # Physical Sky
   intensity,ozone,water,turbidity_coefficient,wavelength_exponent,reflectance,asymmetry,planet_reflecton,ok = enviro.getPhysicalSkyAtmosphere()
+
+  # Sun
+  sun_type_raw,sun_temperature,sun_power,sun_radius_factor,constantColor,ok = enviro.getSunProperties()
+  sun_color = str(constantColor[0]) + ' ' + str(constantColor[1]) + ' ' + str(constantColor[2])
+  
+  sun_type = ''
+  if sun_type_raw == SUN_DISABLED:
+    sun_type = 'none'
+  elif sun_type_raw == SUN_PHYSICAL:
+    sun_type = 'physical'  
+  elif sun_type_raw == SUN_CONSTANT:
+    sun_type = 'constant' 
+  else:
+   sun_type = 'unknown' 
+  
+  # print '[sun_color] ' + str(sun_color) 
 
   # Ground Rotation comes back as radians - We are going to store it in degrees for simplicity
   ground_rotation_radians,ok = enviro.getSunRotation()
@@ -606,7 +623,6 @@ def mxa_getEnvironmentBlock(scene):
   textDocument += '{\n'
   
   textDocument += indent + 'sky_type "' + str(sky_type) + '"\n'
-
   textDocument += indent + 'intensity ' + str(intensity) + '\n'
   textDocument += indent + 'planet_reflecton ' + str(planet_reflecton) + '\n'
   textDocument += indent + 'ozone ' + str(ozone) + '\n'
@@ -615,11 +631,11 @@ def mxa_getEnvironmentBlock(scene):
   textDocument += indent + 'wavelength_exponent ' + str(wavelength_exponent) + '\n'
   textDocument += indent + 'reflectance ' + str(reflectance) + '\n'
   textDocument += indent + 'asymmetry ' + str(asymmetry) + '\n'
-#   textDocument += indent + 'sun_type "' + str('') + '"\n'
-#   textDocument += indent + 'sun_power ' + str('') + '\n'
-#   textDocument += indent + 'sun_radius_factor ' + str('') + '\n'
-#   textDocument += indent + 'sun_temperature ' + str('') + '\n'
-#   textDocument += indent + 'sun_color ' + str('') + '\n'
+  textDocument += indent + 'sun_type "' + str(sun_type) + '"\n'
+  textDocument += indent + 'sun_power ' + str(sun_power) + '\n'
+  textDocument += indent + 'sun_radius_factor ' + str(sun_radius_factor) + '\n'
+  textDocument += indent + 'sun_temperature ' + str(sun_temperature) + '\n'
+  textDocument += indent + 'sun_color ' + str(sun_color) + '\n'
 #   textDocument += indent + 'location ' + str('') + '\n'
 #   textDocument += indent + 'city "' + str('') + '"\n'
 #   textDocument += indent + 'latitude ' + str('') + '\n'

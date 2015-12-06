@@ -5,13 +5,13 @@
 <!--
 
   Maxwell Render Language Module for BBEdit and TextWrangler
-  Version 1.0 - 2015-12-04
+  Version 1.0 - 2015-12-05
 
   Created by Andrew Hazelden
   andrew@andrewhazelden.com
   http://www.andrewhazelden.com
 
-  This language module will open an ASCII plain text representation of a stndard Maxwell MXS scene that has the .mxa file extension
+  This language module will open an .mxa format ASCII plain text representation of a standard Maxwell MXS scene file.
 
   Released under a Creative Commons Attribution-ShareAlike License:
 	<http://creativecommons.org/licenses/by-sa/2.0/>
@@ -222,6 +222,49 @@
 		<string>z_near_clip_plane</string>
 		<string>z_far_clip_plane</string>
 		<string>hidden</string>
+
+		<string>intensity</string>
+		<string>planet_reflecton</string>
+		<string>ozone</string>
+		<string>water</string>
+		<string>turbidity_coefficient</string>
+		<string>wavelength_exponent</string>
+		<string>reflectance</string>
+		<string>asymmetry</string>
+		<string>sun_type</string>
+		<string>sun_power</string>
+		<string>sun_radius_factor</string>
+		<string>sun_temperature</string>
+		<string>sun_color</string>
+		<string>location</string>
+		<string>city</string>
+		<string>latitude</string>
+		<string>longitude</string>
+		<string>date</string>
+		<string>time</string>
+		<string>gmt</string>
+		<string>ground_rotation</string>
+		<string>zenith</string>
+		<string>horizon</string>
+		<string>mid_point</string>
+		<string>ibl_intensity</string>
+		<string>ibl_interpolation</string>
+		<string>ibl_screen_mapping</string>
+		<string>background_type</string>
+		<string>background_map</string>
+		<string>background_intensity</string>
+		<string>background_scale</string>
+		<string>background_offset</string>
+		<string>refraction_type</string>
+		<string>refraction_map</string>
+		<string>refraction_intensity</string>
+		<string>refraction_scale</string>
+		<string>refraction_offset</string>
+		<string>illumination_type</string>
+		<string>illumination_map</string>
+		<string>illumination_intensity</string>
+		<string>illumination_scale</string>
+		<string>illumination_offset</string>
     <!-- Maxwell Parameters End-->
 
 	</array>

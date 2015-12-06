@@ -249,6 +249,49 @@
         <keyword>z_near_clip_plane</keyword>
         <keyword>z_far_clip_plane</keyword>
         <keyword>hidden</keyword>
+        
+        <keyword>intensity</keyword>
+        <keyword>planet_reflecton</keyword>
+        <keyword>ozone</keyword>
+        <keyword>water</keyword>
+        <keyword>turbidity_coefficient</keyword>
+        <keyword>wavelength_exponent</keyword>
+        <keyword>reflectance</keyword>
+        <keyword>asymmetry</keyword>
+        <keyword>sun_type</keyword>
+        <keyword>sun_power</keyword>
+        <keyword>sun_radius_factor</keyword>
+        <keyword>sun_temperature</keyword>
+        <keyword>sun_color</keyword>
+        <keyword>location</keyword>
+        <keyword>city</keyword>
+        <keyword>latitude</keyword>
+        <keyword>longitude</keyword>
+        <keyword>date</keyword>
+        <keyword>time</keyword>
+        <keyword>gmt</keyword>
+        <keyword>ground_rotation</keyword>
+        <keyword>zenith</keyword>
+        <keyword>horizon</keyword>
+        <keyword>mid_point</keyword>
+        <keyword>ibl_intensity</keyword>
+        <keyword>ibl_interpolation</keyword>
+        <keyword>ibl_screen_mapping</keyword>
+        <keyword>background_type</keyword>
+        <keyword>background_map</keyword>
+        <keyword>background_intensity</keyword>
+        <keyword>background_scale</keyword>
+        <keyword>background_offset</keyword>
+        <keyword>refraction_type</keyword>
+        <keyword>refraction_map</keyword>
+        <keyword>refraction_intensity</keyword>
+        <keyword>refraction_scale</keyword>
+        <keyword>refraction_offset</keyword>
+        <keyword>illumination_type</keyword>
+        <keyword>illumination_map</keyword>
+        <keyword>illumination_intensity</keyword>
+        <keyword>illumination_scale</keyword>
+        <keyword>illumination_offset</keyword>
         <!-- Maxwell Parameters End-->
         </context>
 

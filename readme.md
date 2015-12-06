@@ -19,7 +19,9 @@ Here is an example Maxwell ASCII .mxa scene file with syntax highlighting enable
 ### Phase 1 - MXS Binary to MXS ASCII Converter ###
 This is the current development stage.
 
-At the present time the `mxs2ascii.py` script is able to successfully translate the input `.mxs` scene file's "Render Options", and "Camera" node information into the new `.mxa` ASCII text format. The development efforts right now are focused on implementing the rest of the data types that are present in a binary format Maxwell Render `.mxs` scene in the `mxs2ascii.py` script.
+At the present time the `mxs2ascii.py` script is able to successfully translate the input `.mxs` scene file's "Render Options", "Environment", and "Camera" node information into the new `.mxa` ASCII text format. 
+
+The development efforts right now are focused on implementing the rest of the data types that are present in a binary format Maxwell Render `.mxs` scene in the `mxs2ascii.py` script.
 
 ### Phase 2 - MXA ASCII to MXS Binary Converter ###
 

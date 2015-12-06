@@ -88,7 +88,7 @@ camera
   up 0.0 1.0 0.0
   resolution 1024 512
   render_region 0 0 1023 511
-  render_region_type "region"
+  diaphragm_mode "region"
   lens "pinhole"
   focal_length 8.0
   shutter 0.0208333333333
@@ -96,7 +96,7 @@ camera
   iso 100.0
   film_width 32.4
   film_height 16.2
-  diaphragm_type "circular"
+  diaphragm_mode "circular"
   blades 0
   fps 30.0
   step_time 0.0
@@ -130,5 +130,27 @@ environment
   day_of_year 107
   time_of_day 19.0333333333
   gmt -3
-  ground_rotation 1.0
+  ground_rotation 0.0
+  ibl_intensity 15.0
+  ibl_interpolation on
+  background_type 1
+  background_map ""
+  background_intensity 1.0
+  background_scale 1.0 1.0
+  background_offset 0.0 0.0
+  reflection_type 1
+  reflection_map ""
+  reflection_intensity 1.0
+  reflection_scale 1.0 1.0
+  reflection_offset 0.0 0.0
+  refraction_type 1
+  refraction_map ""
+  refraction_intensity 1.0
+  refraction_scale 1.0 1.0
+  refraction_offset 0.0 0.0
+  illumination_type 1
+  illumination_map ""
+  illumination_intensity 1.0
+  illumination_scale 1.0 1.0
+  illumination_offset 0.0 0.0
 }

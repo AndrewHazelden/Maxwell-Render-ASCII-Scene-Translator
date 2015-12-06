@@ -241,8 +241,8 @@
 		<string>city</string>
 		<string>latitude</string>
 		<string>longitude</string>
-		<string>date</string>
-		<string>time</string>
+		<string>day_of_year</string>
+		<string>time_of_day</string>
 		<string>gmt</string>
 		<string>ground_rotation</string>
 		<string>zenith</string>
@@ -250,12 +250,17 @@
 		<string>mid_point</string>
 		<string>ibl_intensity</string>
 		<string>ibl_interpolation</string>
-		<string>ibl_screen_mapping</string>
+		<string>ibl_spherical_mapping</string>
 		<string>background_type</string>
 		<string>background_map</string>
 		<string>background_intensity</string>
 		<string>background_scale</string>
 		<string>background_offset</string>
+		<string>reflection_type</string>
+		<string>reflection_map</string>
+		<string>reflection_intensity</string>
+		<string>reflection_scale</string>
+		<string>reflection_offset</string>
 		<string>refraction_type</string>
 		<string>refraction_map</string>
 		<string>refraction_intensity</string>

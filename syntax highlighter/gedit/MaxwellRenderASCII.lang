@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-
+ Version: 2015-12-06 v0.1
  Author: Andrew Hazelden <andrew@andrewhazelden.com
- Copyright (C) 2015 Andrew Hazelden
+ Copyright: (C) 2015 Andrew Hazelden
 
   Released under a Creative Commons Attribution-ShareAlike License:
   <http://creativecommons.org/licenses/by-sa/2.0/>
-  
 
   Windows gedit language file installation
   On Windows you need to copy the MaxwellRenderASCII.lang file to the language-specs folder located at:
@@ -30,7 +29,6 @@
      or you can place the .lang files in your home folder at:
 
      ~/.local/share/gtksourceview-2.0/language-specs/
-  
   
 -->
 
@@ -277,12 +275,17 @@
         <keyword>mid_point</keyword>
         <keyword>ibl_intensity</keyword>
         <keyword>ibl_interpolation</keyword>
-        <keyword>ibl_screen_mapping</keyword>
+        <keyword>ibl_spherical_mapping</keyword>
         <keyword>background_type</keyword>
         <keyword>background_map</keyword>
         <keyword>background_intensity</keyword>
         <keyword>background_scale</keyword>
         <keyword>background_offset</keyword>
+        <keyword>reflection_type</keyword>
+        <keyword>reflection_map</keyword>
+        <keyword>reflection_intensity</keyword>
+        <keyword>reflection_scale</keyword>
+        <keyword>reflection_offset</keyword>
         <keyword>refraction_type</keyword>
         <keyword>refraction_map</keyword>
         <keyword>refraction_intensity</keyword>

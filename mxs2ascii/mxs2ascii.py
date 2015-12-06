@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-06 6.32 am v0.1
+# 2015-12-06 8.07 am v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -613,8 +613,34 @@ def mxa_getEnvironmentBlock(scene):
   ground_rotation_radians,ok = enviro.getSunRotation()
   ground_rotation = ground_rotation_radians * (180/pi)
   
+  # Sun location and time of year
   longitude,latitude,gmt,day_of_year,time_of_day,ok = enviro.getSunLongitudeAndLatitude()
   
+  # IBL Lighting
+  # With getEnvironmentLayer(layerType) the layerType is set to either: IBL_LAYER_BACKGROUND, IBL_LAYER_REFLECTION, IBL_LAYER_REFRACTION, or IBL_LAYER_ILLUMINATION
+  # Note The ibl_spherical_mapping option is un-used at this point
+  # Note: That the ibl_screen_mapping option hasn't been extracted from the params yet
+  
+  background_map,background_type,ibl_spherical_mapping,interpolation,background_intensity,u_tile,v_tile,u_tile_offset,v_tile_offset,ok = enviro.getEnvironmentLayer(IBL_LAYER_BACKGROUND)
+  background_scale = str(u_tile) + ' ' + str(v_tile)
+  background_offset = str(u_tile_offset) + ' ' + str(v_tile_offset)
+    
+  reflection_map,reflection_type,ibl_spherical_mapping,interpolation,reflection_intensity,u_tile,v_tile,u_tile_offset,v_tile_offset,ok = enviro.getEnvironmentLayer(IBL_LAYER_REFLECTION)
+  reflection_scale = str(u_tile) + ' ' + str(v_tile)
+  reflection_offset = str(u_tile_offset) + ' ' + str(v_tile_offset)
+  
+  refraction_map,refraction_type,ibl_spherical_mapping,interpolation,refraction_intensity,u_tile,v_tile,u_tile_offset,v_tile_offset,ok = enviro.getEnvironmentLayer(IBL_LAYER_REFRACTION)
+  refraction_scale = str(u_tile) + ' ' + str(v_tile)
+  refraction_offset = str(u_tile_offset) + ' ' + str(v_tile_offset)
+
+  illumination_map,illumination_type,ibl_spherical_mapping,interpolation,illumination_intensity,u_tile,v_tile,u_tile_offset,v_tile_offset,ok = enviro.getEnvironmentLayer(IBL_LAYER_ILLUMINATION)
+  illumination_scale = str(u_tile) + ' ' + str(v_tile)
+  illumination_offset = str(u_tile_offset) + ' ' + str(v_tile_offset)
+  
+  ibl_interpolation = "on" if interpolation else "off"
+  
+  ibl_intensity,ok = enviro.getEnvironmentWeight()
+
   # Indent spacer - either a tab or two spaces
   # indent = '\t'
   indent = '  '
@@ -649,24 +675,29 @@ def mxa_getEnvironmentBlock(scene):
 #   textDocument += indent + 'zenith ' + str('') + '\n'
 #   textDocument += indent + 'horizon ' + str('') + '\n'
 #   textDocument += indent + 'mid_point ' + str('') + '\n'
-#   textDocument += indent + 'ibl_intensity ' + str('') + '\n'
-#   textDocument += indent + 'ibl_interpolation ' + str('') + '\n'
-#   textDocument += indent + 'ibl_screen_mapping ' + str('') + '\n'
-#   textDocument += indent + 'background_type ' + str('') + '\n'
-#   textDocument += indent + 'background_map "' + str('') + '"\n'
-#   textDocument += indent + 'background_intensity ' + str('') + '\n'
-#   textDocument += indent + 'background_scale ' + str('') + '\n'
-#   textDocument += indent + 'background_offset ' + str('') + '\n'
-#   textDocument += indent + 'refraction_type ' + str('') + '\n'
-#   textDocument += indent + 'refraction_map "' + str('') + '"\n'
-#   textDocument += indent + 'refraction_intensity ' + str('') + '\n'
-#   textDocument += indent + 'refraction_scale ' + str('') + '\n'
-#   textDocument += indent + 'refraction_offset ' + str('') + '\n'
-#   textDocument += indent + 'illumination_type ' + str('') + '\n'
-#   textDocument += indent + 'illumination_map "' + str('') + '"\n'
-#   textDocument += indent + 'illumination_intensity ' + str('') + '\n'
-#   textDocument += indent + 'illumination_scale ' + str('') + '\n'
-#   textDocument += indent + 'illumination_offset ' + str('') + '\n'
+  textDocument += indent + 'ibl_intensity ' + str(ibl_intensity) + '\n'
+  textDocument += indent + 'ibl_interpolation ' + str(ibl_interpolation) + '\n'
+#   textDocument += indent + 'ibl_screen_mapping ' + str(ibl_screen_mapping) + '\n'
+  textDocument += indent + 'background_type ' + str(background_type) + '\n'
+  textDocument += indent + 'background_map "' + str(background_map) + '"\n'
+  textDocument += indent + 'background_intensity ' + str(background_intensity) + '\n'
+  textDocument += indent + 'background_scale ' + str(background_scale) + '\n'
+  textDocument += indent + 'background_offset ' + str(background_offset) + '\n'
+  textDocument += indent + 'reflection_type ' + str(reflection_type) + '\n'
+  textDocument += indent + 'reflection_map "' + str(reflection_map) + '"\n'
+  textDocument += indent + 'reflection_intensity ' + str(reflection_intensity) + '\n'
+  textDocument += indent + 'reflection_scale ' + str(reflection_scale) + '\n'
+  textDocument += indent + 'reflection_offset ' + str(reflection_offset) + '\n'
+  textDocument += indent + 'refraction_type ' + str(refraction_type) + '\n'
+  textDocument += indent + 'refraction_map "' + str(refraction_map) + '"\n'
+  textDocument += indent + 'refraction_intensity ' + str(refraction_intensity) + '\n'
+  textDocument += indent + 'refraction_scale ' + str(refraction_scale) + '\n'
+  textDocument += indent + 'refraction_offset ' + str(refraction_offset) + '\n'
+  textDocument += indent + 'illumination_type ' + str(illumination_type) + '\n'
+  textDocument += indent + 'illumination_map "' + str(illumination_map) + '"\n'
+  textDocument += indent + 'illumination_intensity ' + str(illumination_intensity) + '\n'
+  textDocument += indent + 'illumination_scale ' + str(illumination_scale) + '\n'
+  textDocument += indent + 'illumination_offset ' + str(illumination_offset) + '\n'
 
   # Close the environment section
   textDocument += '}\n'

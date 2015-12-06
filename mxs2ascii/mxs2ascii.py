@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-06 5.53 am v0.1
+# 2015-12-06 6.06 am v0.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -592,6 +592,10 @@ def mxa_getEnvironmentBlock(scene):
 
   intensity,ozone,water,turbidity_coefficient,wavelength_exponent,reflectance,asymmetry,planet_reflecton,ok = enviro.getPhysicalSkyAtmosphere()
 
+  # Ground Rotation comes back as radians - We are going to store it in degrees for simplicity
+  ground_rotation_radians,ok = enviro.getSunRotation()
+  ground_rotation = ground_rotation_radians * (180/pi)
+  
   # Indent spacer - either a tab or two spaces
   # indent = '\t'
   indent = '  '
@@ -623,7 +627,7 @@ def mxa_getEnvironmentBlock(scene):
 #   textDocument += indent + 'date "' + str('') + '"\n'
 #   textDocument += indent + 'time "' + str('') + '"\n'
 #   textDocument += indent + 'gmt ' + str('') + '\n'
-#   textDocument += indent + 'ground_rotation ' + str('') + '\n'
+  textDocument += indent + 'ground_rotation ' + str(ground_rotation) + '\n'
 #   textDocument += indent + 'zenith ' + str('') + '\n'
 #   textDocument += indent + 'horizon ' + str('') + '\n'
 #   textDocument += indent + 'mid_point ' + str('') + '\n'

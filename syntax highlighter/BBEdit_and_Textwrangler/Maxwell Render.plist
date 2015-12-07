@@ -14,7 +14,7 @@
   This language module will open an .mxa format ASCII plain text representation of a standard Maxwell MXS scene file.
 
   Released under a Creative Commons Attribution-ShareAlike License:
-	<http://creativecommons.org/licenses/by-sa/2.0/>
+  <http://creativecommons.org/licenses/by-sa/2.0/>
 
   To install, copy here:
 
@@ -32,96 +32,96 @@
 -->
 
 <dict>
-	<key>BBEditDocumentType</key>
-	<string>CodelessLanguageModule</string>
+  <key>BBEditDocumentType</key>
+  <string>CodelessLanguageModule</string>
 
-	<key>BBLMColorsSyntax</key>
-	<true/>
+  <key>BBLMColorsSyntax</key>
+  <true/>
 
-	<key>Copyright</key>
-	<string>Copyright © 2015, Andrew Hazelden</string>
+  <key>Copyright</key>
+  <string>Copyright © 2015, Andrew Hazelden</string>
 
-	<key>Author</key>
-	<string>Andrew Hazelden</string>
+  <key>Author</key>
+  <string>Andrew Hazelden</string>
 
-	<key>Version</key>
-	<string>1.0</string>
+  <key>Version</key>
+  <string>1.0</string>
 
-	<key>BBLMIsCaseSensitive</key>
-	<false/>
+  <key>BBLMIsCaseSensitive</key>
+  <false/>
 
-	<key>BBLMLanguageCode</key>
-	<string>MXA</string>
+  <key>BBLMLanguageCode</key>
+  <string>MXA</string>
 
-	<key>BBLMLanguageDisplayName</key>
-	<string>Maxwell Render ASCII</string>
+  <key>BBLMLanguageDisplayName</key>
+  <string>Maxwell Render ASCII</string>
 
-	<key>BBLMScansFunctions</key>
-	<false/>
+  <key>BBLMScansFunctions</key>
+  <false/>
 
-	<key>BBLMSuffixMap</key>
-	<array>
-	<dict>
-	  <key>BBLMLanguageSuffix</key>
-	  <string>.mxa</string>
-	</dict>
-	</array>
+  <key>BBLMSuffixMap</key>
+  <array>
+  <dict>
+    <key>BBLMLanguageSuffix</key>
+    <string>.mxa</string>
+  </dict>
+  </array>
 
-	<key>BBLMPreferredFilenameExtension</key>
-	<string>mxa</string>
+  <key>BBLMPreferredFilenameExtension</key>
+  <string>mxa</string>
 
-	<key>BBLMSupportsTextCompletion</key>
-	<true/>
+  <key>BBLMSupportsTextCompletion</key>
+  <true/>
 
-	<key>BBLMCommentLineDefault</key>
-	<string>#</string>
+  <key>BBLMCommentLineDefault</key>
+  <string>#</string>
 
-	<key>BBLMKeywordList</key>
-	<array>
+  <key>BBLMKeywordList</key>
+  <array>
     <!-- Maxwell Data Types Start -->
-		<string>ARRAY</string>
-		<string>BOOL</string>
-		<string>BYTE</string>
-		<string>ENUM</string>
-		<string>FLOAT</string>
-		<string>DOUBLE</string>
-		<string>INT</string>
-		<string>LONG</string>
-		<string>MATRIX</string>
-		<string>RGB</string>
-		<string>RGBA</string>
-		<string>STRING</string>
-		<string>UINT</string>
-		<string>VECTOR</string>
-		<string>VECTOR2D</string>
-		<string>XYZ</string>
-		<string>HSV</string>
+    <string>ARRAY</string>
+    <string>BOOL</string>
+    <string>BYTE</string>
+    <string>ENUM</string>
+    <string>FLOAT</string>
+    <string>DOUBLE</string>
+    <string>INT</string>
+    <string>LONG</string>
+    <string>MATRIX</string>
+    <string>RGB</string>
+    <string>RGBA</string>
+    <string>STRING</string>
+    <string>UINT</string>
+    <string>VECTOR</string>
+    <string>VECTOR2D</string>
+    <string>XYZ</string>
+    <string>HSV</string>
     <!-- Maxwell Data Types End -->
 
     <!-- Maxwell Nodes Start -->
-		<string>attribute</string>
-		<string>base</string>
-		<string>extension</string>
-		<string>bsdf</string>
-		<string>coating</string>
-		<string>emiter_pair</string>
-		<string>emitter</string>
-		<string>layer</string>
-		<string>camera</string>
-		<string>environment</string>
-		<string>material</string>
-		<string>render_options</string>
-		<string>object</string>
-		<string>object_triangles_group</string>
-		<string>scene_extension</string>
-		<string>sky_extension</string>
-		<string>texture_extension</string>
-		<string>texture_map</string>
+    <string>attribute</string>
+    <string>base</string>
+    <string>extension</string>
+    <string>bsdf</string>
+    <string>coating</string>
+    <string>emiter_pair</string>
+    <string>emitter</string>
+    <string>layer</string>
+    <string>camera</string>
+    <string>environment</string>
+    <string>material</string>
+    <string>render_options</string>
+    <string>object</string>
+    <string>object_triangles_group</string>
+    <string>scene_extension</string>
+    <string>sky_extension</string>
+    <string>texture_extension</string>
+    <string>texture_map</string>
     <!-- Maxwell Nodes End -->
 
     <!-- Maxwell Parameters Start -->
-		<string>active_camera</string>
-		<string>time_limit</string>
+    <string>active_camera</string>
+    <string>time_limit</string>
     <string>sampling_level</string>
     <string>multilight</string>
     <string>multilight_output</string>
@@ -132,7 +132,7 @@
     <string>depth</string>
     <string>image</string>
     <string>mxi</string>
-		<string>materials_override_enable</string>
+    <string>materials_override_enable</string>
     <string>materials_override</string>
     <string>materials_default</string>
     <string>materials_search_path</string>
@@ -146,7 +146,7 @@
     <string>extra_sampling_bitmap</string>
     <string>extra_sampling_invert_mask</string>
     <string>channels_output_mode</string>
-		<string>channels_render_layers</string>
+    <string>channels_render_layers</string>
     <string>channels_render</string>
     <string>channels_alpha</string>
     <string>channels_opaque</string>
@@ -166,7 +166,7 @@
     <string>channels_deep</string>
     <string>channels_deep_mode</string>
     <string>channels_deep_min_distance</string>
-		<string>channels_deep_max_samples</string>
+    <string>channels_deep_max_samples</string>
     <string>channels_uv</string>
     <string>channels_custom_alpha</string>
     <string>channels_reflectance</string>
@@ -195,129 +195,129 @@
     <string>overlay_text_color</string>
     <string>overlay_text_background</string>
 
-		<string>name</string>
-		<string>position</string>
-		<string>target</string>
-		<string>up</string>
-		<string>resolution</string>
-		<string>render_region</string>
-		<string>render_region_mode</string>
-		<string>lens</string>
-		<string>focal_length</string>
-		<string>lock_exposure</string>
-		<string>shutter</string>
-		<string>f_stop</string>
-		<string>ev_number</string>
-		<string>iso</string>
-		<string>film_width</string>
-		<string>film_height</string>
-		<string>diaphragm_mode</string>
-		<string>blades</string>
-		<string>fps</string>
-		<string>step_time</string>
-		<string>pixel_aspect</string>
-		<string>x_shift</string>
-		<string>y_shift</string>
-		<string>z_clip_planes_enabled</string>
-		<string>z_near_clip_plane</string>
-		<string>z_far_clip_plane</string>
-		<string>hidden</string>
+    <string>name</string>
+    <string>position</string>
+    <string>target</string>
+    <string>up</string>
+    <string>resolution</string>
+    <string>render_region</string>
+    <string>render_region_mode</string>
+    <string>lens</string>
+    <string>focal_length</string>
+    <string>lock_exposure</string>
+    <string>shutter</string>
+    <string>f_stop</string>
+    <string>ev_number</string>
+    <string>iso</string>
+    <string>film_width</string>
+    <string>film_height</string>
+    <string>diaphragm_mode</string>
+    <string>blades</string>
+    <string>fps</string>
+    <string>step_time</string>
+    <string>pixel_aspect</string>
+    <string>x_shift</string>
+    <string>y_shift</string>
+    <string>z_clip_planes_enabled</string>
+    <string>z_near_clip_plane</string>
+    <string>z_far_clip_plane</string>
+    <string>hidden</string>
 
-		<string>sky_type</string>
-		<string>intensity</string>
-		<string>planet_reflecton</string>
-		<string>ozone</string>
-		<string>water</string>
-		<string>turbidity_coefficient</string>
-		<string>wavelength_exponent</string>
-		<string>reflectance</string>
-		<string>asymmetry</string>
-		<string>sun_type</string>
-		<string>sun_power</string>
-		<string>sun_radius_factor</string>
-		<string>sun_temperature</string>
-		<string>sun_color</string>
-		<string>location</string>
-		<string>city</string>
-		<string>latitude</string>
-		<string>longitude</string>
-		<string>day_of_year</string>
-		<string>time_of_day</string>
-		<string>gmt</string>
-		<string>ground_rotation</string>
-		<string>zenith</string>
-		<string>horizon</string>
-		<string>mid_point</string>
-		<string>ibl_intensity</string>
-		<string>ibl_interpolation</string>
-		<string>ibl_spherical_mapping</string>
-		<string>background_type</string>
-		<string>background_map</string>
-		<string>background_intensity</string>
-		<string>background_scale</string>
-		<string>background_offset</string>
-		<string>reflection_type</string>
-		<string>reflection_map</string>
-		<string>reflection_intensity</string>
-		<string>reflection_scale</string>
-		<string>reflection_offset</string>
-		<string>refraction_type</string>
-		<string>refraction_map</string>
-		<string>refraction_intensity</string>
-		<string>refraction_scale</string>
-		<string>refraction_offset</string>
-		<string>illumination_type</string>
-		<string>illumination_map</string>
-		<string>illumination_intensity</string>
-		<string>illumination_scale</string>
-		<string>illumination_offset</string>
+    <string>sky_type</string>
+    <string>intensity</string>
+    <string>planet_reflecton</string>
+    <string>ozone</string>
+    <string>water</string>
+    <string>turbidity_coefficient</string>
+    <string>wavelength_exponent</string>
+    <string>reflectance</string>
+    <string>asymmetry</string>
+    <string>sun_type</string>
+    <string>sun_power</string>
+    <string>sun_radius_factor</string>
+    <string>sun_temperature</string>
+    <string>sun_color</string>
+    <string>location</string>
+    <string>city</string>
+    <string>latitude</string>
+    <string>longitude</string>
+    <string>day_of_year</string>
+    <string>time_of_day</string>
+    <string>gmt</string>
+    <string>ground_rotation</string>
+    <string>zenith</string>
+    <string>horizon</string>
+    <string>mid_point</string>
+    <string>ibl_intensity</string>
+    <string>ibl_interpolation</string>
+    <string>ibl_spherical_mapping</string>
+    <string>background_type</string>
+    <string>background_map</string>
+    <string>background_intensity</string>
+    <string>background_scale</string>
+    <string>background_offset</string>
+    <string>reflection_type</string>
+    <string>reflection_map</string>
+    <string>reflection_intensity</string>
+    <string>reflection_scale</string>
+    <string>reflection_offset</string>
+    <string>refraction_type</string>
+    <string>refraction_map</string>
+    <string>refraction_intensity</string>
+    <string>refraction_scale</string>
+    <string>refraction_offset</string>
+    <string>illumination_type</string>
+    <string>illumination_map</string>
+    <string>illumination_intensity</string>
+    <string>illumination_scale</string>
+    <string>illumination_offset</string>
     <!-- Maxwell Parameters End-->
 
-	</array>
+  </array>
 
-	<key>Language Features</key>
-	<dict>
-		<key>Identifier and Keyword Characters</key>
-		<string>0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz</string>
+  <key>Language Features</key>
+  <dict>
+    <key>Identifier and Keyword Characters</key>
+    <string>0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz</string>
 
-		<key>Open Strings 1</key>
-		<string>&quot;</string>
-		<key>Close Strings 1</key>
-		<string>&quot;</string>
-		<key>End-of-line Ends Strings 1</key>
-		<true/>
-		<key>Escape Char in Strings 1</key>
-		<string>\</string>
+    <key>Open Strings 1</key>
+    <string>&quot;</string>
+    <key>Close Strings 1</key>
+    <string>&quot;</string>
+    <key>End-of-line Ends Strings 1</key>
+    <true/>
+    <key>Escape Char in Strings 1</key>
+    <string>\</string>
 
-		<key>Open Line Comments</key> <string>;</string>
-		<key>PreferLineCommentsWhenCommenting</key>
-		<true/>
+    <key>Open Line Comments</key> <string>;</string>
+    <key>PreferLineCommentsWhenCommenting</key>
+    <true/>
 
-		<key>Comment Pattern</key>
-		<string><![CDATA[
-		(?x:
-			(\#.*?$)
-		)
-		]]></string>
+    <key>Comment Pattern</key>
+    <string><![CDATA[
+    (?x:
+      (\#.*?$)
+    )
+    ]]></string>
 
-		<key>String Pattern</key>
-		<string><![CDATA[
-		(?x:
-			("(\\"|[^"\r]|\\\r)*") | (?# Double-quote)
-			(?s:
-				<<-?(?P<delim>\w+) (?# Here-document)
-				.*?
-				(?P=delim)
-			)
-		)
-		]]></string>
+    <key>String Pattern</key>
+    <string><![CDATA[
+    (?x:
+      ("(\\"|[^"\r]|\\\r)*") | (?# Double-quote)
+      (?s:
+        <<-?(?P<delim>\w+) (?# Here-document)
+        .*?
+        (?P=delim)
+      )
+    )
+    ]]></string>
 
-		<key>Skip Pattern</key>
-		<string><![CDATA[
-		(?x:
-		(?P>comment) |
-		(?P>string)
-		)]]></string>
+    <key>Skip Pattern</key>
+    <string><![CDATA[
+    (?x:
+    (?P>comment) |
+    (?P>string)
+    )]]></string>
 
   </dict>
 

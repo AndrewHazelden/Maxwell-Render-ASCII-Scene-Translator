@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-06 8.07 am v0.1
+# 2015-12-07 8.26 am v0.1.1
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -69,7 +69,6 @@ def mxa_writeAsciiScene(mxsFilePath):
   # Release Version
   mxa_version = "0.1"
 
-  print('\n\n')
   print('-----------------------------------------------')
   print('Maxwell MXS to ASCII Scene Translator v' + mxa_version)
   print('By Andrew Hazelden <andrew@andrewhazelden.com>')
@@ -786,46 +785,42 @@ def mxa_getColorTemperature(scene):
 # -------------------------------------------------------------------
 # This code is the "main" section that is run automatically when the python script is loaded in pyMaxwell:
 if __name__ == "__main__":
-
-  # Choose a Maxwell MXS scene file to process:
+  # MXS scene file extension
+  mxsFileExt = 'mxs'
+  
+  # ------------------------------------------
+  # Process a single Maxwell MXS File
+  # ------------------------------------------
   mxsFilePath = '/Applications/Maxwell 3/scripts/stereo/CubeX.mxs'
   # mxsFilePath = 'C:/Program Files/Next Limit/Maxwell 3/scripts/stereo/CubeX.mxs'
   # mxsFilePath = '/opt/maxwell-3.2/scripts/stereo/CubeX.mxs'
   # mxsFilePath = '/home/andrew/maxwell-3.2/scripts/stereo/CubeX.mxs'
 
-  # ------------------------------------------
-  # Process a single MXS File
-  # ------------------------------------------
-
-#  # Launch the MXS scene processing command
-#  if os.path.exists(mxsFilePath):
-#    # Generate the new MXA ASCII scene file
-#  	ok = mxa_writeAsciiScene(mxsFilePath)
-#  else:
-#     print('[MXS File Not Found] ' + mxsFilePath)
-    
-  # ------------------------------------------
-  # Or process a whole directory of MXS files
-  # ------------------------------------------
+  # ---------------------------------------------------
+  # Or process a whole directory of Maxwell MXS files
+  # ---------------------------------------------------
+  # mxsFilePath = '/Applications/Maxwell 3/scripts/stereo/'
+  # mxsFilePath = 'C:/Program Files/Next Limit/Maxwell 3/scripts/stereo/'
+  # mxsFilePath = '/opt/maxwell-3.2/scripts/stereo/'
+  # mxsFilePath = '/home/andrew/maxwell-3.2/scripts/stereo/'
+  # mxsFilePath = '/Applications/Maxwell 3/library/Scenes/Guggenheim_museum_Bilbao/'
   
-  # MXS scene file extension
-  mxsFileExt = 'mxs'
-  
-  # The MXS scene directory path with a trailing slash
-  mxsDirPath = '/Applications/Maxwell 3/scripts/stereo/'
-  # mxsDirPath = 'C:/Program Files/Next Limit/Maxwell 3/scripts/stereo/'
-  # mxsDirPath = '/opt/maxwell-3.2/scripts/stereo/'
-  # mxsDirPath = '/home/andrew/maxwell-3.2/scripts/stereo/'
-  # mxsDirPath = '/Applications/Maxwell 3/library/Scenes/Guggenheim_museum_Bilbao/' 
-  
-  # Build a list of MXS files in the current directory
-  mxsFileList = getFilesFromPath(mxsDirPath, mxsFileExt)
-
-  # Iterate through each of the active MXS files is the current directory
-  for file in mxsFileList:
-    mxsFilePath = mxsDirPath + file
-    # print '[MXS File] ' + mxsFilePath + '\n'
+  # Check if we are going to process 1 MXS file or a whole directory of MXS files
+  if os.path.isfile(mxsFilePath):
+    # Launch the MXS single file processing command
+    print('[Entering MXS Single File Processing Mode]')
     # Generate the new MXA ASCII scene file
     ok = mxa_writeAsciiScene(mxsFilePath)
+  elif os.path.isdir(mxsFilePath):
+    print('[Entering MXS Directory Processing Mode]')
+    # Build a list of MXS files in the current directory
+    mxsFileList = getFilesFromPath(mxsFilePath, mxsFileExt)
     
-
+    # Iterate through each of the active MXS files is the current directory
+    for file in mxsFileList:
+      mxsFileDirPath = mxsFilePath + file
+      print '[MXS File] ' + mxsFileDirPath
+      # Generate the new MXA ASCII scene file
+      ok = mxa_writeAsciiScene(mxsFileDirPath)
+  else:
+    print('[MXS File Not Found] ' + mxsFilePath)

@@ -1,5 +1,5 @@
 # Maxwell Render ASCII Scene Translator #
-**Version 0.1** Released 2015-12-06  
+**Version 0.1.1** Released 2015-12-07  
 by Andrew Hazelden  
 
 ## Overview ##
@@ -19,7 +19,7 @@ Here is an example Maxwell ASCII .mxa scene file with syntax highlighting enable
 ### Phase 1 - MXS Binary to MXS ASCII Converter ###
 This is the current development stage.
 
-At the present time the `mxs2ascii.py` script is able to successfully translate the input `.mxs` scene file's "Render Options", "Environment", and "Camera" node information into the new `.mxa` ASCII text format. 
+At the present time the `mxs2ascii.py` script is able to successfully translate the input `.mxs` scene file's "Render Options", "Environment", and "Camera" node information into the new `.mxa` ASCII text format.
 
 The development efforts right now are focused on implementing the rest of the data types that are present in a binary format Maxwell Render `.mxs` scene in the `mxs2ascii.py` script.
 
@@ -61,21 +61,15 @@ Copy the `mxs2ascii.py` python file to your Maxwell 3.2 scripts directory:
 
 **Step 2.** Choose if you want to process a single MXS or a directory filled with of MXS files.
 
-![Editing the mxsFilePath variable](images/editing-the-mxs-file-path.png)
-
 **Process a Single MXS File**
 
 If you want to process a single MXS file edit the "mxsFilePath" variable in the main function near the bottom of this script and specify your Maxwell Studio based MXS scene file.
 
-Uncomment the code block just below to the section "# Process a single MXS File".
-
-Then add python based `#` number sign comments at the beginning of the lines in the "# Or process a whole directory of MXS files" section of code.
-
 **Process a Whole Directory of MXS Files**
 
-If you want to automatically process an entire folder filled with MXS files then you should edit the "mxsDirPath" to specify the folder location that holds your Maxwell Studio based MXS scene files.
+If you want to automatically process an entire folder filled with MXS files then you should edit the "mxsFilePath" to specify the folder location that holds your Maxwell Studio based MXS scene files.
 
-Make sure the code block just below to the section "# Process a single MXS File" is commented out with python based `#` number sign comments at the beginning of each of the lines. Then you might need to uncomment the code block lines just below the "# Or process a whole directory of MXS files" section of code if you have previously used the "Process a single MXS File" feature.
+![Editing the mxsFilePath variable](images/editing-the-mxs-file-path.png)
 
 **Step 3.** Select the **Script > Run** menu item in PyMaxwell.
 

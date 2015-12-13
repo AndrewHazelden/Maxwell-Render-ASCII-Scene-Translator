@@ -1,6 +1,6 @@
 # Maxwell MXS to ASCII Translator
 # --------------------------------------------
-# 2015-12-07 8.26 am v0.1.1
+# 2015-12-13 14.06 PM v0.1.2
 # By Andrew Hazelden 
 # Email: andrew@andrewhazelden.com
 # Blog: http://www.andrewhazelden.com
@@ -20,7 +20,7 @@
 # Linux
 # /opt/maxwell-3.2/scripts/
 # or
-# $home/maxwell-3.2/scripts/
+# $home/maxwell64-3.2/scripts/
 
 # Mac
 # /Applications/Maxwell 3/scripts/
@@ -64,16 +64,7 @@ import datetime
 
 # Write the Maxell Ascii Scene to Disk
 # Example: writeAsciiScene('/Cube.mas')
-def mxa_writeAsciiScene(mxsFilePath):
-
-  # Release Version
-  mxa_version = "0.1"
-
-  print('-----------------------------------------------')
-  print('Maxwell MXS to ASCII Scene Translator v' + mxa_version)
-  print('By Andrew Hazelden <andrew@andrewhazelden.com>')
-  print('http://www.andrewhazelden.com/blog')
-  print('-----------------------------------------------\n')
+def mxa_writeAsciiScene(mrt_version, mxsFilePath):
   
   # Find out the current scene file
   dirName = os.path.dirname(mxsFilePath)
@@ -110,7 +101,7 @@ def mxa_writeAsciiScene(mxsFilePath):
   now = datetime.datetime.now()
   
   # Check the OS Platform
-  mxPlatform = mxa_getPlatform()
+  mxPlatform = mrt_getPlatform()
   # print('Running on ' + mxPlatform + '\n')
   
   # Maxwell Release number - like "3.2.0.2"
@@ -118,7 +109,7 @@ def mxa_writeAsciiScene(mxsFilePath):
   
   # Add the Maxwell ASCII header text
   textDocument = ''
-  textDocument += '# Maxwell ASCII Scene v' + mxa_version + '\n'
+  textDocument += '# Maxwell ASCII Scene v' + mrt_version + '\n'
   textDocument += '# Generated: ' + now.strftime('%Y-%m-%d %H:%M:%S %p') + '\n'
   textDocument += '# Source MXS: ' + mxsFilePath + '\n'
   textDocument += '# Using: Maxwell ' + mxVersion + ' on ' + mxPlatform + '\n\n'
@@ -160,8 +151,8 @@ def mxa_writeAsciiScene(mxsFilePath):
 
 
 # Check the operating system
-# Example: mxPlatform = mxa_getPlatform()
-def mxa_getPlatform():
+# Example: mxPlatform = mrt_getPlatform()
+def mrt_getPlatform():
   import platform
 
   osPlatform = str(platform.system())
@@ -781,28 +772,96 @@ def mxa_getColorTemperature(scene):
 
   return colorTemperatureValue
 
+
+# Open a folder window up using your desktop file browser
+# Example: mrt_openDirectory('/Applications/')
+def mrt_openDirectory(filenameNativePath):
+  mxPlatform = mrt_getPlatform()
+  
+  # Convert a path to a file into a directory path
+  dirName = ''
+  if os.path.isfile(filenameNativePath):
+    dirName = os.path.dirname(filenameNativePath)
+  else:
+    dirName = filenameNativePath
+  
+  # Check OS platform for Windows/Mac/Linux Paths
+  if mxPlatform == 'Windows':
+    dirName = dirName.replace("/","\\")
+    # Check if the program is running on Windows 
+    os.system('explorer "' + dirName + '"')
+  elif mxPlatform == 'Linux':
+    # Check if the program is running on Linux
+    os.system('nautilus "' + dirName + '" &')
+  elif mxPlatform == 'Mac':
+    # Check if the program is running on Mac
+    os.system('open "' + dirName + '" &')
+  else:
+    # Create the empty variable as a fallback mode
+    dirName = ''
+    
+  print('[Opening the Directory] ' + dirName)
+  return dirName
+  
+  
+# Open the MaxwellRenderToolbox temporary images folder window up using your desktop file browser
+# Example: mrt_openTempImagesDirectory()
+def mrt_openTempImagesDirectory():
+  filenameNativePath = ''
+  mxPlatform = mrt_getPlatform()
+  
+  #Check OS platform for Windows/Mac/Linux Paths
+  if mxPlatform == 'Windows':
+    # Check if the program is running on Windows 
+    filenameNativePath = mrt_tempImagesDirectory()
+    os.system('explorer "' + filenameNativePath + '"')
+  elif mxPlatform == 'Linux':
+    # Check if the program is running on Linux
+    filenameNativePath = mrt_tempImagesDirectory()
+    os.system('nautilus "' + filenameNativePath + '" &')
+  elif mxPlatform == 'Mac':
+    # Check if the program is running on Mac
+    filenameNativePath = mrt_tempImagesDirectory()
+    os.system('open "' + filenameNativePath + '" &')
+  else:
+    # Create the empty variable as a fallback mode
+    filenameNativePath = ''
+    
+  print('[Opening the Temporary Images Directory] ' + filenameNativePath)
+  return filenameNativePath
+  
+
 # -------------------------------------------------------------------
 # -------------------------------------------------------------------
 # This code is the "main" section that is run automatically when the python script is loaded in pyMaxwell:
 if __name__ == "__main__":
+  # Release Version
+  mrt_version = '0.1'
+
+  print('-----------------------------------------------')
+  print('Maxwell MXS to ASCII Scene Translator v' + mrt_version)
+  print('By Andrew Hazelden <andrew@andrewhazelden.com>')
+  print('http://www.andrewhazelden.com/blog')
+  print('-----------------------------------------------\n')
+
   # MXS scene file extension
   mxsFileExt = 'mxs'
   
   # ------------------------------------------
   # Process a single Maxwell MXS File
   # ------------------------------------------
-  mxsFilePath = '/Applications/Maxwell 3/scripts/stereo/CubeX.mxs'
-  # mxsFilePath = 'C:/Program Files/Next Limit/Maxwell 3/scripts/stereo/CubeX.mxs'
-  # mxsFilePath = '/opt/maxwell-3.2/scripts/stereo/CubeX.mxs'
-  # mxsFilePath = '/home/andrew/maxwell-3.2/scripts/stereo/CubeX.mxs'
+  # mxsFilePath = '/Applications/MaxwellRenderToolbox/examples/stereo/CubeX.mxs'
+  # mxsFilePath = 'C:/Program Files/MaxwellRenderToolbox/examples/stereo/CubeX.mxs'
+  # mxsFilePath = '/opt/MaxwellRenderToolbox/examples/stereo/CubeX.mxs'
+  # mxsFilePath = '/home/andrew/MaxwellRenderToolbox/examples/stereo/CubeX.mxs'
 
   # ---------------------------------------------------
   # Or process a whole directory of Maxwell MXS files
   # ---------------------------------------------------
-  # mxsFilePath = '/Applications/Maxwell 3/scripts/stereo/'
-  # mxsFilePath = 'C:/Program Files/Next Limit/Maxwell 3/scripts/stereo/'
-  # mxsFilePath = '/opt/maxwell-3.2/scripts/stereo/'
-  # mxsFilePath = '/home/andrew/maxwell-3.2/scripts/stereo/'
+  mxsFilePath = '/Applications/MaxwellRenderToolbox/examples/stereo/'
+  # mxsFilePath = 'C:/Program Files/MaxwellRenderToolbox/examples/stereo/'
+  # mxsFilePath = '/opt/MaxwellRenderToolbox/examples/stereo/'
+  # mxsFilePath = '/home/andrew/MaxwellRenderToolbox/examples/stereo/'
   # mxsFilePath = '/Applications/Maxwell 3/library/Scenes/Guggenheim_museum_Bilbao/'
   
   # Check if we are going to process 1 MXS file or a whole directory of MXS files
@@ -810,17 +869,24 @@ if __name__ == "__main__":
     # Launch the MXS single file processing command
     print('[Entering MXS Single File Processing Mode]')
     # Generate the new MXA ASCII scene file
-    ok = mxa_writeAsciiScene(mxsFilePath)
+    ok = mxa_writeAsciiScene(mrt_version, mxsFilePath)
+    if ok == 1:
+     # Open a folder window up using your desktop file browser
+     mrt_openDirectory(mxsFilePath)
   elif os.path.isdir(mxsFilePath):
     print('[Entering MXS Directory Processing Mode]')
     # Build a list of MXS files in the current directory
     mxsFileList = getFilesFromPath(mxsFilePath, mxsFileExt)
-    
+    mxsNumber=0
     # Iterate through each of the active MXS files is the current directory
     for file in mxsFileList:
+      mxsNumber += 1
       mxsFileDirPath = mxsFilePath + file
       print '[MXS File] ' + mxsFileDirPath
       # Generate the new MXA ASCII scene file
-      ok = mxa_writeAsciiScene(mxsFileDirPath)
+      ok = mxa_writeAsciiScene(mrt_version, mxsFileDirPath)
+      if ok == 1 and mxsNumber == 1:
+        # Open a folder window up using your desktop file browser
+        mrt_openDirectory(mxsFilePath)
   else:
     print('[MXS File Not Found] ' + mxsFilePath)

@@ -428,7 +428,7 @@ def mxa_getRenderOptionsBlock(scene):
   textDocument += indent + 'tone_mapping_monitor_gamma ' + str(tone_mapping_monitor_gamma) + '\n'
   
   textDocument += indent + 'tone_mapping_sharpness_enabled ' + str(tone_mapping_sharpness_enabled) + '\n'
-  # Note the Maxwell Studio GUI if "Sharpness" is set to 100 then SCATTERING_LENS=1.0
+  # Note the Maxwell Studio GUI if "Sharpness" is set to 100 then tone_mapping_sharpness=1.0
   textDocument += indent + 'tone_mapping_sharpness ' + str(tone_mapping_sharpness) + '\n'
 
   # textDocument += indent + 'simulens_aperture_map ' + str(simulens_aperture_map) + '\n'

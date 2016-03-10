@@ -5,7 +5,7 @@
 <!--
 
   Maxwell Render Language Module for BBEdit and TextWrangler
-  Version 1.0 - 2015-12-05
+  Version 1.0 - 2016-03-10 
 
   Created by Andrew Hazelden
   andrew@andrewhazelden.com
@@ -155,6 +155,7 @@
     <string>channels_shadow</string>
     <string>channels_material_id</string>
     <string>channels_object_id</string>
+    <string>channels_motion_type</string>
     <string>channels_motion_vector</string>
     <string>channels_roughness</string>
     <string>channels_fresnel</string>

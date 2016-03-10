@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
- Version: 2015-12-06 v0.1
+ Version: 2016-03-10 v0.1
  Author: Andrew Hazelden <andrew@andrewhazelden.com
  Copyright: (C) 2015 Andrew Hazelden
 
@@ -180,6 +180,7 @@
         <keyword>channels_shadow</keyword>
         <keyword>channels_material_id</keyword>
         <keyword>channels_object_id</keyword>
+        <keyword>channels_motion_type</keyword>
         <keyword>channels_motion_vector</keyword>
         <keyword>channels_roughness</keyword>
         <keyword>channels_fresnel</keyword>
